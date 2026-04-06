@@ -34,12 +34,6 @@
   --radius-md:   16px;
   --radius-lg:   24px;
   --radius-xl:   36px;
-
-  /* skyline sketch colours */
-  --skyline-stroke: #cecece;
-  --skyline-window: #dedede;
-  --skyline-ground: #d8d8d8;
-  --skyline-win-delay: .15s;
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -233,14 +227,11 @@ em { font-style:italic; color:var(--accent); }
   position:relative; min-height:100vh; overflow:hidden;
   display:flex; flex-direction:column;
   justify-content:center; align-items:center;
-  background: linear-gradient(160deg, #f8f9fc 0%, #edf0f8 55%, #f5f7fb 100%);
-  --skyline-stroke: rgba(30,50,100,.12);
-  --skyline-window: rgba(40,70,140,.08);
-  --skyline-ground: rgba(30,50,100,.09);
+  background: linear-gradient(180deg, #4a7fb5 0%, #7badd4 30%, #c4a87c 65%, #e8b968 85%, #f0c97a 100%);
 }
 .hero::before {
   content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
-  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,255,255,.7) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 25%, rgba(255,255,255,.25) 0%, transparent 70%);
 }
 
 .hero-content {
@@ -252,27 +243,44 @@ em { font-style:italic; color:var(--accent); }
 
 .hero-eyebrow {
   font-size:.68rem; font-weight:700; letter-spacing:.28em;
-  text-transform:uppercase; color:var(--accent); margin-bottom:1.6rem;
+  text-transform:uppercase; color:rgba(255,255,255,.9); margin-bottom:1.6rem;
   display:flex; align-items:center; justify-content:center; gap:16px;
 }
 .hero-eyebrow::before,
 .hero-eyebrow::after {
   content:""; display:inline-block; width:32px; height:1px;
-  background:var(--accent); flex-shrink:0;
+  background:rgba(255,255,255,.5); flex-shrink:0;
 }
 
-.hero-title-light { color:var(--primary-l); display:block; font-weight:300; font-size:.6em; letter-spacing:.06em; margin-bottom:.3em; }
-.hero-title-accent { color:var(--primary); font-weight:800; }
-h1 .hero-title-light,.hero h1 { color:var(--text); }
+.hero-title-light { color:rgba(255,255,255,.85); display:block; font-weight:300; font-size:.6em; letter-spacing:.06em; margin-bottom:.3em; }
+.hero-title-accent { color:#ffffff; font-weight:800; text-shadow:0 2px 20px rgba(0,0,0,.15); }
+h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
 
 .hero-subtitle {
   margin-top:1.5rem; margin-bottom:2.75rem;
   font-size:clamp(1rem,1.8vw,1.12rem);
-  color:var(--text-muted); line-height:1.85; max-width:520px;
+  color:rgba(255,255,255,.8); line-height:1.85; max-width:520px;
   margin-left:auto; margin-right:auto;
   font-weight:400;
 }
 .hero-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; }
+.hero-actions .btn-primary {
+  background:#ffffff; color:#1a1a1a;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.hero-actions .btn-primary:hover,.hero-actions .btn-primary:focus-visible {
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 10px 36px rgba(0,0,0,.3);
+}
+.hero-actions .btn-outline {
+  border-color:rgba(255,255,255,.7);
+  color:#ffffff;
+  background:rgba(255,255,255,.1);
+}
+.hero-actions .btn-outline:hover,.hero-actions .btn-outline:focus-visible {
+  background:rgba(255,255,255,.2);
+  transform:translateY(-3px);
+}
 .br-desktop { display:none; }
 @media(min-width:768px){ .br-desktop { display:inline; } }
 
@@ -281,12 +289,12 @@ h1 .hero-title-light,.hero h1 { color:var(--text); }
   position:absolute; bottom:36px; left:50%; transform:translateX(-50%); z-index:3;
   display:flex; flex-direction:column; align-items:center; gap:10px;
   font-size:.65rem; font-weight:600; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--text-muted);
+  text-transform:uppercase; color:rgba(255,255,255,.7);
 }
-.scroll-line { width:1px; height:44px; background:var(--border); position:relative; overflow:hidden; }
+.scroll-line { width:1px; height:44px; background:rgba(255,255,255,.25); position:relative; overflow:hidden; }
 .scroll-line::after {
   content:""; position:absolute; inset:0;
-  background:var(--accent);
+  background:rgba(255,255,255,.7);
   animation:scrollPulse 2s var(--ease) infinite;
 }
 @keyframes scrollPulse { 0%{transform:translateY(-100%)} 50%{transform:translateY(0)} 100%{transform:translateY(100%)} }
@@ -305,49 +313,7 @@ h1 .hero-title-light,.hero h1 { color:var(--text); }
 }
 .skyline-svg {
   width:100%; height:auto; display:block;
-}
-
-/* building outline – drawn with stroke-dashoffset animation */
-.s-wall, .s-top {
-  fill:none;
-  stroke:var(--skyline-stroke);
-  stroke-width:1.2;
-  stroke-dasharray:var(--p, 600);
-  stroke-dashoffset:var(--p, 600);
-  animation:drawWall var(--dur,1.4s) cubic-bezier(.4,0,.2,1) forwards;
-  animation-delay:var(--d, 0s);
-}
-/* antenna / detail lines */
-.s-line {
-  fill:none;
-  stroke:var(--skyline-stroke);
-  stroke-width:.8;
-  stroke-dasharray:var(--p, 60);
-  stroke-dashoffset:var(--p, 60);
-  animation:drawWall .5s ease forwards;
-  animation-delay:var(--d, 0s);
-}
-/* windows – fade in after building is drawn */
-.s-win {
-  fill:none;
-  stroke:var(--skyline-window);
-  stroke-width:.7;
-  opacity:0;
-  animation:fadeWin .6s ease forwards;
-  animation-delay:calc(var(--d, 0s) + var(--dur, 1.4s) + var(--skyline-win-delay));
-}
-/* ground line */
-.s-ground {
-  stroke:var(--skyline-ground);
-  stroke-width:1;
-}
-
-@keyframes drawWall {
-  to { stroke-dashoffset:0; }
-}
-@keyframes fadeWin {
-  from { opacity:0; }
-  to   { opacity:1; }
+  min-height:280px;
 }
 
 /* ── Stats ──────────────────────────────────────────────── */
@@ -811,119 +777,43 @@ button[type="submit"] { margin-top:8px; }
   .off-market-text { padding:32px 24px; }
 }
 
-/* ── Light Hero nav & text overrides ────────────────────── */
-.nav:not(.scrolled) .logo { color: var(--primary); }
-.nav:not(.scrolled) .logo strong { color: var(--accent); }
-.nav:not(.scrolled) .nav-link { color: var(--primary-l); }
-.nav:not(.scrolled) .nav-link::after { background: var(--primary); }
-.nav:not(.scrolled) .hamburger span { background: var(--primary); }
+/* ── Hero nav & text overrides (landscape background) ──── */
+.nav:not(.scrolled) .logo { color: #ffffff; }
+.nav:not(.scrolled) .logo strong { color: rgba(255,255,255,.8); }
+.nav:not(.scrolled) .nav-link { color: rgba(255,255,255,.9); }
+.nav:not(.scrolled) .nav-link::after { background: #ffffff; }
+.nav:not(.scrolled) .hamburger span { background: #ffffff; }
 .nav:not(.scrolled) .nav-cta {
-  background: var(--primary);
-  border: 1px solid var(--primary);
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.5);
   color: #fff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+.nav:not(.scrolled) .nav-cta:hover {
+  background: rgba(255,255,255,.25);
 }
 
-/* Hero text on light */
-.hero .hero-eyebrow { color: var(--accent-d); }
+/* Hero text on landscape background */
+.hero .hero-eyebrow { color: rgba(255,255,255,.9); }
 .hero .hero-eyebrow::before,
-.hero .hero-eyebrow::after { background: var(--accent); }
-.hero h1 { color: var(--primary); }
-.hero .hero-title-light { color: var(--primary-l); }
-.hero .hero-title-accent { color: var(--primary); font-weight:800; font-size:1em; }
-.hero .hero-subtitle { color: var(--text-muted); }
+.hero .hero-eyebrow::after { background: rgba(255,255,255,.5); }
+.hero h1 { color: #ffffff; }
+.hero .hero-title-light { color: rgba(255,255,255,.85); }
+.hero .hero-title-accent { color: #ffffff; font-weight:800; font-size:1em; text-shadow:0 2px 20px rgba(0,0,0,.15); }
+.hero .hero-subtitle { color: rgba(255,255,255,.8); }
 .hero .btn-outline {
-  border-color: rgba(26,26,26,.22);
-  color: var(--primary);
+  border-color: rgba(255,255,255,.7);
+  color: #ffffff;
 }
 .hero .btn-outline:hover {
-  background: rgba(26,26,26,.06);
-  border-color: var(--primary);
-  color: var(--primary);
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.9);
+  color: #ffffff;
   transform: translateY(-3px);
 }
-.hero-scroll { color: var(--text-muted); }
-.scroll-line { background: var(--border); }
-.scroll-line::after { background: var(--primary); }
-
-/* ── Blueprint SVG technical elements ─────────────────── */
-.s-coord {
-  font-family: "Courier New", monospace;
-  font-size: 8px;
-  fill: rgba(30,50,100,.18);
-  text-anchor: middle;
-}
-.s-axis {
-  stroke: rgba(30,50,100,.06);
-  stroke-width: .6;
-  stroke-dasharray: 20 10;
-}
-
-/* Floor slabs */
-.s-slab {
-  fill: none;
-  stroke: rgba(30,60,140,.12);
-  stroke-width: .65;
-  opacity: 0;
-  animation: fadeWin .5s ease forwards;
-  animation-delay: var(--sd, 3.5s);
-}
-
-/* Floor numbers */
-.s-floor-num {
-  font-family: "Courier New", monospace;
-  font-size: 7px;
-  fill: rgba(30,60,140,.22);
-  text-anchor: start;
-  opacity: 0;
-  animation: fadeWin .4s ease forwards;
-  animation-delay: var(--sd, 3.8s);
-}
-.s-floor-nums { opacity: 0; animation: fadeWin .5s ease forwards var(--sd, 3.8s); }
-
-/* Technical reference line */
-.s-ref-mid {
-  fill: none;
-  stroke: rgba(30,50,100,.08);
-  stroke-width: .5;
-  stroke-dasharray: 6 4;
-  opacity: 0;
-  animation: fadeWin .8s ease forwards 4.0s;
-}
-
-/* Small crosshairs on secondary towers */
-.s-ch-small { opacity: 0; animation: fadeWin .5s ease forwards var(--sd, 3.8s), chPulse 3s ease-in-out 5s infinite; }
-
-/* Dimension lines */
-.s-dim { opacity: 0; animation: fadeWin .6s ease forwards 4.0s; }
-.s-dim-line { fill: none; stroke: rgba(30,60,140,.22); stroke-width: .65; }
-.s-dim-tick { fill: none; stroke: rgba(30,60,140,.25); stroke-width: .65; }
-.s-dim-text {
-  font-family: "Courier New", monospace;
-  font-size: 8px;
-  fill: rgba(30,60,140,.32);
-  text-anchor: middle;
-}
-
-
-/* Crosshair */
-.s-crosshair {
-  opacity: 0;
-  animation: fadeWin .5s ease forwards 3.4s, chPulse 2.4s ease-in-out 4s infinite;
-}
-.s-ch         { stroke: rgba(30,60,150,.45); stroke-width: .8; fill: none; }
-.s-ch-circle  { stroke: rgba(30,60,150,.35); stroke-width: .7; fill: none; }
-
-@keyframes chPulse {
-  0%,100% { opacity: 1; }
-  50%     { opacity: .4; }
-}
-
-/* Title block (removed from HTML, keeping rule clean) */
-.s-title-block { display: none; }
-
-/* Scale bar */
-.s-scale { opacity: 0; animation: fadeWin .5s ease forwards 4.2s; }
+.hero-scroll { color: rgba(255,255,255,.7); }
+.scroll-line { background: rgba(255,255,255,.25); }
+.scroll-line::after { background: rgba(255,255,255,.7); }
 
 /* ── Tech corner brackets on cards ─────────────────────── */
 .dist-card,
