@@ -227,11 +227,12 @@ em { font-style:italic; color:var(--accent); }
   position:relative; min-height:100vh; overflow:hidden;
   display:flex; flex-direction:column;
   justify-content:center; align-items:center;
-  background: linear-gradient(180deg, #4a7fb5 0%, #7badd4 30%, #c4a87c 65%, #e8b968 85%, #f0c97a 100%);
+  background: url('https://images.unsplash.com/photo-1677098077185-5438068c2ae6?w=1920&q=80') center/cover no-repeat;
+  background-color: #2a3a50;
 }
 .hero::before {
   content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
-  background: radial-gradient(ellipse 60% 50% at 50% 25%, rgba(255,255,255,.25) 0%, transparent 70%);
+  background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.5) 100%);
 }
 
 .hero-content {
@@ -306,10 +307,7 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
 
 /* ── Skyline SVG ────────────────────────────────────────── */
 .skyline-wrap {
-  position:absolute;
-  bottom:0; left:0; right:0; z-index:1;
-  pointer-events:none;
-  line-height:0;
+  display:none;
 }
 .skyline-svg {
   width:100%; height:auto; display:block;
