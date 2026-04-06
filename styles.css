@@ -34,6 +34,12 @@
   --radius-md:   16px;
   --radius-lg:   24px;
   --radius-xl:   36px;
+
+  /* skyline sketch colours */
+  --skyline-stroke: #cecece;
+  --skyline-window: #dedede;
+  --skyline-ground: #d8d8d8;
+  --skyline-win-delay: .15s;
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -295,7 +301,7 @@ h1 .hero-title-light,.hero h1 { color:var(--text); }
 /* building outline – drawn with stroke-dashoffset animation */
 .s-wall, .s-top {
   fill:none;
-  stroke:#cecece;
+  stroke:var(--skyline-stroke);
   stroke-width:1.2;
   stroke-dasharray:var(--p, 600);
   stroke-dashoffset:var(--p, 600);
@@ -305,7 +311,7 @@ h1 .hero-title-light,.hero h1 { color:var(--text); }
 /* antenna / detail lines */
 .s-line {
   fill:none;
-  stroke:#cecece;
+  stroke:var(--skyline-stroke);
   stroke-width:.8;
   stroke-dasharray:var(--p, 60);
   stroke-dashoffset:var(--p, 60);
@@ -315,15 +321,15 @@ h1 .hero-title-light,.hero h1 { color:var(--text); }
 /* windows – fade in after building is drawn */
 .s-win {
   fill:none;
-  stroke:#dedede;
+  stroke:var(--skyline-window);
   stroke-width:.7;
   opacity:0;
   animation:fadeWin .6s ease forwards;
-  animation-delay:calc(var(--d, 0s) + var(--dur, 1.4s) + .15s);
+  animation-delay:calc(var(--d, 0s) + var(--dur, 1.4s) + var(--skyline-win-delay));
 }
 /* ground line */
 .s-ground {
-  stroke:#d8d8d8;
+  stroke:var(--skyline-ground);
   stroke-width:1;
 }
 
