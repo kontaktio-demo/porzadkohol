@@ -718,7 +718,7 @@ button[type="submit"] { margin-top:8px; }
   transition:background .25s, transform .25s; color:#fff;
 }
 .social-btn:hover { background:rgba(255,255,255,.15); transform:translateY(-3px); }
-.social-btn polygon { fill: #1a1a1a; }
+.social-btn polygon { fill: var(--primary); }
 
 .footer-col h4 { font-family:"Inter",sans-serif; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:14px; }
 .footer-col ul { display:flex; flex-direction:column; gap:10px; }
