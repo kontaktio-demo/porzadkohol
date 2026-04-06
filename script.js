@@ -108,6 +108,7 @@ function initCounters() {
           current = Math.min(current + target / steps, target);
           number.textContent = Math.floor(current) + suffix;
           if (current < target) requestAnimationFrame(tick);
+          else el.classList.add('counted');
         };
 
         requestAnimationFrame(tick);

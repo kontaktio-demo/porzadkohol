@@ -59,12 +59,11 @@
   <div class="hero-content reveal">
     <p class="hero-eyebrow">Łódź &amp; Województwo Łódzkie</p>
     <h1>
-      <span class="hero-title-light">Znajdziemy dla Ciebie</span><br>
-      <em class="hero-title-accent">idealne miejsce</em>
+      <span class="hero-title-light">Nieruchomości w Łodzi</span><br>
+      <em class="hero-title-accent">na każdym etapie</em>
     </h1>
     <p class="hero-subtitle">
-      Każda nieruchomość to wyjątkowa historia.<br class="br-desktop">
-      Pozwól, że pomożemy Ci napisać tę właśnie dla Ciebie.
+      Sprzedaż, wynajem, skup i inwestycje deweloperskie — prowadzone przez eksperta z wykształceniem prawniczym i ponad 5-letnim doświadczeniem na rynku łódzkim.
     </p>
     <div class="hero-actions">
       <a href="#oferta"  class="btn btn-primary btn-lg">Poznaj ofertę</a>
@@ -72,13 +71,54 @@
     </div>
   </div>
 
-  <!-- Animated sketch skyline -->
+  <!-- Scan line overlay -->
+  <div class="hero-scan" aria-hidden="true"></div>
+
+  <!-- Animated blueprint skyline -->
   <div class="skyline-wrap" aria-hidden="true">
-    <svg class="skyline-svg" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax meet"
-         xmlns="http://www.w3.org/2000/svg">
+    <svg class="skyline-svg" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="bpgrid" width="48" height="48" patternUnits="userSpaceOnUse">
+          <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(80,160,255,0.05)" stroke-width="0.4"/>
+        </pattern>
+        <!-- Orbit animation paths (invisible guides) -->
+        <path id="horbit" d="M 749,318 A 196,24 0 0 1 357,318 A 196,24 0 0 1 749,318"/>
+        <path id="vorbit" d="M 553,80 A 20,210 0 0 1 553,500 A 20,210 0 0 1 553,80"/>
+      </defs>
+
+      <!-- Blueprint grid background -->
+      <rect width="1440" height="520" fill="url(#bpgrid)"/>
+
+      <!-- Grid coordinate labels -->
+      <text class="s-coord" x="53" y="17">A</text>
+      <text class="s-coord" x="137" y="17">B</text>
+      <text class="s-coord" x="214" y="17">C</text>
+      <text class="s-coord" x="287" y="17">D</text>
+      <text class="s-coord" x="380" y="17">E</text>
+      <text class="s-coord" x="553" y="17">★</text>
+      <text class="s-coord" x="748" y="17">F</text>
+      <text class="s-coord" x="852" y="17">G</text>
+      <text class="s-coord" x="1065" y="17">H</text>
+      <text class="s-coord" x="1196" y="17">I</text>
+      <text class="s-coord" x="1365" y="17">J</text>
+
+      <!-- Row labels -->
+      <text class="s-coord" x="12" y="166">01</text>
+      <text class="s-coord" x="12" y="260">02</text>
+      <text class="s-coord" x="12" y="380">03</text>
+      <text class="s-coord" x="12" y="500">04</text>
+
+      <!-- Subtle horizontal axis -->
+      <line class="s-axis" x1="28" y1="260" x2="1432" y2="260"/>
 
       <!-- Ground line -->
       <line class="s-ground" x1="0" y1="500" x2="1440" y2="500"/>
+
+      <!-- ── ORBIT BACK HALVES (rendered before buildings so they appear "behind") ── -->
+      <path class="s-orbit-back" d="M 749,318 A 196,24 0 0 1 357,318"/>
+      <path class="s-orbit-v-back" d="M 553,80 A 20,210 0 0 0 553,500"/>
+
+      <!-- ── BUILDINGS ── -->
 
       <!-- B1: small far-left -->
       <g class="s-bld" style="--d:.2s;--dur:.8s">
@@ -111,7 +151,7 @@
         <rect class="s-win" x="224" y="386" width="9" height="7"/>
       </g>
 
-      <!-- B4: skyscraper with antenna -->
+      <!-- B4: skyscraper with antenna + floor slabs -->
       <g class="s-bld" style="--d:.68s;--dur:1.7s">
         <line class="s-line" x1="287" y1="160" x2="287" y2="122" style="--p:38"/>
         <rect class="s-wall" x="256" y="160" width="62" height="340" style="--p:804"/>
@@ -129,6 +169,18 @@
         <rect class="s-win" x="299" y="322" width="9" height="7"/>
         <rect class="s-win" x="266" y="356" width="9" height="7"/>
         <rect class="s-win" x="299" y="356" width="9" height="7"/>
+      </g>
+      <!-- B4 floor slabs -->
+      <g class="s-slabs" style="--sd:2.6s">
+        <line class="s-slab" x1="257" y1="188" x2="317" y2="188"/>
+        <line class="s-slab" x1="257" y1="218" x2="317" y2="218"/>
+        <line class="s-slab" x1="257" y1="250" x2="317" y2="250"/>
+        <line class="s-slab" x1="257" y1="284" x2="317" y2="284"/>
+        <line class="s-slab" x1="257" y1="320" x2="317" y2="320"/>
+        <line class="s-slab" x1="257" y1="358" x2="317" y2="358"/>
+        <line class="s-slab" x1="257" y1="396" x2="317" y2="396"/>
+        <line class="s-slab" x1="257" y1="434" x2="317" y2="434"/>
+        <line class="s-slab" x1="257" y1="468" x2="317" y2="468"/>
       </g>
 
       <!-- B5: wide mid-rise -->
@@ -160,7 +212,7 @@
         <rect class="s-win" x="489" y="378" width="9" height="7"/>
       </g>
 
-      <!-- B7: central tower (tallest) with antenna -->
+      <!-- B7: central tower (tallest) with antenna + floor slabs + floor numbers -->
       <g class="s-bld" style="--d:1.25s;--dur:2.0s">
         <line class="s-line" x1="553" y1="118" x2="553" y2="76" style="--p:42"/>
         <rect class="s-wall" x="520" y="118" width="66" height="382" style="--p:896"/>
@@ -180,6 +232,29 @@
         <rect class="s-win" x="566" y="330" width="9" height="7"/>
         <rect class="s-win" x="531" y="366" width="9" height="7"/>
         <rect class="s-win" x="566" y="366" width="9" height="7"/>
+      </g>
+      <!-- B7 floor slabs -->
+      <g class="s-slabs" style="--sd:3.5s">
+        <line class="s-slab" x1="521" y1="148" x2="585" y2="148"/>
+        <line class="s-slab" x1="521" y1="178" x2="585" y2="178"/>
+        <line class="s-slab" x1="521" y1="210" x2="585" y2="210"/>
+        <line class="s-slab" x1="521" y1="244" x2="585" y2="244"/>
+        <line class="s-slab" x1="521" y1="280" x2="585" y2="280"/>
+        <line class="s-slab" x1="521" y1="316" x2="585" y2="316"/>
+        <line class="s-slab" x1="521" y1="352" x2="585" y2="352"/>
+        <line class="s-slab" x1="521" y1="388" x2="585" y2="388"/>
+        <line class="s-slab" x1="521" y1="422" x2="585" y2="422"/>
+        <line class="s-slab" x1="521" y1="454" x2="585" y2="454"/>
+        <line class="s-slab" x1="521" y1="482" x2="585" y2="482"/>
+      </g>
+      <!-- B7 floor numbers -->
+      <g class="s-floor-nums" style="--sd:3.8s">
+        <text class="s-floor-num" x="591" y="152">14</text>
+        <text class="s-floor-num" x="591" y="214">12</text>
+        <text class="s-floor-num" x="591" y="284">10</text>
+        <text class="s-floor-num" x="591" y="356">08</text>
+        <text class="s-floor-num" x="591" y="426">06</text>
+        <text class="s-floor-num" x="591" y="486">04</text>
       </g>
 
       <!-- B8: adjacent mid-right of tower -->
@@ -209,7 +284,7 @@
         <rect class="s-win" x="768" y="368" width="10" height="7"/>
       </g>
 
-      <!-- B10: right skyscraper with antenna -->
+      <!-- B10: right skyscraper with antenna + floor slabs -->
       <g class="s-bld" style="--d:1.88s;--dur:1.8s">
         <line class="s-line" x1="852" y1="176" x2="852" y2="136" style="--p:40"/>
         <rect class="s-wall" x="818" y="176" width="68" height="324" style="--p:784"/>
@@ -227,6 +302,18 @@
         <rect class="s-win" x="866" y="340" width="9" height="7"/>
         <rect class="s-win" x="829" y="374" width="9" height="7"/>
         <rect class="s-win" x="866" y="374" width="9" height="7"/>
+      </g>
+      <!-- B10 floor slabs -->
+      <g class="s-slabs" style="--sd:2.9s">
+        <line class="s-slab" x1="819" y1="204" x2="885" y2="204"/>
+        <line class="s-slab" x1="819" y1="234" x2="885" y2="234"/>
+        <line class="s-slab" x1="819" y1="266" x2="885" y2="266"/>
+        <line class="s-slab" x1="819" y1="300" x2="885" y2="300"/>
+        <line class="s-slab" x1="819" y1="336" x2="885" y2="336"/>
+        <line class="s-slab" x1="819" y1="370" x2="885" y2="370"/>
+        <line class="s-slab" x1="819" y1="404" x2="885" y2="404"/>
+        <line class="s-slab" x1="819" y1="436" x2="885" y2="436"/>
+        <line class="s-slab" x1="819" y1="466" x2="885" y2="466"/>
       </g>
 
       <!-- B11: medium right -->
@@ -266,7 +353,7 @@
         <rect class="s-win" x="1127" y="360" width="10" height="7"/>
       </g>
 
-      <!-- B14: skyscraper far-right -->
+      <!-- B14: skyscraper far-right + floor slabs -->
       <g class="s-bld" style="--d:2.62s;--dur:1.7s">
         <line class="s-line" x1="1196" y1="180" x2="1196" y2="144" style="--p:36"/>
         <rect class="s-wall" x="1162" y="180" width="68" height="320" style="--p:776"/>
@@ -282,6 +369,18 @@
         <rect class="s-win" x="1211" y="312" width="9" height="7"/>
         <rect class="s-win" x="1173" y="346" width="9" height="7"/>
         <rect class="s-win" x="1211" y="346" width="9" height="7"/>
+      </g>
+      <!-- B14 floor slabs -->
+      <g class="s-slabs" style="--sd:3.1s">
+        <line class="s-slab" x1="1163" y1="208" x2="1229" y2="208"/>
+        <line class="s-slab" x1="1163" y1="238" x2="1229" y2="238"/>
+        <line class="s-slab" x1="1163" y1="270" x2="1229" y2="270"/>
+        <line class="s-slab" x1="1163" y1="304" x2="1229" y2="304"/>
+        <line class="s-slab" x1="1163" y1="338" x2="1229" y2="338"/>
+        <line class="s-slab" x1="1163" y1="372" x2="1229" y2="372"/>
+        <line class="s-slab" x1="1163" y1="404" x2="1229" y2="404"/>
+        <line class="s-slab" x1="1163" y1="434" x2="1229" y2="434"/>
+        <line class="s-slab" x1="1163" y1="462" x2="1229" y2="462"/>
       </g>
 
       <!-- B15: medium far-right -->
@@ -309,6 +408,62 @@
         <rect class="s-wall" x="1402" y="458" width="48" height="42" style="--p:180"/>
         <rect class="s-win" x="1412" y="468" width="8" height="6"/>
         <rect class="s-win" x="1432" y="468" width="8" height="6"/>
+      </g>
+
+      <!-- ── ORBIT FRONT HALVES (rendered after buildings so they appear "in front") ── -->
+      <path class="s-orbit-front" d="M 357,318 A 196,24 0 0 1 749,318"/>
+      <path class="s-orbit-v-front" d="M 553,80 A 20,210 0 0 1 553,500"/>
+
+      <!-- ── ORBIT DOTS ── -->
+      <circle class="s-orbit-dot" r="4.5">
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <mpath href="#horbit"/>
+        </animateMotion>
+      </circle>
+
+      <circle class="s-orbit-dot-v" r="3">
+        <animateMotion dur="14s" repeatCount="indefinite">
+          <mpath href="#vorbit"/>
+        </animateMotion>
+      </circle>
+
+      <!-- ── DIMENSION LINES for B7 central tower ── -->
+      <g class="s-dim">
+        <!-- Width bracket at top -->
+        <line class="s-dim-line" x1="520" y1="58" x2="586" y2="58"/>
+        <line class="s-dim-tick" x1="520" y1="52" x2="520" y2="64"/>
+        <line class="s-dim-tick" x1="586" y1="52" x2="586" y2="64"/>
+        <text class="s-dim-text" x="553" y="48">66m</text>
+        <!-- Height bracket on left -->
+        <line class="s-dim-line" x1="508" y1="118" x2="508" y2="500"/>
+        <line class="s-dim-tick" x1="502" y1="118" x2="514" y2="118"/>
+        <line class="s-dim-tick" x1="502" y1="500" x2="514" y2="500"/>
+        <text class="s-dim-text s-dim-vert" x="498" y="309">382m</text>
+      </g>
+
+      <!-- ── CROSSHAIR on antenna tip ── -->
+      <g class="s-crosshair">
+        <circle class="s-ch-circle" cx="553" cy="76" r="10"/>
+        <line class="s-ch" x1="553" y1="60" x2="553" y2="68"/>
+        <line class="s-ch" x1="553" y1="84" x2="553" y2="92"/>
+        <line class="s-ch" x1="537" y1="76" x2="545" y2="76"/>
+        <line class="s-ch" x1="561" y1="76" x2="569" y2="76"/>
+      </g>
+
+      <!-- ── TECHNICAL TITLE BLOCK ── -->
+      <g class="s-title-block">
+        <rect class="s-tb-bg" x="1192" y="452" width="238" height="44"/>
+        <line class="s-tb-div" x1="1192" y1="467" x2="1430" y2="467"/>
+        <text class="s-tb-main" x="1311" y="462">MWW MIESZKANIE</text>
+        <text class="s-tb-sub" x="1311" y="480">Łódź — Panorama Rynku</text>
+      </g>
+
+      <!-- ── SCALE BAR ── -->
+      <g class="s-scale">
+        <line class="s-dim-tick" x1="1192" y1="504" x2="1192" y2="512"/>
+        <line class="s-dim-line" x1="1192" y1="508" x2="1270" y2="508"/>
+        <line class="s-dim-tick" x1="1270" y1="504" x2="1270" y2="512"/>
+        <text class="s-dim-text" x="1231" y="500">500m</text>
       </g>
 
     </svg>
