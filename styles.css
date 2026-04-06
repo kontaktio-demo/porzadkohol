@@ -905,12 +905,7 @@ button[type="submit"] { margin-top:8px; }
   fill: rgba(120,190,255,.55);
   text-anchor: middle;
 }
-.s-dim-vert {
-  writing-mode: vertical-rl;
-  text-anchor: middle;
-  transform-origin: 498px 309px;
-  transform: rotate(180deg);
-}
+
 
 /* Crosshair */
 .s-crosshair {
