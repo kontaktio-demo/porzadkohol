@@ -141,6 +141,7 @@
 .tilt-3d {
   transform-style: preserve-3d;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  will-change: transform;
 }
 .tilt-3d:hover {
   z-index: 2;
@@ -282,6 +283,7 @@
 }
 
 .parallax-layer {
+  will-change: transform;
   transition: transform .05s linear;
 }
 
@@ -385,6 +387,7 @@
   will-change: background-position;
 }
 .hero-content {
+  will-change: transform, opacity;
   transition: none;
 }
 
@@ -393,6 +396,7 @@
 .dev-card,
 .testimonial-card,
 .partner-card {
+  will-change: transform;
   transform: translateY(var(--card-parallax-y, 0));
 }
 
@@ -401,6 +405,7 @@
 }
 
 .stat .stat-number {
+  will-change: transform;
   transform: translateY(var(--stat-parallax-y, 0));
   transition: transform .1s linear;
 }
@@ -414,6 +419,7 @@
 }
 
 .parallax-deco {
+  will-change: transform;
   transition: transform .1s linear;
 }
 
@@ -421,10 +427,12 @@
 [data-parallax-x],
 [data-parallax-scale],
 [data-parallax-rotate] {
+  will-change: transform;
   transition: transform .08s linear;
 }
 
 [data-parallax-fade] {
+  will-change: opacity;
   transition: opacity .15s linear;
 }
 

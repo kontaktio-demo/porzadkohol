@@ -21,9 +21,9 @@ function initPreloader() {
   };
 
   if (document.readyState === 'complete') {
-    setTimeout(hide, 200);
+    setTimeout(hide, 800);
   } else {
-    window.addEventListener('load', () => setTimeout(hide, 200));
+    window.addEventListener('load', () => setTimeout(hide, 800));
   }
 }
 
@@ -121,131 +121,41 @@ function initCounters() {
   stats.forEach(stat => observer.observe(stat));
 }
 
-function sanitizeInput(str) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
-
-var _formSubmitCount = 0;
-var _formLastSubmit = 0;
-
 function initForm() {
-  var form = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm');
   if (!form) return;
 
-  var EMAIL_RE = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  var MAX_NAME_LEN = 100;
-  var MAX_EMAIL_LEN = 254;
-  var MAX_PHONE_LEN = 20;
-  var MAX_MSG_LEN = 5000;
-  var RATE_LIMIT_MS = 10000;
-  var MAX_SUBMITS_PER_SESSION = 5;
-
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', e => {
     e.preventDefault();
 
-    var btn       = form.querySelector('button[type="submit"]');
-    var nameEl    = form.querySelector('#fname');
-    var emailEl   = form.querySelector('#femail');
-    var phoneEl   = form.querySelector('#fphone');
-    var msgEl     = form.querySelector('#fmessage');
-    var gdprEl    = form.querySelector('#fgdpr');
-    var honeypot  = form.querySelector('#fwebsite');
-    var orig      = btn.textContent;
+    const btn      = form.querySelector('button[type="submit"]');
+    const nameEl   = form.querySelector('#fname');
+    const emailEl  = form.querySelector('#femail');
+    const orig     = btn.textContent;
+    const hasName  = nameEl.value.trim();
+    const hasEmail = emailEl.value.trim();
 
     clearError(nameEl);
     clearError(emailEl);
-    if (phoneEl) clearError(phoneEl);
-    if (msgEl) clearError(msgEl);
-    if (gdprEl) clearError(gdprEl);
 
-    // Honeypot check
-    if (honeypot && honeypot.value) return;
-
-    // Rate limiting
-    var now = Date.now();
-    if (now - _formLastSubmit < RATE_LIMIT_MS) {
-      showError(btn.parentNode || form, 'Poczekaj chwilę przed ponownym wysłaniem.');
-      shakeBtn(btn);
-      return;
-    }
-    if (_formSubmitCount >= MAX_SUBMITS_PER_SESSION) {
-      showError(btn.parentNode || form, 'Osiągnięto limit wysłanych wiadomości. Odśwież stronę.');
-      shakeBtn(btn);
-      return;
-    }
-
-    var nameVal  = (nameEl.value || '').trim();
-    var emailVal = (emailEl.value || '').trim();
-    var phoneVal = phoneEl ? (phoneEl.value || '').trim() : '';
-    var msgVal   = msgEl ? (msgEl.value || '').trim() : '';
-
-    var hasError = false;
-
-    if (!nameVal) {
-      showError(nameEl, 'Podaj imię i nazwisko.');
-      hasError = true;
-    } else if (nameVal.length > MAX_NAME_LEN) {
-      showError(nameEl, 'Imię jest za długie (maks. ' + MAX_NAME_LEN + ' znaków).');
-      hasError = true;
-    } else if (/[<>{}]/.test(nameVal)) {
-      showError(nameEl, 'Imię zawiera niedozwolone znaki.');
-      hasError = true;
-    }
-
-    if (!emailVal) {
-      showError(emailEl, 'Podaj adres e-mail.');
-      hasError = true;
-    } else if (emailVal.length > MAX_EMAIL_LEN) {
-      showError(emailEl, 'Adres e-mail jest za długi.');
-      hasError = true;
-    } else if (!EMAIL_RE.test(emailVal)) {
-      showError(emailEl, 'Podaj poprawny adres e-mail.');
-      hasError = true;
-    }
-
-    if (phoneVal && phoneVal.length > MAX_PHONE_LEN) {
-      showError(phoneEl, 'Numer telefonu jest za długi.');
-      hasError = true;
-    } else if (phoneVal && !/^[+\d\s()-]*$/.test(phoneVal)) {
-      showError(phoneEl, 'Numer telefonu zawiera niedozwolone znaki.');
-      hasError = true;
-    }
-
-    if (msgVal && msgVal.length > MAX_MSG_LEN) {
-      showError(msgEl, 'Wiadomość jest za długa (maks. ' + MAX_MSG_LEN + ' znaków).');
-      hasError = true;
-    }
-
-    if (gdprEl && !gdprEl.checked) {
-      showError(gdprEl, 'Zaakceptuj zgodę na przetwarzanie danych.');
-      hasError = true;
-    }
+    let hasError = false;
+    if (!hasName)  { showError(nameEl,  'Please enter your name.');  hasError = true; }
+    if (!hasEmail) { showError(emailEl, 'Please enter your email.'); hasError = true; }
 
     if (hasError) {
       shakeBtn(btn);
       return;
     }
 
-    // Sanitize values
-    nameVal = sanitizeInput(nameVal);
-    emailVal = sanitizeInput(emailVal);
-    phoneVal = sanitizeInput(phoneVal);
-    msgVal = sanitizeInput(msgVal);
-
-    _formSubmitCount++;
-    _formLastSubmit = now;
-
-    btn.textContent = 'Wysyłanie…';
+    btn.textContent = 'Sending…';
     btn.disabled = true;
 
-    setTimeout(function () {
-      btn.textContent = 'Wiadomość wysłana ✓';
+    setTimeout(() => {
+      btn.textContent = 'Request Sent ✓';
       btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
       btn.style.color = '#fff';
 
-      setTimeout(function () {
+      setTimeout(() => {
         btn.textContent = orig;
         btn.disabled = false;
         btn.style.background = '';
@@ -340,4 +250,3 @@ function initCookieConsent() {
     consent.classList.remove('show');
   });
 }
-
