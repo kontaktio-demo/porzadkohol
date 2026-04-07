@@ -154,14 +154,14 @@
   /* ------------------------------------------------------------------ */
   function initGradientOrbs() {
     const orbConfigs = [
-      { parent: '.about',         x: '75%', y: '20%', size: 340, hue: 0,   delay: 0 },
-      { parent: '.distinguishes', x: '15%', y: '60%', size: 280, hue: 0,   delay: -8 },
-      { parent: '.services',      x: '80%', y: '70%', size: 320, hue: 0,   delay: -4 },
-      { parent: '.developer',     x: '25%', y: '30%', size: 300, hue: 0,   delay: -12 },
-      { parent: '.testimonials',  x: '70%', y: '40%', size: 260, hue: 0,   delay: -6 },
-      { parent: '.contact',       x: '20%', y: '70%', size: 350, hue: 0,   delay: -10 },
-      { parent: '.partners',      x: '60%', y: '50%', size: 240, hue: 0,   delay: -15 },
-      { parent: '.agent-section', x: '85%', y: '25%', size: 280, hue: 0,   delay: -3 },
+      { parent: '.about',         x: '75%', y: '20%', size: 340, delay: 0 },
+      { parent: '.distinguishes', x: '15%', y: '60%', size: 280, delay: -8 },
+      { parent: '.services',      x: '80%', y: '70%', size: 320, delay: -4 },
+      { parent: '.developer',     x: '25%', y: '30%', size: 300, delay: -12 },
+      { parent: '.testimonials',  x: '70%', y: '40%', size: 260, delay: -6 },
+      { parent: '.contact',       x: '20%', y: '70%', size: 350, delay: -10 },
+      { parent: '.partners',      x: '60%', y: '50%', size: 240, delay: -15 },
+      { parent: '.agent-section', x: '85%', y: '25%', size: 280, delay: -3 },
     ];
 
     orbConfigs.forEach(function (cfg) {

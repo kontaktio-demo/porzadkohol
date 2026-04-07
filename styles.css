@@ -1311,20 +1311,16 @@ button[type="submit"] { margin-top:8px; }
 }
 @keyframes bgFloat {
   0%,100% {
-    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0))
-               translateY(0) rotate(0deg);
+    transform: translate3d(var(--mouse-x, 0), var(--mouse-y, 0), 0) rotate(0deg);
   }
   25% {
-    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0))
-               translateY(calc(var(--float-drift, 40px) * -0.6)) rotate(5deg);
+    transform: translate3d(var(--mouse-x, 0), calc(var(--mouse-y, 0) - var(--float-drift, 40px) * 0.6), 0) rotate(5deg);
   }
   50% {
-    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0))
-               translateY(calc(var(--float-drift, 40px) * -1)) rotate(0deg);
+    transform: translate3d(var(--mouse-x, 0), calc(var(--mouse-y, 0) - var(--float-drift, 40px)), 0) rotate(0deg);
   }
   75% {
-    transform: translate(var(--mouse-x, 0), var(--mouse-y, 0))
-               translateY(calc(var(--float-drift, 40px) * -0.4)) rotate(-3deg);
+    transform: translate3d(var(--mouse-x, 0), calc(var(--mouse-y, 0) - var(--float-drift, 40px) * 0.4), 0) rotate(-3deg);
   }
 }
 
