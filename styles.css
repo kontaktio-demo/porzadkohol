@@ -307,7 +307,7 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
   min-height:280px;
 }
 
-.stats { background:var(--bg-alt); }
+.stats { background:#fff; }
 .stats-grid {
   display:grid; grid-template-columns:repeat(2,1fr);
   max-width:var(--container); margin:0 auto;
@@ -988,34 +988,6 @@ button[type="submit"] { margin-top:8px; }
 }
 .about > .container { position: relative; z-index: 1; }
 
-.distinguishes {
-  position: relative;
-  overflow: hidden;
-}
-.distinguishes::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0,0,0,.03) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-.distinguishes::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 300px;
-  background: url('images/about-secondary.webp') bottom center/cover no-repeat;
-  opacity: .07;
-  filter: grayscale(100%);
-  pointer-events: none;
-  z-index: 0;
-}
 .distinguishes > .container { position: relative; z-index: 1; }
 
 .services {
@@ -1088,23 +1060,6 @@ button[type="submit"] { margin-top:8px; }
 }
 .contact > .container { position: relative; z-index: 1; }
 
-.partners {
-  position: relative;
-  overflow: hidden;
-}
-.partners::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 250px;
-  background: url('images/section-bg-1.webp') bottom center/cover no-repeat;
-  opacity: .06;
-  filter: grayscale(100%);
-  pointer-events: none;
-  z-index: 0;
-}
 .partners > .container { position: relative; z-index: 1; }
 
 .agent-section {
@@ -1173,28 +1128,6 @@ button[type="submit"] { margin-top:8px; }
   z-index: 2;
 }
 
-.stats {
-  position: relative;
-  overflow: hidden;
-}
-.stats::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('images/section-bg-1.webp') center/cover no-repeat;
-  opacity: .06;
-  filter: grayscale(100%);
-  pointer-events: none;
-  z-index: 0;
-}
-.stats::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(26,26,26,.02) 0%, transparent 50%, rgba(26,26,26,.02) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
 .stats-grid { position: relative; z-index: 1; }
 
 .dist-card:hover,
@@ -1260,7 +1193,6 @@ button[type="submit"] { margin-top:8px; }
   .contact::before,
   .agent-section::before,
   .testimonials::before,
-  .stats::before,
   .footer::before {
     background-attachment: fixed;
   }
