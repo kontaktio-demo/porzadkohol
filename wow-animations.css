@@ -166,14 +166,12 @@
   animation: clipRevealRight 1.2s var(--ease) .55s forwards;
 }
 
-/* Service / dev card images */
-.service-card .service-img,
-.dev-card .dev-img {
+/* Service card images */
+.service-card .service-img {
   clip-path: inset(0 0 0 0);
   transition: clip-path .6s var(--ease);
 }
-.service-card:hover .service-img,
-.dev-card:hover .dev-img {
+.service-card:hover .service-img {
   clip-path: inset(4px 4px 4px 4px);
 }
 

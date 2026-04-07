@@ -92,7 +92,7 @@
     if (!isDesktop) return;
 
     var cards = document.querySelectorAll(
-      '.dist-card, .service-card, .dev-card, .testimonial-card, .partner-card, .listing-card'
+      '.dist-card, .service-card, .testimonial-card, .partner-card, .listing-card'
     );
 
     cards.forEach(function (card) {
@@ -361,7 +361,7 @@
     if (isTouchDevice) return;
 
     var grids = document.querySelectorAll(
-      '.dist-grid, .services-grid, .dev-grid, .testimonials-grid, .partners-grid'
+      '.dist-grid, .services-grid, .testimonials-grid, .partners-grid'
     );
     if (!grids.length) return;
 
