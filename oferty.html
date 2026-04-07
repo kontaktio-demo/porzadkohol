@@ -228,7 +228,6 @@
 <script>
 'use strict';
 
-// ── Default listings data ──────────────────────────────────
 const DEFAULT_LISTINGS = [
   {id:1, type:'sprzedaz', category:'mieszkanie', title:'Apartament na Śródmieściu', price:450000, currency:'PLN', area:62, rooms:3, floor:4, totalFloors:8, address:'ul. Piotrkowska, Śródmieście, Łódź', img:'images/hero-bg.webp', desc:'Przestronny apartament z widokiem na Piotrkowską, po remoncie, balkon.', active:true},
   {id:2, type:'wynajem', category:'mieszkanie', title:'Mieszkanie 2-pokojowe Bałuty', price:2200, currency:'PLN/mies', area:45, rooms:2, floor:2, totalFloors:5, address:'ul. Zgierska, Bałuty, Łódź', img:'images/about-secondary.webp', desc:'Przytulne mieszkanie, pełne wyposażenie, dostęp do internetu.', active:true},
@@ -241,13 +240,11 @@ const DEFAULT_LISTINGS = [
   {id:9, type:'wynajem', category:'mieszkanie', title:'Mieszkanie 3-pokojowe Śródmieście', price:3400, currency:'PLN/mies', area:72, rooms:3, floor:3, totalFloors:7, address:'ul. Kilińskiego, Śródmieście, Łódź', img:'images/hero-bg.webp', desc:'Przestronne mieszkanie, po remoncie, dostępne od zaraz.', active:true},
 ];
 
-// ── State ──────────────────────────────────────────────────
 let allListings = [];
 let filtered    = [];
 let displayed   = 9;
 const PAGE_SIZE = 9;
 
-// ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   loadListings();
   renderListings();
@@ -272,7 +269,6 @@ function loadListings() {
   allListings = DEFAULT_LISTINGS.filter(l => l.active !== false);
 }
 
-// ── Render ─────────────────────────────────────────────────
 function renderListings() {
   applyFilters();
 }
@@ -302,7 +298,6 @@ function applyFilters() {
     return true;
   });
 
-  // Sort
   if (sort === 'price-asc')  filtered.sort((a,b) => a.price - b.price);
   if (sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
   if (sort === 'area-desc')  filtered.sort((a,b) => b.area - a.area);
@@ -373,7 +368,6 @@ function renderCard(l) {
     </article>`;
 }
 
-// ── Filters ────────────────────────────────────────────────
 function bindFilters() {
   document.getElementById('filterApply').addEventListener('click', applyFilters);
   document.getElementById('filterReset').addEventListener('click', () => {
@@ -391,13 +385,11 @@ function bindFilters() {
     paint();
   });
 
-  // Filter on Enter
   document.getElementById('filterCity').addEventListener('keydown', e => {
     if (e.key === 'Enter') applyFilters();
   });
 }
 
-// ── Modal ──────────────────────────────────────────────────
 function bindModal() {
   const overlay = document.getElementById('modalOverlay');
   const closeBtn = document.getElementById('modalClose');
@@ -443,7 +435,6 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// ── Nav ────────────────────────────────────────────────────
 function bindNav() {
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -460,7 +451,6 @@ function bindNav() {
   });
 }
 
-// ── Admin bar ──────────────────────────────────────────────
 function checkAdminBar() {
   try {
     if (localStorage.getItem('mww_admin_logged_in') === '1') {
@@ -477,7 +467,6 @@ function checkAdminBar() {
   }
 }
 
-// ── Cookie consent ─────────────────────────────────────────
 function initCookieConsent() {
   const consent = document.getElementById('cookieConsent');
   if (!consent) return;
