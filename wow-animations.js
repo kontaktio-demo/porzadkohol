@@ -56,7 +56,7 @@
     if (!isDesktop) return;
 
     var cards = document.querySelectorAll(
-      '.dist-card, .service-card, .testimonial-card, .partner-card, .listing-card'
+      '.dist-card, .testimonial-card, .partner-card, .listing-card'
     );
 
     cards.forEach(function (card) {

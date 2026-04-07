@@ -135,7 +135,7 @@
   transition: clip-path .6s var(--ease);
 }
 .service-card:hover .service-img {
-  clip-path: inset(4px 4px 4px 4px);
+  clip-path: inset(0 0 0 0);
 }
 
 .tilt-3d {

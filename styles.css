@@ -400,7 +400,7 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
   transition:transform .35s var(--ease), box-shadow .35s;
   position:relative;
 }
-.service-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-md); }
+.service-card:hover { box-shadow:0 0 24px rgba(0,0,0,.10); }
 
 .service-featured {
   outline:1.5px solid var(--border);
@@ -412,7 +412,7 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
   background-size:cover; background-position:center;
   transition:transform .4s var(--ease);
 }
-.service-card:hover .service-img { transform:scale(1.04); }
+.service-card:hover .service-img { transform:none; }
 .service-tag {
   position:absolute; bottom:14px; right:14px;
   background:rgba(0,0,0,.65); color:#fff;
@@ -832,7 +832,7 @@ button[type="submit"] { margin-top:8px; }
 .testimonial-card {
   position: relative;
 }
-.dist-card::before, .service-card::before,
+.dist-card::before,
 .partner-card::before, .testimonial-card::before {
   content: '';
   position: absolute; top: 10px; left: 10px;
@@ -841,7 +841,7 @@ button[type="submit"] { margin-top:8px; }
   border-left: 1px solid var(--border-soft);
   transition: border-color .35s, width .35s, height .35s;
 }
-.dist-card::after, .service-card::after,
+.dist-card::after,
 .partner-card::after, .testimonial-card::after {
   content: '';
   position: absolute; bottom: 10px; right: 10px;
@@ -850,9 +850,9 @@ button[type="submit"] { margin-top:8px; }
   border-right: 1px solid var(--border-soft);
   transition: border-color .35s, width .35s, height .35s;
 }
-.dist-card:hover::before, .service-card:hover::before,
+.dist-card:hover::before,
 .partner-card:hover::before, .testimonial-card:hover::before,
-.dist-card:hover::after, .service-card:hover::after,
+.dist-card:hover::after,
 .partner-card:hover::after, .testimonial-card:hover::after {
   border-color: var(--accent);
   width: 20px; height: 20px;
@@ -1185,7 +1185,6 @@ button[type="submit"] { margin-top:8px; }
 }
 
 .dist-card:hover,
-.service-card:hover,
 .testimonial-card:hover {
   box-shadow: 0 16px 48px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.05);
 }
