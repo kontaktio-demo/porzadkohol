@@ -668,6 +668,72 @@
     margin: 0 auto;
   }
 
+  /* Center two-col text sections on mobile */
+  .two-col > .text {
+    text-align: center;
+  }
+  .two-col > .text .eyebrow {
+    justify-content: center;
+  }
+  .two-col > .text .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .two-col > .text .features-list {
+    text-align: left;
+    display: inline-flex;
+    flex-direction: column;
+  }
+  .two-col > .text .btn {
+    align-self: center;
+  }
+  .two-col > .text .agent-credentials {
+    text-align: left;
+    align-items: center;
+  }
+  .two-col > .text .agent-quote {
+    text-align: left;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center agent visual on mobile */
+  .agent-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .agent-photo {
+    margin: 0 auto;
+  }
+  .agent-card-float {
+    align-self: center;
+  }
+
+  /* Center section headers */
+  .section-header {
+    text-align: center;
+  }
+  .section-header .section-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center contact CTA buttons */
+  .contact-cta-btns {
+    justify-content: center;
+  }
+
+  /* Center off-market button */
+  .off-market-text {
+    align-items: center;
+    text-align: center;
+  }
+  .off-market-text .btn-primary {
+    align-self: center;
+  }
+
   /* Cards smaller padding */
   .dist-card {
     padding: 24px 20px;
@@ -738,16 +804,33 @@
   .sticky-bar {
     left: 12px;
     right: 12px;
+    bottom: 12px;
     transform: translateX(0) translateY(calc(100% + 48px));
-    border-radius: 16px;
+    border-radius: 12px;
     width: auto;
   }
   .sticky-bar.on {
     transform: translateX(0) translateY(0);
     animation: none;
   }
+  .sticky-phone {
+    padding: 8px 12px;
+    font-size: .78rem;
+    gap: 6px;
+    flex: 1;
+    justify-content: center;
+  }
   .sticky-phone span {
-    display: none;
+    display: inline;
+  }
+  .sticky-offers {
+    padding: 8px 12px;
+    font-size: .78rem;
+    flex: 1;
+    text-align: center;
+  }
+  .sticky-close {
+    padding: 8px 10px;
   }
 
   /* Section padding reduce */
@@ -834,6 +917,28 @@
   .nav-cta {
     padding: 8px 14px;
     font-size: .75rem;
+  }
+
+  /* Sticky bar even more compact */
+  .sticky-bar {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+  .sticky-phone {
+    padding: 7px 10px;
+    font-size: .72rem;
+  }
+  .sticky-phone svg {
+    width: 14px;
+    height: 14px;
+  }
+  .sticky-offers {
+    padding: 7px 10px;
+    font-size: .72rem;
+  }
+  .sticky-close {
+    padding: 7px 8px;
   }
 
   /* Footer */
