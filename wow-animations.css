@@ -788,7 +788,14 @@
 }
 
 /* ------------------------------------------------------------------
-   OFERTY PAGE RESPONSIVE ENHANCEMENTS
+   26. BLINK CURSOR FOR HERO TYPING EFFECT (JS adds the element)
+   ------------------------------------------------------------------ */
+
+@keyframes blink {
+  0%,100% { opacity: .6; }
+  50%     { opacity: 0; }
+}
+
    (when linked from oferty.html)
    ------------------------------------------------------------------ */
 

@@ -16,6 +16,11 @@
   var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  /* --- Configuration constants --- */
+  var TILT_MAX_DEG = 5;       // max tilt rotation in degrees
+  var MAGNETIC_STRENGTH = 0.15; // magnetic button follow strength
+  var PARALLAX_SHIFT_PX = 30;  // max parallax shift in pixels
+
   /* ================================================================
      1. ENHANCED SCROLL REVEAL
      The base script.js handles .reveal. Here we also observe
@@ -67,8 +72,8 @@
         var y = e.clientY - rect.top;
         var midX = rect.width / 2;
         var midY = rect.height / 2;
-        var rotateY = ((x - midX) / midX) * 5;   // max ±5 deg
-        var rotateX = ((midY - y) / midY) * 5;
+        var rotateY = ((x - midX) / midX) * TILT_MAX_DEG;
+        var rotateX = ((midY - y) / midY) * TILT_MAX_DEG;
 
         card.style.transform =
           'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px) scale(1.01)';
@@ -96,7 +101,7 @@
         var x = e.clientX - rect.left - rect.width / 2;
         var y = e.clientY - rect.top - rect.height / 2;
         btn.style.transform =
-          'translate(' + (x * 0.15) + 'px,' + (y * 0.15) + 'px) translateY(-3px) scale(1.02)';
+          'translate(' + (x * MAGNETIC_STRENGTH) + 'px,' + (y * MAGNETIC_STRENGTH) + 'px) translateY(-3px) scale(1.02)';
       });
 
       btn.addEventListener('mouseleave', function () {
@@ -128,7 +133,7 @@
 
         var rect = section.getBoundingClientRect();
         var offset = rect.top / window.innerHeight;
-        var shift = offset * 30; // max 30px shift
+        var shift = offset * PARALLAX_SHIFT_PX;
 
         before.style.transform =
           'translate(-50%, calc(-50% + ' + shift + 'px))';
@@ -209,14 +214,6 @@
     cursor.setAttribute('aria-hidden', 'true');
     cursor.style.cssText =
       'display:inline-block;margin-left:4px;animation:blink 1s step-end infinite;font-weight:300;opacity:.6;';
-
-    // Add the blink keyframes
-    if (!document.getElementById('wow-blink-style')) {
-      var style = document.createElement('style');
-      style.id = 'wow-blink-style';
-      style.textContent = '@keyframes blink{0%,100%{opacity:.6}50%{opacity:0}}';
-      document.head.appendChild(style);
-    }
 
     eyebrow.appendChild(cursor);
 
