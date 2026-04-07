@@ -702,17 +702,17 @@ button[type="submit"] { margin-top:8px; }
 
 /* ── Sticky bar ─────────────────────────────────────────── */
 .sticky-bar {
-  position:fixed; bottom:24px; right:24px; z-index:900;
+  position:fixed; bottom:24px; left:50%; z-index:900;
   background:#fff;
   border:1px solid var(--border);
   border-radius:50px;
   display:flex; align-items:center; gap:0;
   box-shadow:0 4px 24px rgba(0,0,0,.12);
-  transform:translateY(120%);
+  transform:translate(-50%,120%);
   transition:transform .4s var(--ease);
   overflow:hidden;
 }
-.sticky-bar.on { transform:translateY(0); }
+.sticky-bar.on { transform:translate(-50%,0); }
 .sticky-phone {
   display:flex; align-items:center; gap:8px;
   padding:12px 20px;
