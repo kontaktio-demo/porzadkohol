@@ -1156,3 +1156,78 @@ body::after {
     opacity: 0.5;
   }
 }
+
+.section.about,
+.section.distinguishes,
+.section.services,
+.section.developer,
+.section.agent-section,
+.section.testimonials,
+.section.partners,
+.section.contact { overflow: hidden; }
+
+.footer { overflow: hidden; }
+
+.section.about::before,
+.section.distinguishes::before,
+.section.services::before,
+.section.developer::before,
+.section.agent-section::before,
+.section.testimonials::before,
+.section.partners::before,
+.section.contact::before,
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .045;
+  filter: grayscale(100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: bgDrift 30s ease-in-out infinite alternate;
+}
+
+.section.about::before { background-image: url('images/section-bg-1.webp'); }
+.section.distinguishes::before { background-image: url('images/hero-bg.webp'); }
+.section.services::before { background-image: url('images/about-secondary.webp'); }
+.section.developer::before { background-image: url('images/about-photo.webp'); }
+.section.agent-section::before { background-image: url('images/section-bg-1.webp'); }
+.section.testimonials::before { background-image: url('images/hero-bg.webp'); }
+.section.partners::before { background-image: url('images/about-secondary.webp'); }
+.section.contact::before { background-image: url('images/about-photo.webp'); }
+.footer::before { background-image: url('images/hero-bg.webp'); opacity: .06; }
+
+.section > .container { position: relative; z-index: 1; }
+
+@keyframes bgDrift {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.12) translate(-1%, -.5%); }
+}
+
+@media (max-width: 768px) {
+  .section.about::before,
+  .section.distinguishes::before,
+  .section.services::before,
+  .section.developer::before,
+  .section.agent-section::before,
+  .section.testimonials::before,
+  .section.partners::before,
+  .section.contact::before { opacity: .03; animation: none; }
+}
+
+@media (max-width: 480px) {
+  .section.about::before,
+  .section.distinguishes::before,
+  .section.services::before,
+  .section.developer::before,
+  .section.agent-section::before,
+  .section.testimonials::before,
+  .section.partners::before,
+  .section.contact::before { display: none; }
+}
