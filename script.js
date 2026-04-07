@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initForm();
   initStickyBar();
   initCookieConsent();
-  initBackToTop();
-  initShineEffects();
 });
 
 function initPreloader() {
@@ -343,28 +341,3 @@ function initCookieConsent() {
   });
 }
 
-function initBackToTop() {
-  var btn = document.getElementById('backToTop');
-  if (!btn) return;
-
-  var update = function () {
-    btn.classList.toggle('visible', window.scrollY > 600);
-  };
-
-  window.addEventListener('scroll', update, { passive: true });
-  update();
-
-  btn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-
-function initShineEffects() {
-  var cards = document.querySelectorAll('.dist-card, .dev-card, .testimonial-card, .partner-card');
-  cards.forEach(function (card) {
-    var shine = document.createElement('div');
-    shine.className = 'shine-layer';
-    shine.setAttribute('aria-hidden', 'true');
-    card.appendChild(shine);
-  });
-}
