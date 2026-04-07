@@ -528,6 +528,15 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
   font-family:"Inter",system-ui,sans-serif;
 }
 
+.section-desc strong,
+.dist-card p strong,
+.service-body p strong,
+.dev-body p strong,
+.off-market-text p strong,
+.hero-subtitle strong,
+.lead strong,
+.footer-brand p strong { color:var(--text); font-weight:600; }
+
 .agent-credentials { display:flex; flex-direction:column; gap:10px; margin:1.25rem 0 2rem; }
 .agent-credentials li { display:flex; align-items:center; gap:12px; font-size:.88rem; color:var(--text); }
 .agent-credentials li span:first-child { flex-shrink:0; color:var(--primary); display:flex; }
@@ -544,7 +553,9 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
   display:flex; flex-direction:column; gap:14px;
 }
 .testimonial-stars { font-size:1rem; color:var(--accent); letter-spacing:2px; }
-.testimonial-card p { font-size:.92rem; color:var(--text); font-style:italic; line-height:1.7; flex:1; }
+.testimonial-card p { font-size:.92rem; color:var(--text); line-height:1.7; flex:1; }
+.testimonial-card p em { font-style:italic; }
+.testimonial-card p strong { font-weight:600; color:var(--primary); }
 .testimonial-card footer { border-top:1px solid var(--border-soft); padding-top:12px; }
 .testimonial-card footer strong { display:block; font-size:.88rem; color:var(--primary); }
 .testimonial-card footer span   { font-size:.78rem; color:var(--text-muted); }
@@ -647,6 +658,7 @@ button[type="submit"] { margin-top:8px; }
 }
 .footer-logo strong { color:rgba(255,255,255,.5); }
 .footer-brand p { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.7; max-width:280px; margin-bottom:20px; }
+.footer-brand p strong { color:rgba(255,255,255,.85); font-weight:600; }
 
 .footer-social { display:flex; gap:10px; flex-wrap:wrap; }
 .social-btn {
@@ -767,6 +779,7 @@ button[type="submit"] { margin-top:8px; }
 .hero .hero-title-light { color: rgba(255,255,255,.85); }
 .hero .hero-title-accent { color: #ffffff; font-weight:800; font-size:1em; text-shadow:0 2px 20px rgba(0,0,0,.15); }
 .hero .hero-subtitle { color: rgba(255,255,255,.8); }
+.hero .hero-subtitle strong { color: #ffffff; font-weight: 600; }
 .hero .btn-outline {
   border-color: rgba(255,255,255,.7);
   color: #ffffff;
