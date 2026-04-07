@@ -132,7 +132,7 @@
     const sections = document.querySelectorAll('.section');
     sections.forEach(function (section) {
       var count = Math.floor(Math.random() * 2) + 2;
-      for (let i = 0; i < count; i++) {
+      for (var i = 0; i < count; i++) {
         const shape = document.createElement('div');
         shape.className = 'bg-float-shape';
         shape.setAttribute('aria-hidden', 'true');
