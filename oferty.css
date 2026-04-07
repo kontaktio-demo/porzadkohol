@@ -584,3 +584,67 @@ body {
     background-attachment: fixed;
   }
 }
+
+/* --- Oferty mobile enhancements --- */
+@media (max-width: 768px) {
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255,255,255,.98);
+    backdrop-filter: blur(20px);
+    padding: 90px 28px 40px;
+    transform: translateX(110%);
+    transition: transform .4s cubic-bezier(.25,.46,.45,.94);
+    z-index: 900;
+    gap: 20px;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .filter-bar {
+    position: relative;
+    top: 0;
+  }
+  .listing-card {
+    margin-bottom: 0;
+  }
+  .listing-footer {
+    flex-direction: column;
+  }
+  .btn-ask {
+    width: 100%;
+  }
+  .btn-save {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+  .listing-price {
+    font-size: 1.05rem;
+  }
+  .listings-meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .cookie-consent {
+    left: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+    padding: 16px;
+  }
+}

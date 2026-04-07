@@ -1,0 +1,982 @@
+/* ============================================
+   WOW ANIMATIONS — MWW Mieszkanie
+   Amazing scroll-reveal variants, 3D effects,
+   hero cinematic entrance, shimmer & glow,
+   parallax, clip-path image reveals, and
+   full mobile responsiveness.
+   ============================================ */
+
+/* ------------------------------------------------------------------
+   1. REVEAL ANIMATION VARIANTS
+   All variants also carry the base .reveal class so the existing
+   IntersectionObserver in script.js adds .visible automatically.
+   ------------------------------------------------------------------ */
+
+/* Slide from left */
+.reveal.reveal-left {
+  transform: translateX(-80px) translateY(0) scale(1);
+}
+
+/* Slide from right */
+.reveal.reveal-right {
+  transform: translateX(80px) translateY(0) scale(1);
+}
+
+/* Scale up from small */
+.reveal.reveal-scale {
+  transform: scale(.75) translateY(0);
+}
+
+/* Flip up with perspective */
+.reveal.reveal-flip {
+  transform: perspective(800px) rotateX(12deg) translateY(50px) scale(.97);
+}
+
+/* Blur in */
+.reveal.reveal-blur {
+  filter: blur(14px);
+  transform: translateY(24px) scale(1);
+}
+.reveal.reveal-blur.visible {
+  filter: blur(0);
+}
+
+/* Rotate in */
+.reveal.reveal-rotate {
+  transform: rotate(-6deg) translateY(50px) scale(.92);
+}
+
+/* Zoom burst – starts large, settles */
+.reveal.reveal-zoom {
+  transform: scale(1.15) translateY(0);
+  filter: blur(6px);
+}
+.reveal.reveal-zoom.visible {
+  filter: blur(0);
+}
+
+/* ------------------------------------------------------------------
+   2. HERO CINEMATIC ENTRANCE
+   Each child animates in sequence once .visible is applied.
+   ------------------------------------------------------------------ */
+
+@keyframes heroFadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroTitleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(.96);
+    letter-spacing: .12em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: inherit;
+  }
+}
+
+/* hide hero children until parent is visible */
+.hero-content .hero-eyebrow,
+.hero-content h1 .hero-title-light,
+.hero-content h1 .hero-title-accent,
+.hero-content .hero-subtitle,
+.hero-content .hero-actions {
+  opacity: 0;
+}
+
+.hero-content.visible .hero-eyebrow {
+  animation: heroFadeSlideUp .85s var(--ease) .15s both;
+}
+.hero-content.visible h1 .hero-title-light {
+  animation: heroTitleReveal 1s var(--ease) .35s both;
+}
+.hero-content.visible h1 .hero-title-accent {
+  animation: heroTitleReveal 1.1s var(--ease) .55s both;
+}
+.hero-content.visible .hero-subtitle {
+  animation: heroFadeSlideUp .9s var(--ease) .8s both;
+}
+.hero-content.visible .hero-actions {
+  animation: heroFadeSlideUp .9s var(--ease) 1.05s both;
+}
+
+/* ------------------------------------------------------------------
+   3. TEXT SHIMMER ON HERO ACCENT
+   A subtle light-sweep repeating after the initial reveal.
+   ------------------------------------------------------------------ */
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.hero-content.visible .hero-title-accent {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255,255,255,.55) 42%,
+    #ffffff 50%,
+    rgba(255,255,255,.55) 58%,
+    #ffffff 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroTitleReveal 1.1s var(--ease) .55s both,
+             shimmer 4s ease-in-out 2.5s infinite;
+}
+
+/* ------------------------------------------------------------------
+   4. IMAGE CLIP-PATH REVEALS
+   ------------------------------------------------------------------ */
+
+@keyframes clipRevealLeft {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes clipRevealRight {
+  from { clip-path: inset(0 0 0 100%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes clipRevealUp {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.about-img-main,
+.about-img-secondary {
+  clip-path: inset(0 100% 0 0);
+}
+.about-visuals.visible .about-img-main {
+  animation: clipRevealLeft 1.2s var(--ease) .25s forwards;
+}
+.about-visuals.visible .about-img-secondary {
+  animation: clipRevealRight 1.2s var(--ease) .55s forwards;
+}
+
+/* Service / dev card images */
+.service-card .service-img,
+.dev-card .dev-img {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path .6s var(--ease);
+}
+.service-card:hover .service-img,
+.dev-card:hover .dev-img {
+  clip-path: inset(4px 4px 4px 4px);
+}
+
+/* ------------------------------------------------------------------
+   5. 3D TILT CARD EFFECT  (applied via JS class .tilt-3d)
+   ------------------------------------------------------------------ */
+
+.tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  will-change: transform;
+}
+.tilt-3d:hover {
+  z-index: 2;
+}
+
+/* ------------------------------------------------------------------
+   6. MAGNETIC BUTTON GLOW  (ripple on hover)
+   ------------------------------------------------------------------ */
+
+.btn-primary,
+.btn-outline {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after,
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.25), transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width .55s var(--ease), height .55s var(--ease), opacity .4s;
+  pointer-events: none;
+  opacity: 0;
+}
+.btn-primary:hover::after,
+.btn-outline:hover::after {
+  width: 320px;
+  height: 320px;
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------
+   7. ICON HOVER ANIMATIONS
+   ------------------------------------------------------------------ */
+
+.dist-card:hover .dist-icon {
+  transform: scale(1.2) rotate(-8deg);
+  transition: transform .4s var(--ease-spring);
+}
+.partner-card:hover .partner-icon {
+  transform: scale(1.18) rotate(6deg);
+  transition: transform .4s var(--ease-spring);
+}
+.feature-icon {
+  transition: transform .3s var(--ease);
+}
+.features-list li:hover .feature-icon {
+  transform: scale(1.15) translateX(2px);
+  transition: transform .4s var(--ease-spring);
+}
+
+/* ------------------------------------------------------------------
+   8. ENHANCED COUNTER ANIMATION (bounce)
+   ------------------------------------------------------------------ */
+
+@keyframes statBounceWow {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.25); }
+  50%  { transform: scale(.92); }
+  70%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.stat.counted .stat-number {
+  animation: statBounceWow .7s var(--ease-spring) !important;
+}
+
+/* ------------------------------------------------------------------
+   9. FLOATING BADGE PULSE
+   ------------------------------------------------------------------ */
+
+@keyframes badgePulse {
+  0%,100% { box-shadow: var(--shadow-md); transform: translateY(-50%); }
+  50%     { box-shadow: var(--shadow-md), 0 0 0 6px rgba(26,26,26,.06); transform: translateY(calc(-50% - 4px)); }
+}
+
+.about-award-badge {
+  animation: badgePulse 3.5s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   10. SECTION HEADER LINE GROW
+   ------------------------------------------------------------------ */
+
+.section-header::after {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform .9s var(--ease) .3s;
+}
+.section-header.visible::after,
+.reveal.visible .section-header::after,
+.reveal.visible ~ .section-header::after {
+  transform: scaleX(1);
+}
+/* center variant */
+.section-header-center::after {
+  transform-origin: center center;
+}
+
+/* Intersection observer will add .visible to section-headers */
+.section-header {
+  opacity: 1; /* headers don't hide, just the line animates */
+}
+
+/* ------------------------------------------------------------------
+   11. FOOTER LINK UNDERLINES
+   ------------------------------------------------------------------ */
+
+.footer-col ul li a {
+  position: relative;
+  display: inline;
+}
+.footer-col ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(255,255,255,.6);
+  transition: width .35s var(--ease);
+}
+.footer-col ul li a:hover::after {
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------
+   12. COOKIE CONSENT BOUNCE-IN
+   ------------------------------------------------------------------ */
+
+@keyframes bounceInUp {
+  0%   { transform: translateY(140%) scale(.92); opacity: 0; }
+  55%  { transform: translateY(-6%) scale(1.02); opacity: 1; }
+  75%  { transform: translateY(2%); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.cookie-consent.show {
+  animation: bounceInUp .65s var(--ease) forwards;
+}
+
+/* ------------------------------------------------------------------
+   13. STICKY BAR BOUNCE-UP
+   ------------------------------------------------------------------ */
+
+@keyframes stickyBounce {
+  0%   { transform: translate(-50%, calc(100% + 48px)); }
+  65%  { transform: translate(-50%, -5px); }
+  100% { transform: translate(-50%, 0); }
+}
+
+.sticky-bar.on {
+  animation: stickyBounce .55s var(--ease) forwards;
+}
+
+/* ------------------------------------------------------------------
+   14. TESTIMONIAL CARD FLOAT ON HOVER
+   ------------------------------------------------------------------ */
+
+.testimonial-card {
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.testimonial-card:hover {
+  transform: translateY(-10px) rotate(-.5deg);
+}
+
+/* ------------------------------------------------------------------
+   15. SERVICE TAG / DEV BADGE ENTRANCE
+   ------------------------------------------------------------------ */
+
+@keyframes tagSlideIn {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.service-card.visible .service-tag,
+.dev-card.visible .dev-badge {
+  animation: tagSlideIn .5s var(--ease) .4s both;
+}
+
+/* ------------------------------------------------------------------
+   16. PARALLAX LAYER (applied via JS)
+   ------------------------------------------------------------------ */
+
+.parallax-layer {
+  will-change: transform;
+  transition: transform .05s linear;
+}
+
+/* ------------------------------------------------------------------
+   17. SCROLL PROGRESS INDICATOR (top of page)
+   ------------------------------------------------------------------ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  z-index: 1100;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform .08s linear;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   18. ENHANCED SOCIAL BUTTONS
+   ------------------------------------------------------------------ */
+
+.social-btn {
+  transition: background .3s var(--ease), transform .3s var(--ease-spring), box-shadow .3s;
+}
+.social-btn:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 6px 20px rgba(255,255,255,.15);
+}
+
+/* ------------------------------------------------------------------
+   19. FORM FOCUS ANIMATION
+   ------------------------------------------------------------------ */
+
+@keyframes focusRing {
+  0%   { box-shadow: 0 0 0 0 rgba(26,26,26,.15); }
+  50%  { box-shadow: 0 0 0 5px rgba(26,26,26,.08); }
+  100% { box-shadow: 0 0 0 3px rgba(26,26,26,.06); }
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  animation: focusRing .4s var(--ease);
+}
+
+/* ------------------------------------------------------------------
+   20. OFF-MARKET BANNER HOVER
+   ------------------------------------------------------------------ */
+
+.off-market-banner {
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.off-market-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.off-market-img {
+  transition: filter .6s var(--ease), transform .6s var(--ease);
+}
+.off-market-banner:hover .off-market-img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* ------------------------------------------------------------------
+   21. SKUP HIGHLIGHT GLOW
+   ------------------------------------------------------------------ */
+
+@keyframes skupPulse {
+  0%,100% { box-shadow: inset 0 0 0 0 rgba(26,26,26,.0); }
+  50%     { box-shadow: inset 0 0 12px 0 rgba(26,26,26,.06); }
+}
+
+.skup-highlight {
+  animation: skupPulse 2.5s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   22. HERO SCROLL INDICATOR ENHANCED
+   ------------------------------------------------------------------ */
+
+@keyframes scrollBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%     { transform: translateX(-50%) translateY(-8px); }
+}
+
+.hero-scroll {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   23. PRELOADER ENHANCED
+   ------------------------------------------------------------------ */
+
+@keyframes preloaderPulse {
+  0%,100% { opacity: .5; }
+  50%     { opacity: 1; }
+}
+
+.preloader-text {
+  animation: preloaderPulse 1.5s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------
+   24. NAV LINK HOVER EFFECT ENHANCEMENT
+   ------------------------------------------------------------------ */
+
+.nav-link {
+  transition: color .25s var(--ease), transform .25s var(--ease);
+}
+.nav-link:hover {
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------------------------------
+   25. STAR RATING TWINKLE
+   ------------------------------------------------------------------ */
+
+@keyframes twinkle {
+  0%,100% { opacity: 1; }
+  50%     { opacity: .6; text-shadow: 0 0 8px rgba(26,26,26,.15); }
+}
+
+.testimonial-stars {
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+
+/* ==================================================================
+   PARALLAX CSS SUPPORT
+   ================================================================== */
+
+/* ------------------------------------------------------------------
+   P1. SECTION BACKGROUND PARALLAX
+   JS sets --parallax-y on .parallax-section elements. The ::before
+   pseudo-element shifts its background position accordingly.
+   ------------------------------------------------------------------ */
+
+.parallax-section::before {
+  transition: none;
+  transform: translateY(var(--parallax-y, 0));
+}
+
+/* ------------------------------------------------------------------
+   P2. HERO PARALLAX
+   The hero background-position-y is driven by JS directly.
+   Hero content fades & shifts on scroll.
+   ------------------------------------------------------------------ */
+
+.hero {
+  will-change: background-position;
+}
+.hero-content {
+  will-change: transform, opacity;
+  transition: none;
+}
+
+/* ------------------------------------------------------------------
+   P3. CARD DEPTH PARALLAX
+   JS sets --card-parallax-y per card for wave stagger.
+   ------------------------------------------------------------------ */
+
+.dist-card,
+.service-card,
+.dev-card,
+.testimonial-card,
+.partner-card {
+  will-change: transform;
+  transform: translateY(var(--card-parallax-y, 0));
+}
+
+/* make sure tilt-3d overrides this when hovering (JS sets inline) */
+.tilt-3d:hover {
+  transform: var(--tilt-transform, none);
+}
+
+/* ------------------------------------------------------------------
+   P4. STAT PARALLAX
+   JS sets --stat-parallax-y per stat for staggered depth.
+   ------------------------------------------------------------------ */
+
+.stat .stat-number {
+  will-change: transform;
+  transform: translateY(var(--stat-parallax-y, 0));
+  transition: transform .1s linear;
+}
+
+/* ------------------------------------------------------------------
+   P5. FLOATING SHAPE SCROLL PARALLAX
+   JS sets --scroll-y for additional scroll-based offset.
+   ------------------------------------------------------------------ */
+
+.bg-float-shape {
+  transform: translate3d(
+    var(--mouse-x, 0),
+    calc(var(--mouse-y, 0) + var(--scroll-y, 0)),
+    0
+  );
+}
+
+/* ------------------------------------------------------------------
+   P6. DECORATIVE PARALLAX SHAPES
+   Geometric shapes injected by JS into sections.
+   ------------------------------------------------------------------ */
+
+.parallax-deco {
+  will-change: transform;
+  transition: transform .1s linear;
+}
+
+/* ------------------------------------------------------------------
+   P7. DATA-ATTRIBUTE PARALLAX ELEMENTS
+   Elements with data-parallax-* attributes are driven by JS.
+   ------------------------------------------------------------------ */
+
+[data-parallax-speed],
+[data-parallax-x],
+[data-parallax-scale],
+[data-parallax-rotate] {
+  will-change: transform;
+  transition: transform .08s linear;
+}
+
+[data-parallax-fade] {
+  will-change: opacity;
+  transition: opacity .15s linear;
+}
+
+/* ==================================================================
+   MOBILE RESPONSIVENESS ENHANCEMENTS
+   ================================================================== */
+
+/* --- Tablet (≤1024px) --- */
+@media (max-width: 1024px) {
+  .two-col {
+    gap: clamp(32px, 5vw, 60px);
+  }
+  .dist-grid,
+  .services-grid,
+  .dev-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-content {
+    padding-left: clamp(20px, 6vw, 60px);
+    padding-right: clamp(20px, 6vw, 60px);
+  }
+}
+
+/* --- Mobile large (≤768px) --- */
+@media (max-width: 768px) {
+  /* Navigation mobile menu improvements */
+  .nav-links.open {
+    width: 100%;
+    padding-top: 90px;
+    padding-left: 28px;
+    padding-right: 28px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,.98);
+  }
+
+  /* Hero adjustments */
+  .hero-content {
+    padding-top: 100px;
+    padding-bottom: clamp(140px, 24vw, 240px);
+  }
+
+  /* Grids go single column */
+  .dist-grid,
+  .services-grid,
+  .dev-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Partners 2 columns */
+  .partners-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* About section */
+  .about-img-stack {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Cards smaller padding */
+  .dist-card {
+    padding: 24px 20px;
+  }
+
+  /* Contact layout */
+  .contact-layout {
+    gap: 24px;
+  }
+
+  /* Footer grid */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Reduce reveal offset on mobile for performance */
+  .reveal {
+    transform: translateY(20px) scale(.985);
+  }
+  .reveal.reveal-left {
+    transform: translateX(-40px) translateY(0);
+  }
+  .reveal.reveal-right {
+    transform: translateX(40px) translateY(0);
+  }
+  .reveal.reveal-flip {
+    transform: perspective(600px) rotateX(8deg) translateY(30px);
+  }
+
+  /* Off market */
+  .off-market-img {
+    min-height: 200px;
+  }
+
+  /* Agent section */
+  .agent-card-float {
+    position: relative;
+    left: 0;
+    bottom: -12px;
+    margin-top: -20px;
+  }
+
+  /* Disable heavy animations on mobile */
+  .tilt-3d {
+    transform: none !important;
+  }
+
+  /* Disable parallax on mobile for performance */
+  .parallax-section::before {
+    transform: none !important;
+  }
+  .parallax-deco {
+    display: none;
+  }
+  .dist-card,
+  .service-card,
+  .dev-card,
+  .testimonial-card,
+  .partner-card {
+    transform: none !important;
+  }
+  .stat .stat-number {
+    transform: none !important;
+  }
+
+  /* Sticky bar */
+  .sticky-bar {
+    left: 12px;
+    right: 12px;
+    transform: translateX(0) translateY(calc(100% + 48px));
+    border-radius: 16px;
+    width: auto;
+  }
+  .sticky-bar.on {
+    transform: translateX(0) translateY(0);
+    animation: none;
+  }
+  .sticky-phone span {
+    display: none;
+  }
+
+  /* Section padding reduce */
+  .section {
+    padding-left: clamp(16px, 4vw, 40px);
+    padding-right: clamp(16px, 4vw, 40px);
+  }
+}
+
+/* --- Mobile small (≤480px) --- */
+@media (max-width: 480px) {
+  /* Hero */
+  h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  .hero-content {
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
+  .hero-subtitle {
+    font-size: .92rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Partners single column */
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stats */
+  .stat-number {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+
+  /* About images */
+  .about-img-main {
+    width: 85%;
+    height: 65%;
+  }
+  .about-img-secondary {
+    width: 50%;
+    height: 40%;
+  }
+
+  /* Cookie consent */
+  .cookie-consent {
+    left: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+    padding: 16px;
+  }
+
+  /* Contact */
+  .contact-form,
+  .contact-info-card {
+    padding: 20px;
+  }
+  .contact-cta-btns {
+    flex-direction: column;
+  }
+  .contact-cta-btns .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Off market */
+  .off-market-text {
+    padding: 24px 20px;
+  }
+
+  /* Form */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Nav CTA phone */
+  .nav-cta {
+    padding: 8px 14px;
+    font-size: .75rem;
+  }
+
+  /* Footer */
+  .footer-top {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+
+  /* Disable animations that are too heavy on small screens */
+  .hero-content.visible .hero-title-accent {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: #ffffff;
+    animation: heroTitleReveal 1.1s var(--ease) .55s both;
+  }
+}
+
+/* --- Respect reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal-left,
+  .reveal.reveal-right,
+  .reveal.reveal-scale,
+  .reveal.reveal-flip,
+  .reveal.reveal-blur,
+  .reveal.reveal-rotate,
+  .reveal.reveal-zoom {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+    animation: none;
+  }
+  .hero-content .hero-eyebrow,
+  .hero-content h1 .hero-title-light,
+  .hero-content h1 .hero-title-accent,
+  .hero-content .hero-subtitle,
+  .hero-content .hero-actions {
+    opacity: 1;
+    animation: none !important;
+  }
+  .about-img-main,
+  .about-img-secondary {
+    clip-path: none;
+    animation: none !important;
+  }
+  .tilt-3d {
+    transform: none !important;
+  }
+  .testimonial-stars {
+    animation: none;
+  }
+  .about-award-badge {
+    animation: none;
+  }
+  .cookie-consent.show {
+    animation: none;
+    transform: translateY(0);
+  }
+  .sticky-bar.on {
+    animation: none;
+    transform: translate(-50%, 0);
+  }
+  /* Disable all parallax */
+  .parallax-section::before {
+    transform: none !important;
+  }
+  .parallax-deco {
+    display: none;
+  }
+  .dist-card,
+  .service-card,
+  .dev-card,
+  .testimonial-card,
+  .partner-card {
+    --card-parallax-y: 0px;
+  }
+  .stat .stat-number {
+    --stat-parallax-y: 0px;
+  }
+  [data-parallax-speed],
+  [data-parallax-x],
+  [data-parallax-scale],
+  [data-parallax-rotate] {
+    transform: none !important;
+  }
+  [data-parallax-fade] {
+    opacity: 1 !important;
+  }
+  .hero-content {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   26. BLINK CURSOR FOR HERO TYPING EFFECT (JS adds the element)
+   ------------------------------------------------------------------ */
+
+@keyframes blink {
+  0%,100% { opacity: .6; }
+  50%     { opacity: 0; }
+}
+
+/* ------------------------------------------------------------------
+   OFERTY PAGE RESPONSIVE ENHANCEMENTS
+   ------------------------------------------------------------------ */
+
+/* Card reveal for listings page */
+.listing-card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease),
+              box-shadow .3s var(--ease);
+}
+.listing-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Listing card stagger */
+.listing-card:nth-child(1) { transition-delay: .0s; }
+.listing-card:nth-child(2) { transition-delay: .1s; }
+.listing-card:nth-child(3) { transition-delay: .2s; }
+.listing-card:nth-child(4) { transition-delay: .3s; }
+.listing-card:nth-child(5) { transition-delay: .35s; }
+.listing-card:nth-child(6) { transition-delay: .4s; }
+
+/* Listing photo zoom */
+.listing-photo img {
+  transition: transform .6s var(--ease);
+}
+.listing-card:hover .listing-photo img {
+  transform: scale(1.06);
+}
+
+/* Page header entrance */
+.page-header {
+  animation: heroFadeSlideUp .8s var(--ease) .1s both;
+}

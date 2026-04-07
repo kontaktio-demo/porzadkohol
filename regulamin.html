@@ -74,9 +74,19 @@
       .nav { padding:0 20px; }
       .nav-links { display:none; }
       .page-header { padding:32px 20px 20px; }
+      .page-header h1 { font-size:1.6rem; }
       .prose-wrap { padding:32px 20px 60px; }
+      .prose h2 { font-size:1.15rem; margin:28px 0 10px; }
       .footer-bottom { padding:16px 20px; }
       .footer-bottom-inner { flex-direction:column; text-align:center; gap:4px; }
+    }
+    @media (max-width:480px) {
+      .page-header { padding:24px 16px 16px; }
+      .page-header h1 { font-size:1.35rem; }
+      .prose-wrap { padding:24px 16px 48px; }
+      .prose p, .prose li { font-size:.85rem; }
+      .prose .info-box { padding:16px; }
+      .btn { padding:8px 16px; font-size:.78rem; }
     }
   </style>
 </head>
