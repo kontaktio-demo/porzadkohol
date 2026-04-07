@@ -507,6 +507,106 @@
 }
 
 /* ==================================================================
+   PARALLAX CSS SUPPORT
+   ================================================================== */
+
+/* ------------------------------------------------------------------
+   P1. SECTION BACKGROUND PARALLAX
+   JS sets --parallax-y on .parallax-section elements. The ::before
+   pseudo-element shifts its background position accordingly.
+   ------------------------------------------------------------------ */
+
+.parallax-section::before {
+  transition: none;
+  transform: translateY(var(--parallax-y, 0));
+}
+
+/* ------------------------------------------------------------------
+   P2. HERO PARALLAX
+   The hero background-position-y is driven by JS directly.
+   Hero content fades & shifts on scroll.
+   ------------------------------------------------------------------ */
+
+.hero {
+  will-change: background-position;
+}
+.hero-content {
+  will-change: transform, opacity;
+  transition: none;
+}
+
+/* ------------------------------------------------------------------
+   P3. CARD DEPTH PARALLAX
+   JS sets --card-parallax-y per card for wave stagger.
+   ------------------------------------------------------------------ */
+
+.dist-card,
+.service-card,
+.dev-card,
+.testimonial-card,
+.partner-card {
+  will-change: transform;
+  transform: translateY(var(--card-parallax-y, 0));
+}
+
+/* make sure tilt-3d overrides this when hovering (JS sets inline) */
+.tilt-3d:hover {
+  transform: var(--tilt-transform, none);
+}
+
+/* ------------------------------------------------------------------
+   P4. STAT PARALLAX
+   JS sets --stat-parallax-y per stat for staggered depth.
+   ------------------------------------------------------------------ */
+
+.stat .stat-number {
+  will-change: transform;
+  transform: translateY(var(--stat-parallax-y, 0));
+  transition: transform .1s linear;
+}
+
+/* ------------------------------------------------------------------
+   P5. FLOATING SHAPE SCROLL PARALLAX
+   JS sets --scroll-y for additional scroll-based offset.
+   ------------------------------------------------------------------ */
+
+.bg-float-shape {
+  transform: translate3d(
+    var(--mouse-x, 0),
+    calc(var(--mouse-y, 0) + var(--scroll-y, 0)),
+    0
+  );
+}
+
+/* ------------------------------------------------------------------
+   P6. DECORATIVE PARALLAX SHAPES
+   Geometric shapes injected by JS into sections.
+   ------------------------------------------------------------------ */
+
+.parallax-deco {
+  will-change: transform;
+  transition: transform .1s linear;
+}
+
+/* ------------------------------------------------------------------
+   P7. DATA-ATTRIBUTE PARALLAX ELEMENTS
+   Elements with data-parallax-* attributes are driven by JS.
+   ------------------------------------------------------------------ */
+
+[data-parallax-speed],
+[data-parallax-x],
+[data-parallax-scale],
+[data-parallax-rotate] {
+  will-change: transform;
+  transition: transform .08s linear;
+}
+
+[data-parallax-fade] {
+  will-change: opacity;
+  transition: opacity .15s linear;
+}
+
+/* ==================================================================
    MOBILE RESPONSIVENESS ENHANCEMENTS
    ================================================================== */
 
@@ -614,6 +714,26 @@
   /* Disable heavy animations on mobile */
   .tilt-3d {
     transform: none !important;
+  }
+
+  /* Disable parallax on mobile for performance */
+  .parallax-section::before {
+    transform: none !important;
+  }
+  .parallax-deco {
+    display: none;
+  }
+  .dist-card,
+  .service-card,
+  .dev-card,
+  .testimonial-card,
+  .partner-card {
+    transform: translateY(var(--card-parallax-y, 0));
+    --card-parallax-y: 0px;
+  }
+  .stat .stat-number {
+    transform: none;
+    --stat-parallax-y: 0px;
   }
 
   /* Sticky bar */
@@ -784,6 +904,36 @@
   .sticky-bar.on {
     animation: none;
     transform: translate(-50%, 0);
+  }
+  /* Disable all parallax */
+  .parallax-section::before {
+    transform: none !important;
+  }
+  .parallax-deco {
+    display: none;
+  }
+  .dist-card,
+  .service-card,
+  .dev-card,
+  .testimonial-card,
+  .partner-card {
+    --card-parallax-y: 0px;
+  }
+  .stat .stat-number {
+    --stat-parallax-y: 0px;
+  }
+  [data-parallax-speed],
+  [data-parallax-x],
+  [data-parallax-scale],
+  [data-parallax-rotate] {
+    transform: none !important;
+  }
+  [data-parallax-fade] {
+    opacity: 1 !important;
+  }
+  .hero-content {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
 
