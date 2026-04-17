@@ -1,0 +1,44 @@
+# ============================================================
+#  Render Blueprint – MWW Backend
+# ============================================================
+# Wystarczy podłączyć repo z tym plikiem na render.com
+# i kliknąć "New Blueprint Instance".
+
+services:
+  - type: web
+    name: mww-backend
+    runtime: node
+    region: frankfurt  # lub oregon
+    plan: free         # zmień na starter/standard w produkcji
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: MONGODB_URI
+        sync: false  # Ustaw ręcznie w panelu Render
+      - key: CORS_ORIGINS
+        sync: false  # Ustaw ręcznie
+      - key: ADMIN_USERNAME
+        value: mww
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: MAX_FILE_SIZE_MB
+        value: "10"
+      - key: IMAGE_FORMAT
+        value: both
+      - key: IMAGE_QUALITY
+        value: "80"
+      - key: IMAGE_MAX_WIDTH
+        value: "1920"
+      - key: THUMB_MAX_WIDTH
+        value: "400"
+    disk:
+      name: mww-uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1
