@@ -17,7 +17,7 @@ const MWW_CONFIG = Object.freeze({
 
   // Adres backendu (Render) — zmień po wdrożeniu
   // Podczas developmentu możesz użyć: 'http://localhost:3000'
-  API_BASE_URL: 'http://localhost:3000',
+  API_BASE_URL: 'https://backend-mww.onrender.com',
 
   // Endpointy API
   ENDPOINTS: Object.freeze({
