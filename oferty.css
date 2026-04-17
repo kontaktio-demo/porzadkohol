@@ -257,13 +257,15 @@ body {
   outline-offset: 2px;
 }
 
-/* Card entrance animation */
-@keyframes cardFadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.listing-card.card-enter {
-  animation: cardFadeUp .5s var(--ease) both;
+/* Card entrance animation — respects reduced motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes cardFadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .listing-card.card-enter {
+    animation: cardFadeUp .5s var(--ease) both;
+  }
 }
 
 /* Photo */
