@@ -458,12 +458,25 @@ function paint() {
   const slice = filtered.slice(0, displayed);
 
   if (slice.length === 0) {
-    grid.innerHTML = `
-      <div class="no-results">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <h3>Brak ofert spełniających kryteria</h3>
-        <p>Zmień filtry lub wyczyść wyszukiwanie, aby zobaczyć więcej ofert.</p>
-      </div>`;
+    const hasFilters = document.getElementById('filterType').value ||
+      document.getElementById('filterCat').value ||
+      document.getElementById('filterCity').value.trim() ||
+      document.getElementById('filterRooms').value ||
+      document.getElementById('filterPriceMin').value ||
+      document.getElementById('filterPriceMax').value ||
+      document.getElementById('filterAreaMin').value ||
+      document.getElementById('filterAreaMax').value;
+
+    if (hasFilters) {
+      grid.innerHTML = `
+        <div class="no-results">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <h3>Brak ofert spełniających kryteria</h3>
+          <p>Zmień filtry lub wyczyść wyszukiwanie, aby zobaczyć więcej ofert.</p>
+        </div>`;
+    } else {
+      grid.innerHTML = '';
+    }
     loadWrap.style.display = 'none';
     return;
   }
