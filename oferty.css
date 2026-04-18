@@ -244,6 +244,23 @@ body {
   outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
+.listing-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.listing-card-link:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -2px;
+  border-radius: var(--radius-xl);
+}
+.listing-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 18px 14px;
+  justify-content: flex-end;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   @keyframes cardFadeUp {
