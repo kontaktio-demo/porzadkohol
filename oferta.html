@@ -28,9 +28,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="oferty.css">
-  <link rel="stylesheet" href="oferta-detail.css">
-  <link rel="stylesheet" href="wow-animations.css">
+  <link rel="stylesheet" href="/oferty.css">
+  <link rel="stylesheet" href="/oferta-detail.css">
+  <link rel="stylesheet" href="/wow-animations.css">
   <script src="/config.js"></script>
   <!-- JSON-LD Structured Data (filled dynamically) -->
   <script type="application/ld+json" id="jsonLd">{}</script>
@@ -39,21 +39,21 @@
 
 <div id="adminBar" class="admin-bar admin-bar-hidden">
   Zalogowany jako pracownik &nbsp;|&nbsp;
-  <a href="panel.html">Panel zarządzania ofertami</a>
+  <a href="/panel.html">Panel zarządzania ofertami</a>
   &nbsp;|&nbsp;
   <a href="#" id="adminLogout">Wyloguj</a>
 </div>
 
 <header class="nav" id="nav">
-  <a href="index.html" class="logo" aria-label="MWW Mieszkanie - strona główna">MWW <strong>Mieszkanie</strong></a>
+  <a href="/index.html" class="logo" aria-label="MWW Mieszkanie - strona główna">MWW <strong>Mieszkanie</strong></a>
 
   <nav class="nav-links" id="navLinks" role="navigation" aria-label="Nawigacja główna">
-    <a href="oferty.html" class="nav-link active">Oferty</a>
-    <a href="index.html#o-nas"     class="nav-link">O nas</a>
-    <a href="index.html#oferta"    class="nav-link">Oferta</a>
-    <a href="index.html#deweloper" class="nav-link">Deweloperskie</a>
-    <a href="index.html#agent"     class="nav-link">Agentka</a>
-    <a href="index.html#kontakt"   class="nav-link">Kontakt</a>
+    <a href="/oferty.html" class="nav-link active">Oferty</a>
+    <a href="/index.html#o-nas"     class="nav-link">O nas</a>
+    <a href="/index.html#oferta"    class="nav-link">Oferta</a>
+    <a href="/index.html#deweloper" class="nav-link">Deweloperskie</a>
+    <a href="/index.html#agent"     class="nav-link">Agentka</a>
+    <a href="/index.html#kontakt"   class="nav-link">Kontakt</a>
   </nav>
 
   <div class="nav-right">
@@ -70,9 +70,9 @@
 <!-- Breadcrumbs for SEO -->
 <nav class="breadcrumbs" aria-label="Ścieżka nawigacji">
   <div class="breadcrumbs-inner">
-    <a href="index.html">Strona główna</a>
+    <a href="/index.html">Strona główna</a>
     <span class="breadcrumb-sep">›</span>
-    <a href="oferty.html">Oferty</a>
+    <a href="/oferty.html">Oferty</a>
     <span class="breadcrumb-sep">›</span>
     <span id="breadcrumbTitle" class="breadcrumb-current">Oferta</span>
   </div>
@@ -92,7 +92,7 @@
     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
     <h1>Oferta nie została znaleziona</h1>
     <p>Oferta mogła zostać usunięta lub dezaktywowana.</p>
-    <a href="oferty.html" class="btn btn-primary">Wróć do ofert</a>
+    <a href="/oferty.html" class="btn btn-primary">Wróć do ofert</a>
   </div>
 </div>
 
@@ -187,22 +187,22 @@
       <div class="footer-col">
         <h4>Oferta</h4>
         <ul>
-          <li><a href="index.html#sprzedaz">Sprzedaż</a></li>
-          <li><a href="index.html#wynajem">Wynajem</a></li>
-          <li><a href="index.html#deweloper">Oferty deweloperskie</a></li>
-          <li><a href="index.html#skup">Skup za gotówkę</a></li>
-          <li><a href="index.html#off-market">Off the market</a></li>
+          <li><a href="/index.html#sprzedaz">Sprzedaż</a></li>
+          <li><a href="/index.html#wynajem">Wynajem</a></li>
+          <li><a href="/index.html#deweloper">Oferty deweloperskie</a></li>
+          <li><a href="/index.html#skup">Skup za gotówkę</a></li>
+          <li><a href="/index.html#off-market">Off the market</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>O biurze</h4>
         <ul>
-          <li><a href="index.html#o-nas">O nas</a></li>
-          <li><a href="index.html#agent">Magdalena Wałowska-Wojtczak</a></li>
-          <li><a href="index.html#partnerzy">Nasi partnerzy</a></li>
-          <li><a href="index.html#kontakt">Kontakt</a></li>
-          <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
-          <li><a href="regulamin.html">Regulamin serwisu</a></li>
+          <li><a href="/index.html#o-nas">O nas</a></li>
+          <li><a href="/index.html#agent">Magdalena Wałowska-Wojtczak</a></li>
+          <li><a href="/index.html#partnerzy">Nasi partnerzy</a></li>
+          <li><a href="/index.html#kontakt">Kontakt</a></li>
+          <li><a href="/polityka-prywatnosci.html">Polityka prywatności</a></li>
+          <li><a href="/regulamin.html">Regulamin serwisu</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -505,7 +505,7 @@ function renderOffer(l) {
     (l.videoUrl ? '<div class="offer-section"><h2>Wideo</h2><a href="' + escHtml(l.videoUrl) + '" target="_blank" rel="noopener noreferrer" class="offer-video-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Obejrzyj wideo</a></div>' : '') +
     (l.virtualTourUrl ? '<div class="offer-section"><h2>Wirtualny spacer</h2><a href="' + escHtml(l.virtualTourUrl) + '" target="_blank" rel="noopener noreferrer" class="offer-video-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Wirtualny spacer</a></div>' : '') +
     '<div class="offer-back-wrap">' +
-      '<a href="oferty.html" class="offer-back-link">' +
+      '<a href="/oferty.html" class="offer-back-link">' +
         '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>' +
         'Wróć do wszystkich ofert' +
       '</a>' +
@@ -726,6 +726,6 @@ function initCookieConsent() {
   });
 }
 </script>
-<script src="wow-animations.js"></script>
+<script src="/wow-animations.js"></script>
 </body>
 </html>
