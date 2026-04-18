@@ -44,6 +44,7 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 40px;
+  flex: 1;
 }
 .offer-loading-inner {
   display: grid;
@@ -72,6 +73,7 @@
   justify-content: center;
   text-align: center;
   padding: 40px;
+  flex: 1;
 }
 .offer-error-inner {
   max-width: 400px;
@@ -95,6 +97,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 40px 60px;
+  flex: 1;
 }
 
 /* Top section: gallery + summary */
