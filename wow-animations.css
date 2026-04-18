@@ -210,7 +210,7 @@
 }
 
 .section-header {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .footer-col ul li a {
@@ -398,12 +398,10 @@
     background: rgba(255,255,255,.98);
   }
 
-
   .hero-content {
     padding-top: 100px;
     padding-bottom: clamp(140px, 24vw, 240px);
   }
-
 
   .dist-grid,
   .services-grid,
@@ -413,18 +411,15 @@
     gap: 16px;
   }
 
-
   .partners-grid {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
 
-
   .about-img-stack {
     max-width: 100%;
     margin: 0 auto;
   }
-
 
   .two-col > .text {
     text-align: center;
@@ -455,7 +450,6 @@
     margin-right: auto;
   }
 
-
   .agent-visual {
     display: flex;
     flex-direction: column;
@@ -470,7 +464,6 @@
     align-self: center;
   }
 
-
   .section-header {
     text-align: center;
     margin-bottom: clamp(24px, 4vw, 40px);
@@ -484,11 +477,9 @@
     margin-right: auto;
   }
 
-
   .contact-cta-btns {
     justify-content: center;
   }
-
 
   .off-market-text {
     align-items: center;
@@ -498,16 +489,13 @@
     align-self: center;
   }
 
-
   .dist-card {
     padding: 24px 20px;
   }
 
-
   .contact-layout {
     gap: 24px;
   }
-
 
   .footer-grid {
     grid-template-columns: 1fr;
@@ -534,7 +522,6 @@
     align-items: center;
   }
 
-
   .reveal {
     transform: translateY(20px) scale(.985);
   }
@@ -546,11 +533,9 @@
     transform: perspective(600px) rotateX(8deg) translateY(30px);
   }
 
-
   .off-market-img {
     min-height: 200px;
   }
-
 
   .agent-card-float {
     position: relative;
@@ -559,11 +544,9 @@
     margin-top: -20px;
   }
 
-
   .tilt-3d {
     transform: none !important;
   }
-
 
   .sticky-bar {
     left: 12px;
@@ -597,7 +580,6 @@
     padding: 8px 10px;
   }
 
-
   .section {
     padding-top: clamp(32px, 5vw, 48px);
     padding-bottom: clamp(32px, 5vw, 48px);
@@ -605,11 +587,9 @@
     padding-right: 0;
   }
 
-
   .two-col {
     gap: clamp(24px, 4vw, 40px);
   }
-
 
   .services-grid {
     margin-bottom: 24px;
@@ -637,16 +617,13 @@
     justify-content: center;
   }
 
-
   .partners-grid {
     grid-template-columns: 1fr;
   }
 
-
   .stat-number {
     font-size: clamp(1.6rem, 8vw, 2.4rem);
   }
-
 
   .about-img-main {
     width: 85%;
@@ -657,14 +634,12 @@
     height: 40%;
   }
 
-
   .cookie-consent {
     left: 8px;
     bottom: 8px;
     width: calc(100vw - 16px);
     padding: 16px;
   }
-
 
   .contact-form,
   .contact-info-card {
@@ -678,22 +653,18 @@
     justify-content: center;
   }
 
-
   .off-market-text {
     padding: 24px 20px;
   }
-
 
   .form-row {
     grid-template-columns: 1fr;
   }
 
-
   .nav-cta {
     padding: 8px 14px;
     font-size: .75rem;
   }
-
 
   .sticky-bar {
     left: 8px;
@@ -716,7 +687,6 @@
     padding: 7px 8px;
   }
 
-
   .footer-top {
     padding-left: 0;
     padding-right: 0;
@@ -726,7 +696,6 @@
     text-align: center;
     gap: 6px;
   }
-
 
   .hero-content.visible .hero-title-accent {
     background: none;

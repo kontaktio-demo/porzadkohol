@@ -204,9 +204,6 @@ function clearError(input) {
   if (msg) msg.remove();
 }
 
-function shakeBtn() {
-}
-
 function initStickyBar() {
   const bar   = document.getElementById('stickyBar');
   const close = document.getElementById('stickyClose');

@@ -764,8 +764,6 @@ button[type="submit"] { margin-top:8px; }
 }
 .reveal.visible { opacity: 1; transform: none; }
 
-
-
 @media(max-width:600px){
   .stats-grid { grid-template-columns:repeat(2,1fr); }
   .stat { border-bottom:1px solid var(--border); }
@@ -974,8 +972,6 @@ button[type="submit"] { margin-top:8px; }
 
 .agent-section > .container { position: relative; z-index: 1; }
 
-
-
 .about::after {
   display: none;
 }
@@ -1043,8 +1039,6 @@ button[type="submit"] { margin-top:8px; }
   opacity: .5;
 }
 
-
-
 @media (max-width: 768px) {
   .about::after,
   .agent-section::after {
@@ -1064,7 +1058,6 @@ button[type="submit"] { margin-top:8px; }
     opacity: 0.5;
   }
 }
-
 
 #bgParticles {
   position: absolute;
@@ -1115,8 +1108,6 @@ button[type="submit"] { margin-top:8px; }
   opacity: 0.3;
   transform: scale(1.5);
 }
-
-
 
 .bg-wave-divider {
   position: absolute;

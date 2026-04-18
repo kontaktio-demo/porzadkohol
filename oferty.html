@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <!-- X-Frame-Options should be set via HTTP header, not meta tag -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#1a1a1a">
@@ -80,7 +79,7 @@
     </div>
     <div class="filter-group">
       <label for="filterCity">Dzielnica / lokalizacja</label>
-      <input type="text" id="filterCity" placeholder="np. Śródmieście">
+      <input type="text" id="filterCity" placeholder="np. Śródmieście" maxlength="100">
     </div>
     <div class="filter-group">
       <label>Cena (PLN)</label>
@@ -197,7 +196,6 @@
   </div>
 </footer>
 
-<!-- Detail overlay (OLX-style) -->
 <div id="detailOverlay" class="detail-overlay">
   <button class="detail-close" id="detailClose" aria-label="Zamknij szczegóły">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -255,7 +253,6 @@ let filtered    = [];
 let displayed   = 9;
 const PAGE_SIZE = 9;
 
-/* ── HTML entity escaping to prevent XSS ── */
 function escHtml(str) {
   if (!str) return '';
   return String(str)
@@ -266,11 +263,9 @@ function escHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
-/* ── Shared constants ── */
 const CAT_LABELS = {mieszkanie:'Mieszkanie',dom:'Dom',dzialka:'Działka',lokal:'Lokal',biuro:'Biuro',garaz:'Garaż',magazyn:'Magazyn',inne:'Inne'};
 const DEFAULT_PHONE = '+48515488951';
 
-/* ── Resolve image URL: prepend backend base for /uploads/ paths ── */
 function resolveImg(src) {
   if (!src) return '';
   if (src.startsWith('/uploads/')) return MWW_CONFIG.API_BASE_URL + src;
@@ -278,10 +273,8 @@ function resolveImg(src) {
   return MWW_CONFIG.API_BASE_URL + '/' + src.replace(/^\//, '');
 }
 
-/* ── SVG placeholder for missing images ── */
 const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect fill='%23f0f0f0' width='600' height='400'/%3E%3Cg transform='translate(300,180)' fill='none' stroke='%23ccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-30' y='-20' width='60' height='48' rx='4'/%3E%3Ccircle cx='-14' cy='-6' r='5'/%3E%3Cpolyline points='-30,28 -10,8 2,20 14,4 30,28'/%3E%3C/g%3E%3Ctext x='300' y='240' font-family='Inter,system-ui,sans-serif' font-size='13' fill='%23bbb' text-anchor='middle'%3EBrak zdj%C4%99cia%3C/text%3E%3C/svg%3E";
 
-/* ── Handle broken image – swap to placeholder ── */
 function onImgError(img) {
   img.onerror = null;
   img.src = PLACEHOLDER_SVG;
@@ -299,13 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
 });
 
-/* ═══════════════════════════════════════════════════════════
-   DATA LOADING
-   ═══════════════════════════════════════════════════════════ */
 async function loadListings() {
   const grid = document.getElementById('listingsGrid');
 
-  // Show skeleton loader
   grid.innerHTML = Array.from({ length: 6 }, () => `
     <div class="listing-card listing-skeleton">
       <div class="skeleton-photo"></div>
@@ -341,19 +330,41 @@ async function loadListings() {
 
 function renderListings() { applyFilters(); }
 
-/* ═══════════════════════════════════════════════════════════
-   FILTERING / SORTING
-   ═══════════════════════════════════════════════════════════ */
 function applyFilters() {
   const type  = document.getElementById('filterType').value;
   const cat   = document.getElementById('filterCat').value;
   const city  = document.getElementById('filterCity').value.toLowerCase().trim();
-  const pMin  = parseInt(document.getElementById('filterPriceMin').value) || 0;
-  const pMax  = parseInt(document.getElementById('filterPriceMax').value) || Infinity;
-  const aMin  = parseInt(document.getElementById('filterAreaMin').value) || 0;
-  const aMax  = parseInt(document.getElementById('filterAreaMax').value) || Infinity;
   const rooms = document.getElementById('filterRooms').value;
   const sort  = document.getElementById('sortSelect').value;
+
+  const priceMinEl = document.getElementById('filterPriceMin');
+  const priceMaxEl = document.getElementById('filterPriceMax');
+  const areaMinEl  = document.getElementById('filterAreaMin');
+  const areaMaxEl  = document.getElementById('filterAreaMax');
+
+  let pMin = Math.max(0, parseInt(priceMinEl.value) || 0);
+  let pMax = parseInt(priceMaxEl.value) || Infinity;
+  let aMin = Math.max(0, parseInt(areaMinEl.value) || 0);
+  let aMax = parseInt(areaMaxEl.value) || Infinity;
+
+  if (pMax !== Infinity) pMax = Math.max(0, pMax);
+  if (aMax !== Infinity) aMax = Math.max(0, aMax);
+
+  if (pMin > 0 && pMax !== Infinity && pMin > pMax) {
+    const tmp = pMin;
+    pMin = pMax;
+    pMax = tmp;
+    priceMinEl.value = pMin;
+    priceMaxEl.value = pMax;
+  }
+
+  if (aMin > 0 && aMax !== Infinity && aMin > aMax) {
+    const tmp = aMin;
+    aMin = aMax;
+    aMax = tmp;
+    areaMinEl.value = aMin;
+    areaMaxEl.value = aMax;
+  }
 
   filtered = allListings.filter(l => {
     if (type && l.type !== type) return false;
@@ -402,7 +413,6 @@ function paint() {
   grid.innerHTML = slice.map((l, i) => renderCard(l, i)).join('');
   loadWrap.style.display = displayed < filtered.length ? 'block' : 'none';
 
-  // Staggered card entrance animation
   requestAnimationFrame(() => {
     grid.querySelectorAll('.listing-card').forEach((card, i) => {
       card.style.animationDelay = (i * 0.06) + 's';
@@ -411,9 +421,6 @@ function paint() {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════
-   CARD RENDERING
-   ═══════════════════════════════════════════════════════════ */
 function renderCard(l, idx) {
   const fmtPrice = new Intl.NumberFormat('pl-PL').format(l.price);
   const typeLabel = l.type === 'sprzedaz' ? 'Sprzedaż' : 'Wynajem';
@@ -426,7 +433,6 @@ function renderCard(l, idx) {
   const safeTitle = escHtml(l.title);
   const safeId = escHtml(l.id);
 
-  // Build feature pills
   const featurePills = [];
   if (l.area > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + escHtml(l.area) + ' m²</span>');
   if (l.rooms > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20v-8l4-4h12l4 4v8"/><path d="M2 12h20"/><path d="M6 12v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg>' + escHtml(l.rooms) + ' pok.</span>');
@@ -493,15 +499,11 @@ function getTimeAgo(dateStr) {
   return new Date(dateStr).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-/* ═══════════════════════════════════════════════════════════
-   DETAIL VIEW (OLX-style fullscreen overlay)
-   ═══════════════════════════════════════════════════════════ */
 function openDetail(listing) {
   const l = listing;
   const overlay = document.getElementById('detailOverlay');
   const body = document.getElementById('detailBody');
 
-  // Resolve all images
   const allImages = [];
   if (Array.isArray(l.images) && l.images.length > 0) {
     l.images.forEach(img => {
@@ -524,7 +526,6 @@ function openDetail(listing) {
   const safeTitle = escHtml(l.title);
   const safeId = escHtml(l.id);
 
-  // Build info grid rows
   const infoRows = [];
   function addRow(label, value) { if (value) infoRows.push({ label: escHtml(label), value: escHtml(String(value)) }); }
   addRow('Powierzchnia', l.area ? l.area + ' m²' : '');
@@ -544,7 +545,6 @@ function openDetail(listing) {
   addRow('Dostępne od', l.availableFrom ? new Date(l.availableFrom).toLocaleDateString('pl-PL') : '');
   addRow('Nr referencyjny', l.refNumber || '');
 
-  // Features boolean tags
   const boolFeatures = [];
   if (l.balcony) boolFeatures.push('Balkon');
   if (l.terrace) boolFeatures.push('Taras');
@@ -557,7 +557,6 @@ function openDetail(listing) {
     l.features.forEach(f => { if (typeof f === 'string' && f.trim()) boolFeatures.push(escHtml(f.trim())); });
   }
 
-  // Gallery HTML – escape image src attributes
   const galleryHtml = allImages.length > 1
     ? `<div class="detail-gallery" id="detailGallery">
         <div class="detail-gallery-main">
@@ -578,7 +577,6 @@ function openDetail(listing) {
         <img src="${escHtml(allImages[0].src)}" alt="${allImages[0].alt}" onerror="onImgError(this)">
       </div>`;
 
-  // Escape description: first escape HTML entities, then convert newlines to <br>
   const safeDesc = l.desc ? escHtml(l.desc).replace(/\n/g, '<br>') : '';
   const safePhone = escHtml(l.agentPhone || DEFAULT_PHONE);
 
@@ -626,12 +624,10 @@ function openDetail(listing) {
     ${l.virtualTourUrl ? '<div class="detail-section"><h3>Wirtualny spacer</h3><a href="' + escHtml(l.virtualTourUrl) + '" target="_blank" rel="noopener noreferrer" class="detail-video-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Wirtualny spacer</a></div>' : ''}
   `;
 
-  // Open overlay
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
   history.pushState({ detail: l.id }, '', '#oferta-' + encodeURIComponent(l.slug || l.id));
 
-  // Bind gallery navigation
   if (allImages.length > 1) {
     let currentIdx = 0;
     const mainImg = document.getElementById('galleryMainImg');
@@ -653,7 +649,6 @@ function openDetail(listing) {
     thumbs.forEach(t => { t.onclick = () => goTo(parseInt(t.dataset.idx)); });
   }
 
-  // Bind ask button in detail
   document.getElementById('detailAskBtn').addEventListener('click', () => {
     closeDetail();
     setTimeout(() => {
@@ -674,9 +669,6 @@ function closeDetail() {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   EVENT BINDINGS
-   ═══════════════════════════════════════════════════════════ */
 function bindFilters() {
   document.getElementById('filterApply').addEventListener('click', applyFilters);
   document.getElementById('filterReset').addEventListener('click', () => {
@@ -686,9 +678,14 @@ function bindFilters() {
   });
   document.getElementById('sortSelect').addEventListener('change', applyFilters);
   document.getElementById('loadMoreBtn').addEventListener('click', () => { displayed += PAGE_SIZE; paint(); });
-  document.getElementById('filterCity').addEventListener('keydown', e => { if (e.key === 'Enter') applyFilters(); });
 
-  // Card click → open detail (excluding .btn-ask-small and .btn-save)
+  const filterBar = document.querySelector('.filter-inner');
+  if (filterBar) {
+    filterBar.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.target.tagName === 'INPUT')) applyFilters();
+    });
+  }
+
   document.getElementById('listingsGrid').addEventListener('click', e => {
     const askBtn = e.target.closest('.btn-ask-small');
     if (askBtn) {
@@ -712,13 +709,11 @@ function bindFilters() {
     if (listing) openDetail(listing);
   });
 
-  // Detail overlay close
   document.getElementById('detailClose').addEventListener('click', closeDetail);
   document.getElementById('detailOverlay').addEventListener('click', e => {
     if (e.target === document.getElementById('detailOverlay')) closeDetail();
   });
 
-  // Keyboard: Enter on card opens detail
   document.getElementById('listingsGrid').addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const card = e.target.closest('.listing-card');
@@ -728,7 +723,6 @@ function bindFilters() {
     }
   });
 
-  // Back button closes detail
   window.addEventListener('popstate', () => {
     if (document.getElementById('detailOverlay').classList.contains('open')) closeDetail();
   });
@@ -751,7 +745,13 @@ function bindModal() {
   submitBtn.addEventListener('click', () => {
     const name  = document.getElementById('mName').value.trim();
     const phone = document.getElementById('mPhone').value.trim();
+    const email = document.getElementById('mEmail').value.trim();
     if (!name || !phone) { alert('Proszę podać imię i telefon.'); return; }
+    if (name.length < 2 || name.length > 100) { alert('Imię powinno mieć od 2 do 100 znaków.'); return; }
+    const phoneClean = phone.replace(/[\s\-\(\)]/g, '');
+    if (!/^\+?\d{7,15}$/.test(phoneClean)) { alert('Proszę podać poprawny numer telefonu.'); return; }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Proszę podać poprawny adres e-mail.'); return; }
+    submitBtn.disabled = true;
     submitBtn.textContent = 'Wysłano zapytanie';
     submitBtn.setAttribute('aria-label', 'Zapytanie zostało wysłane');
     submitBtn.style.background = '#22c55e';
@@ -759,6 +759,7 @@ function bindModal() {
       closeModal();
       submitBtn.textContent = 'Wyślij zapytanie';
       submitBtn.style.background = '';
+      submitBtn.disabled = false;
       ['mName','mPhone','mEmail','mMsg'].forEach(id => { document.getElementById(id).value = ''; });
     }, 2000);
   });
@@ -777,9 +778,29 @@ function bindNav() {
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('navLinks');
   if (!hamburger || !navLinks) return;
+
+  const openMenu = () => {
+    hamburger.classList.add('open');
+    navLinks.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
   hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  navLinks.addEventListener('click', e => { if (e.target.closest('.nav-link')) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  document.addEventListener('click', e => {
+    if (navLinks.classList.contains('open') && !hamburger.contains(e.target) && !navLinks.contains(e.target)) closeMenu();
   });
 }
 

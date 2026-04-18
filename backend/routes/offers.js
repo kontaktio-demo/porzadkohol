@@ -5,8 +5,6 @@ const supabase = require('../db');
 const auth = require('../middleware/auth');
 const { deleteImageFiles } = require('../utils/imageProcessor');
 
-// ─── Helpers ─────────────────────────────────────────────
-
 /** Escape special characters for Postgres ILIKE pattern */
 function escapeILike(str) {
   return String(str).replace(/[%_\\]/g, c => '\\' + c);
@@ -30,7 +28,7 @@ function generateSlug(title) {
     + '-' + Date.now().toString(36);
 }
 
-/** Build an offer row from request body (maps camelCase → snake_case) */
+/** Build an offer row from request body (maps camelCase -> snake_case) */
 function buildOfferRow(body) {
   const row = {};
 
@@ -190,13 +188,11 @@ function rowToApi(r) {
   };
 }
 
-// ─────────────────────────────────────────────────────────
 // PUBLIC ROUTES
-// ─────────────────────────────────────────────────────────
 
 /**
  * GET /api/offers
- * Public – active offers with filters, sorting, pagination
+ * Public - active offers with filters, sorting, pagination
  */
 router.get('/', async (req, res) => {
   try {
@@ -279,7 +275,7 @@ router.get('/', async (req, res) => {
 
 /**
  * GET /api/offers/stats
- * Public – offer statistics
+ * Public - offer statistics
  */
 router.get('/stats', async (_req, res) => {
   try {
@@ -308,9 +304,7 @@ router.get('/stats', async (_req, res) => {
   }
 });
 
-// ─────────────────────────────────────────────────────────
-// ADMIN – GET ALL (before /:id to avoid conflict)
-// ─────────────────────────────────────────────────────────
+// ADMIN - GET ALL (before /:id to avoid conflict)
 
 router.get('/all', auth, async (_req, res) => {
   try {
@@ -327,9 +321,7 @@ router.get('/all', auth, async (_req, res) => {
   }
 });
 
-// ─────────────────────────────────────────────────────────
-// PUBLIC – single offer (after /all and /stats)
-// ─────────────────────────────────────────────────────────
+// PUBLIC - single offer (after /all and /stats)
 
 router.get('/:id', async (req, res) => {
   try {
@@ -362,9 +354,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ─────────────────────────────────────────────────────────
-// ADMIN – CRUD
-// ─────────────────────────────────────────────────────────
+// ADMIN - CRUD
 
 router.post('/', auth, async (req, res) => {
   try {

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Seed script – creates default admin user in Supabase if none exists.
+ * Seed script - creates default admin user in Supabase if none exists.
  *
  * Usage:
  *   SUPABASE_URL=... SUPABASE_SERVICE_KEY=... ADMIN_USERNAME=... ADMIN_PASSWORD=... node seed.js
@@ -31,7 +31,7 @@ async function seed() {
       .single();
 
     if (existing) {
-      console.log('✓ Admin user already exists – skipping.');
+      console.log('✓ Admin user already exists - skipping.');
       return;
     }
 

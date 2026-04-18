@@ -24,12 +24,10 @@ const imageRoutes = require('./routes/images');
 
 const app = express();
 
-// ─── Security ────────────────────────────────────────────
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 
-// ─── CORS ────────────────────────────────────────────────
 const allowedOrigins = (process.env.CORS_ORIGINS || '')
   .split(',')
   .map(o => o.trim())
@@ -47,7 +45,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// ─── Rate limiting ───────────────────────────────────────
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 200,
@@ -64,27 +61,22 @@ const authLimiter = rateLimit({
 });
 app.use('/api/auth/login', authLimiter);
 
-// ─── Body parsing ────────────────────────────────────────
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
-// ─── Logging ─────────────────────────────────────────────
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('short'));
 }
 
-// ─── Static files for uploaded images ────────────────────
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   maxAge: '7d',
   immutable: true,
 }));
 
-// ─── Routes ──────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/offers', offerRoutes);
 app.use('/api/images', imageRoutes);
 
-// ─── Health check ────────────────────────────────────────
 app.get('/api/health', async (_req, res) => {
   // Quick Supabase connectivity check
   let dbOk = false;
@@ -115,12 +107,10 @@ app.get('/', (_req, res) => {
   });
 });
 
-// ─── 404 ─────────────────────────────────────────────────
 app.use((_req, res) => {
   res.status(404).json({ error: 'Nie znaleziono zasobu.' });
 });
 
-// ─── Global error handler ────────────────────────────────
 app.use((err, _req, res, _next) => {
   console.error('[ERROR]', err.message || err);
   if (err.message && err.message.includes('CORS')) {
@@ -133,7 +123,6 @@ app.use((err, _req, res, _next) => {
   });
 });
 
-// ─── Start ───────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
