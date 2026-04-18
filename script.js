@@ -237,17 +237,44 @@ function initStickyBar() {
 function initCookieConsent() {
   const consent = document.getElementById('cookieConsent');
   if (!consent) return;
-  if (localStorage.getItem('mww_cookie_consent')) return;
+
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+  function deleteCookie(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax';
+  }
+  function getCookie(name) {
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? decodeURIComponent(v.pop()) : null;
+  }
+  function applyCookieConsent(prefs) {
+    setCookie('mww_cookie_consent', JSON.stringify(prefs), 365);
+    if (prefs.analytics) {
+      setCookie('mww_analytics', '1', 365);
+    } else {
+      deleteCookie('mww_analytics');
+    }
+    if (prefs.marketing) {
+      setCookie('mww_marketing', '1', 365);
+    } else {
+      deleteCookie('mww_marketing');
+    }
+  }
+
+  if (getCookie('mww_cookie_consent')) return;
 
   setTimeout(() => consent.classList.add('show'), 1200);
 
   document.getElementById('cookieAccept').addEventListener('click', () => {
-    localStorage.setItem('mww_cookie_consent', JSON.stringify({necessary:true, analytics:true, marketing:true}));
+    applyCookieConsent({necessary:true, analytics:true, marketing:true});
     consent.classList.remove('show');
   });
 
   document.getElementById('cookieReject').addEventListener('click', () => {
-    localStorage.setItem('mww_cookie_consent', JSON.stringify({necessary:true, analytics:false, marketing:false}));
+    applyCookieConsent({necessary:true, analytics:false, marketing:false});
     consent.classList.remove('show');
   });
 
@@ -259,7 +286,7 @@ function initCookieConsent() {
   document.getElementById('cookieSave').addEventListener('click', () => {
     const analytics = document.getElementById('cookieAnalytics').checked;
     const marketing = document.getElementById('cookieMarketing').checked;
-    localStorage.setItem('mww_cookie_consent', JSON.stringify({necessary:true, analytics, marketing}));
+    applyCookieConsent({necessary:true, analytics, marketing});
     consent.classList.remove('show');
   });
 }
