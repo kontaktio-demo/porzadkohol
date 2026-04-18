@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+  <!-- X-Frame-Options should be set via HTTP header, not meta tag -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="#1a1a1a">
@@ -197,6 +197,16 @@
   </div>
 </footer>
 
+<!-- Detail overlay (OLX-style) -->
+<div id="detailOverlay" class="detail-overlay">
+  <button class="detail-close" id="detailClose" aria-label="Zamknij szczegóły">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="detail-scroll">
+    <div class="detail-inner" id="detailBody"></div>
+  </div>
+</div>
+
 <div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal" style="position:relative">
     <button class="modal-close" id="modalClose" aria-label="Zamknij">
@@ -245,6 +255,41 @@ let filtered    = [];
 let displayed   = 9;
 const PAGE_SIZE = 9;
 
+/* ── HTML entity escaping to prevent XSS ── */
+function escHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/* ── Shared constants ── */
+const CAT_LABELS = {mieszkanie:'Mieszkanie',dom:'Dom',dzialka:'Działka',lokal:'Lokal',biuro:'Biuro',garaz:'Garaż',magazyn:'Magazyn',inne:'Inne'};
+const DEFAULT_PHONE = '+48515488951';
+
+/* ── Resolve image URL: prepend backend base for /uploads/ paths ── */
+function resolveImg(src) {
+  if (!src) return '';
+  if (src.startsWith('/uploads/')) return MWW_CONFIG.API_BASE_URL + src;
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  return MWW_CONFIG.API_BASE_URL + '/' + src.replace(/^\//, '');
+}
+
+/* ── SVG placeholder for missing images ── */
+const PLACEHOLDER_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect fill='%23f0f0f0' width='600' height='400'/%3E%3Cg transform='translate(300,180)' fill='none' stroke='%23ccc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='-30' y='-20' width='60' height='48' rx='4'/%3E%3Ccircle cx='-14' cy='-6' r='5'/%3E%3Cpolyline points='-30,28 -10,8 2,20 14,4 30,28'/%3E%3C/g%3E%3Ctext x='300' y='240' font-family='Inter,system-ui,sans-serif' font-size='13' fill='%23bbb' text-anchor='middle'%3EBrak zdj%C4%99cia%3C/text%3E%3C/svg%3E";
+
+/* ── Handle broken image – swap to placeholder ── */
+function onImgError(img) {
+  img.onerror = null;
+  img.src = PLACEHOLDER_SVG;
+  img.style.objectFit = 'contain';
+  img.style.padding = '20px';
+  img.style.background = '#f0f0f0';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   loadListings();
   bindFilters();
@@ -254,26 +299,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
 });
 
+/* ═══════════════════════════════════════════════════════════
+   DATA LOADING
+   ═══════════════════════════════════════════════════════════ */
 async function loadListings() {
   const grid = document.getElementById('listingsGrid');
+
+  // Show skeleton loader
+  grid.innerHTML = Array.from({ length: 6 }, () => `
+    <div class="listing-card listing-skeleton">
+      <div class="skeleton-photo"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-line skeleton-price"></div>
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line skeleton-meta"></div>
+        <div class="skeleton-line skeleton-loc"></div>
+      </div>
+    </div>`).join('');
 
   try {
     const url = MWW_CONFIG.API_BASE_URL + MWW_CONFIG.ENDPOINTS.OFFERS;
     const res = await fetch(url);
-
     if (!res.ok) throw new Error('HTTP ' + res.status);
-
     const data = await res.json();
-
-    if (Array.isArray(data) && data.length) {
-      allListings = data.filter(function(l) { return l.active !== false; });
-    } else {
-      allListings = [];
-    }
+    allListings = Array.isArray(data) ? data.filter(l => l.active !== false) : [];
   } catch (err) {
     console.warn('Nie udało się pobrać ofert z API:', err);
     allListings = [];
-
     grid.innerHTML = '<div class="no-results">' +
       '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
       '<h3>Nie można załadować ofert</h3>' +
@@ -287,25 +339,29 @@ async function loadListings() {
   renderListings();
 }
 
-function renderListings() {
-  applyFilters();
-}
+function renderListings() { applyFilters(); }
 
+/* ═══════════════════════════════════════════════════════════
+   FILTERING / SORTING
+   ═══════════════════════════════════════════════════════════ */
 function applyFilters() {
-  const type    = document.getElementById('filterType').value;
-  const cat     = document.getElementById('filterCat').value;
-  const city    = document.getElementById('filterCity').value.toLowerCase().trim();
-  const pMin    = parseInt(document.getElementById('filterPriceMin').value) || 0;
-  const pMax    = parseInt(document.getElementById('filterPriceMax').value) || Infinity;
-  const aMin    = parseInt(document.getElementById('filterAreaMin').value) || 0;
-  const aMax    = parseInt(document.getElementById('filterAreaMax').value) || Infinity;
-  const rooms   = document.getElementById('filterRooms').value;
-  const sort    = document.getElementById('sortSelect').value;
+  const type  = document.getElementById('filterType').value;
+  const cat   = document.getElementById('filterCat').value;
+  const city  = document.getElementById('filterCity').value.toLowerCase().trim();
+  const pMin  = parseInt(document.getElementById('filterPriceMin').value) || 0;
+  const pMax  = parseInt(document.getElementById('filterPriceMax').value) || Infinity;
+  const aMin  = parseInt(document.getElementById('filterAreaMin').value) || 0;
+  const aMax  = parseInt(document.getElementById('filterAreaMax').value) || Infinity;
+  const rooms = document.getElementById('filterRooms').value;
+  const sort  = document.getElementById('sortSelect').value;
 
   filtered = allListings.filter(l => {
     if (type && l.type !== type) return false;
     if (cat  && l.category !== cat) return false;
-    if (city && !l.address.toLowerCase().includes(city)) return false;
+    if (city) {
+      const haystack = [l.address, l.city, l.district, l.street].join(' ').toLowerCase();
+      if (!haystack.includes(city)) return false;
+    }
     if (l.price < pMin || l.price > pMax) return false;
     if (l.area < aMin || l.area > aMax) return false;
     if (rooms) {
@@ -325,18 +381,17 @@ function applyFilters() {
 }
 
 function paint() {
-  const grid = document.getElementById('listingsGrid');
-  const countEl = document.getElementById('resultsCount');
+  const grid     = document.getElementById('listingsGrid');
+  const countEl  = document.getElementById('resultsCount');
   const loadWrap = document.getElementById('loadMoreWrap');
 
   countEl.textContent = filtered.length;
-
   const slice = filtered.slice(0, displayed);
 
   if (slice.length === 0) {
     grid.innerHTML = `
       <div class="no-results">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <h3>Brak ofert spełniających kryteria</h3>
         <p>Zmień filtry lub wyczyść wyszukiwanie, aby zobaczyć więcej ofert.</p>
       </div>`;
@@ -344,67 +399,338 @@ function paint() {
     return;
   }
 
-  grid.innerHTML = slice.map(renderCard).join('');
+  grid.innerHTML = slice.map((l, i) => renderCard(l, i)).join('');
   loadWrap.style.display = displayed < filtered.length ? 'block' : 'none';
+
+  // Staggered card entrance animation
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.listing-card').forEach((card, i) => {
+      card.style.animationDelay = (i * 0.06) + 's';
+      card.classList.add('card-enter');
+    });
+  });
 }
 
-function renderCard(l) {
+/* ═══════════════════════════════════════════════════════════
+   CARD RENDERING
+   ═══════════════════════════════════════════════════════════ */
+function renderCard(l, idx) {
   const fmtPrice = new Intl.NumberFormat('pl-PL').format(l.price);
   const typeLabel = l.type === 'sprzedaz' ? 'Sprzedaż' : 'Wynajem';
-  const floorInfo = l.floor > 0 ? `<span class="listing-meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> ${l.floor}/${l.totalFloors} p.</span>` : '';
-  const roomsInfo = l.rooms > 0 ? `<span class="listing-meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 22V8L12 2l9 6v14"/></svg> ${l.rooms} pok.</span>` : '';
+  const imgSrc = escHtml(resolveImg(l.img) || PLACEHOLDER_SVG);
+  const pricePerM2 = l.pricePerM2 ? new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m²' : '';
+  const catLabel = CAT_LABELS[l.category] || escHtml(l.category) || '';
+  const timeAgo = getTimeAgo(l.createdAt);
+  const imgCount = Array.isArray(l.images) ? l.images.length : 0;
+  const featuredMark = l.featured ? '<span class="listing-badge-featured" title="Oferta wyróżniona">★</span>' : '';
+  const safeTitle = escHtml(l.title);
+  const safeId = escHtml(l.id);
+
+  // Build feature pills
+  const featurePills = [];
+  if (l.area > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + escHtml(l.area) + ' m²</span>');
+  if (l.rooms > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20v-8l4-4h12l4 4v8"/><path d="M2 12h20"/><path d="M6 12v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg>' + escHtml(l.rooms) + ' pok.</span>');
+  if (l.floor > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>' + escHtml(l.floor) + '/' + escHtml(l.totalFloors || '?') + ' p.</span>');
+
+  const locationText = escHtml([l.city, l.district, l.street].filter(Boolean).join(', ') || l.address || '');
+  const shortDescText = l.shortDesc || l.desc || '';
+  const safeShortDesc = escHtml(shortDescText.substring(0, 150));
 
   return `
-    <article class="listing-card" data-id="${l.id}">
+    <article class="listing-card" data-id="${safeId}" tabindex="0" role="button" aria-label="Zobacz szczegóły: ${safeTitle}">
       <div class="listing-photo">
-        <img src="${l.img}" alt="${l.title}" loading="lazy">
-        <span class="listing-badge ${l.type}">${typeLabel}</span>
+        <img src="${imgSrc}" alt="${safeTitle}" loading="lazy" onerror="onImgError(this)">
+        <div class="listing-badges">
+          <span class="listing-badge ${escHtml(l.type)}">${typeLabel}</span>
+          ${catLabel ? '<span class="listing-badge listing-badge-cat">' + catLabel + '</span>' : ''}
+          ${featuredMark}
+        </div>
+        ${imgCount > 1 ? '<span class="listing-img-count"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>' + imgCount + '</span>' : ''}
+        <div class="listing-photo-overlay">
+          <span class="listing-view-label">Zobacz szczegóły</span>
+        </div>
       </div>
       <div class="listing-body">
-        <div class="listing-price">${fmtPrice} <span class="listing-price-sub">${l.currency}</span></div>
-        <h2 class="listing-title">${l.title}</h2>
-        <div class="listing-meta">
-          <span class="listing-meta-item">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            ${l.area} m²
-          </span>
-          ${roomsInfo}
-          ${floorInfo}
+        <div class="listing-price-row">
+          <div class="listing-price">${fmtPrice} <span class="listing-price-sub">${escHtml(l.currency || 'PLN')}</span></div>
+          ${pricePerM2 ? '<div class="listing-price-m2">' + pricePerM2 + '</div>' : ''}
         </div>
+        <h2 class="listing-title">${safeTitle}</h2>
+        <div class="listing-pills">${featurePills.join('')}</div>
         <div class="listing-location">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          ${l.address}
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>${locationText}</span>
         </div>
-        <p class="listing-desc">${l.desc}</p>
+        ${safeShortDesc ? '<p class="listing-desc">' + safeShortDesc + '</p>' : ''}
         <div class="listing-footer">
-          <button class="btn-ask" data-id="${l.id}" data-title="${l.title}">Zapytaj</button>
-          <button class="btn-save" aria-label="Zapisz ofertę">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </button>
+          <span class="listing-time" title="Data dodania">${timeAgo}</span>
+          <div class="listing-actions">
+            <button class="btn-ask-small" data-id="${safeId}" data-title="${safeTitle}" aria-label="Zapytaj o ofertę">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Zapytaj
+            </button>
+            <button class="btn-save" data-id="${safeId}" aria-label="Zapisz ofertę">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </article>`;
 }
 
+function getTimeAgo(dateStr) {
+  if (!dateStr) return '';
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'Właśnie dodano';
+  if (mins < 60) return mins + ' min temu';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + ' godz. temu';
+  const days = Math.floor(hrs / 24);
+  if (days === 1) return 'Wczoraj';
+  if (days < 7) return days + ' dni temu';
+  if (days < 30) return Math.floor(days / 7) + ' tyg. temu';
+  return new Date(dateStr).toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DETAIL VIEW (OLX-style fullscreen overlay)
+   ═══════════════════════════════════════════════════════════ */
+function openDetail(listing) {
+  const l = listing;
+  const overlay = document.getElementById('detailOverlay');
+  const body = document.getElementById('detailBody');
+
+  // Resolve all images
+  const allImages = [];
+  if (Array.isArray(l.images) && l.images.length > 0) {
+    l.images.forEach(img => {
+      const src = resolveImg(img.webp || img.avif || img.original || img.thumb || '');
+      if (src) allImages.push({ src: src, alt: escHtml(img.alt || l.title) });
+    });
+  }
+  if (allImages.length === 0 && l.img) {
+    allImages.push({ src: resolveImg(l.img), alt: escHtml(l.title) });
+  }
+  if (allImages.length === 0) {
+    allImages.push({ src: PLACEHOLDER_SVG, alt: 'Brak zdjęcia' });
+  }
+
+  const fmtPrice = new Intl.NumberFormat('pl-PL').format(l.price);
+  const typeLabel = l.type === 'sprzedaz' ? 'Sprzedaż' : 'Wynajem';
+  const catLabel = CAT_LABELS[l.category] || '';
+  const locationParts = [l.street, l.district, l.city].filter(Boolean);
+  const locationText = escHtml(locationParts.length ? locationParts.join(', ') : l.address);
+  const safeTitle = escHtml(l.title);
+  const safeId = escHtml(l.id);
+
+  // Build info grid rows
+  const infoRows = [];
+  function addRow(label, value) { if (value) infoRows.push({ label: escHtml(label), value: escHtml(String(value)) }); }
+  addRow('Powierzchnia', l.area ? l.area + ' m²' : '');
+  addRow('Pokoje', l.rooms > 0 ? l.rooms : '');
+  addRow('Piętro', l.floor > 0 ? l.floor + '/' + (l.totalFloors || '?') : '');
+  addRow('Rok budowy', l.yearBuilt || '');
+  addRow('Typ budynku', l.buildingType || '');
+  addRow('Materiał', l.buildingMaterial || '');
+  addRow('Ogrzewanie', l.heatingType || '');
+  addRow('Stan', l.condition || '');
+  addRow('Parking', l.parking || '');
+  addRow('Czynsz', l.rent > 0 ? new Intl.NumberFormat('pl-PL').format(l.rent) + ' PLN/mies.' : '');
+  addRow('Kaucja', l.deposit > 0 ? new Intl.NumberFormat('pl-PL').format(l.deposit) + ' PLN' : '');
+  addRow('Powierzchnia działki', l.plotArea > 0 ? l.plotArea + ' m²' : '');
+  addRow('Typ działki', l.plotType || '');
+  addRow('Media', l.utilities || '');
+  addRow('Dostępne od', l.availableFrom ? new Date(l.availableFrom).toLocaleDateString('pl-PL') : '');
+  addRow('Nr referencyjny', l.refNumber || '');
+
+  // Features boolean tags
+  const boolFeatures = [];
+  if (l.balcony) boolFeatures.push('Balkon');
+  if (l.terrace) boolFeatures.push('Taras');
+  if (l.garden) boolFeatures.push('Ogród');
+  if (l.elevator) boolFeatures.push('Winda');
+  if (l.basement) boolFeatures.push('Piwnica');
+  if (l.furnished) boolFeatures.push('Umeblowane');
+  if (l.fencing) boolFeatures.push('Ogrodzenie');
+  if (Array.isArray(l.features)) {
+    l.features.forEach(f => { if (typeof f === 'string' && f.trim()) boolFeatures.push(escHtml(f.trim())); });
+  }
+
+  // Gallery HTML – escape image src attributes
+  const galleryHtml = allImages.length > 1
+    ? `<div class="detail-gallery" id="detailGallery">
+        <div class="detail-gallery-main">
+          <button class="gallery-arrow gallery-arrow-left" id="galleryPrev" aria-label="Poprzednie zdjęcie">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <img id="galleryMainImg" src="${escHtml(allImages[0].src)}" alt="${allImages[0].alt}" onerror="onImgError(this)">
+          <button class="gallery-arrow gallery-arrow-right" id="galleryNext" aria-label="Następne zdjęcie">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <span class="gallery-counter" id="galleryCounter">1 / ${allImages.length}</span>
+        </div>
+        <div class="detail-gallery-thumbs" id="galleryThumbs">
+          ${allImages.map((img, i) => '<img src="' + escHtml(img.src) + '" alt="" class="gallery-thumb' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '" onerror="onImgError(this)">').join('')}
+        </div>
+      </div>`
+    : `<div class="detail-gallery detail-gallery-single">
+        <img src="${escHtml(allImages[0].src)}" alt="${allImages[0].alt}" onerror="onImgError(this)">
+      </div>`;
+
+  // Escape description: first escape HTML entities, then convert newlines to <br>
+  const safeDesc = l.desc ? escHtml(l.desc).replace(/\n/g, '<br>') : '';
+  const safePhone = escHtml(l.agentPhone || DEFAULT_PHONE);
+
+  body.innerHTML = `
+    <div class="detail-top">
+      ${galleryHtml}
+      <div class="detail-summary">
+        <div class="detail-badges">
+          <span class="listing-badge ${escHtml(l.type)}">${typeLabel}</span>
+          ${catLabel ? '<span class="listing-badge listing-badge-cat">' + catLabel + '</span>' : ''}
+          ${l.featured ? '<span class="listing-badge listing-badge-feat">★ Wyróżniona</span>' : ''}
+        </div>
+        <h1 class="detail-title">${safeTitle}</h1>
+        <div class="detail-location">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>${locationText}</span>
+        </div>
+        <div class="detail-price-box">
+          <div class="detail-price">${fmtPrice} <span>${escHtml(l.currency || 'PLN')}</span></div>
+          ${l.pricePerM2 ? '<div class="detail-price-m2">' + new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m²</div>' : ''}
+        </div>
+        <div class="detail-quick-stats">
+          ${l.area > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.area) + '</span><span class="qs-label">m²</span></div>' : ''}
+          ${l.rooms > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.rooms) + '</span><span class="qs-label">pok.</span></div>' : ''}
+          ${l.floor > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.floor) + '/' + escHtml(l.totalFloors || '?') + '</span><span class="qs-label">piętro</span></div>' : ''}
+          ${l.yearBuilt ? '<div class="qs"><span class="qs-val">' + escHtml(l.yearBuilt) + '</span><span class="qs-label">rok bud.</span></div>' : ''}
+        </div>
+        <div class="detail-cta">
+          <button class="btn-ask-detail" id="detailAskBtn" data-id="${safeId}" data-title="${safeTitle}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Zapytaj o ofertę
+          </button>
+          <a href="tel:${safePhone}" class="btn-call-detail">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Zadzwoń
+          </a>
+        </div>
+        ${l.agentName ? '<div class="detail-agent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>' + escHtml(l.agentName) + '</span></div>' : ''}
+      </div>
+    </div>
+    ${safeDesc ? '<div class="detail-section"><h3>Opis</h3><div class="detail-desc-text">' + safeDesc + '</div></div>' : ''}
+    ${infoRows.length > 0 ? '<div class="detail-section"><h3>Szczegóły</h3><div class="detail-info-grid">' + infoRows.map(r => '<div class="info-cell"><span class="info-label">' + r.label + '</span><span class="info-value">' + r.value + '</span></div>').join('') + '</div></div>' : ''}
+    ${boolFeatures.length > 0 ? '<div class="detail-section"><h3>Udogodnienia</h3><div class="detail-features">' + boolFeatures.map(f => '<span class="feature-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>' + f + '</span>').join('') + '</div></div>' : ''}
+    ${l.videoUrl ? '<div class="detail-section"><h3>Wideo</h3><a href="' + escHtml(l.videoUrl) + '" target="_blank" rel="noopener noreferrer" class="detail-video-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Obejrzyj wideo</a></div>' : ''}
+    ${l.virtualTourUrl ? '<div class="detail-section"><h3>Wirtualny spacer</h3><a href="' + escHtml(l.virtualTourUrl) + '" target="_blank" rel="noopener noreferrer" class="detail-video-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Wirtualny spacer</a></div>' : ''}
+  `;
+
+  // Open overlay
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  history.pushState({ detail: l.id }, '', '#oferta-' + encodeURIComponent(l.slug || l.id));
+
+  // Bind gallery navigation
+  if (allImages.length > 1) {
+    let currentIdx = 0;
+    const mainImg = document.getElementById('galleryMainImg');
+    const counter = document.getElementById('galleryCounter');
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+
+    function goTo(idx) {
+      currentIdx = (idx + allImages.length) % allImages.length;
+      mainImg.src = allImages[currentIdx].src;
+      mainImg.style.objectFit = '';
+      mainImg.style.padding = '';
+      mainImg.style.background = '';
+      counter.textContent = (currentIdx + 1) + ' / ' + allImages.length;
+      thumbs.forEach((t, i) => t.classList.toggle('active', i === currentIdx));
+    }
+
+    document.getElementById('galleryPrev').onclick = () => goTo(currentIdx - 1);
+    document.getElementById('galleryNext').onclick = () => goTo(currentIdx + 1);
+    thumbs.forEach(t => { t.onclick = () => goTo(parseInt(t.dataset.idx)); });
+  }
+
+  // Bind ask button in detail
+  document.getElementById('detailAskBtn').addEventListener('click', () => {
+    closeDetail();
+    setTimeout(() => {
+      document.getElementById('modalListingTitle').textContent = 'Oferta: ' + l.title;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('mName').focus();
+    }, 300);
+  });
+}
+
+function closeDetail() {
+  const overlay = document.getElementById('detailOverlay');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (location.hash.startsWith('#oferta-')) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EVENT BINDINGS
+   ═══════════════════════════════════════════════════════════ */
 function bindFilters() {
   document.getElementById('filterApply').addEventListener('click', applyFilters);
   document.getElementById('filterReset').addEventListener('click', () => {
-    ['filterType','filterCat','filterRooms','sortSelect'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
-    ['filterCity','filterPriceMin','filterPriceMax','filterAreaMin','filterAreaMax'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
+    ['filterType','filterCat','filterRooms','sortSelect'].forEach(id => { document.getElementById(id).value = ''; });
+    ['filterCity','filterPriceMin','filterPriceMax','filterAreaMin','filterAreaMax'].forEach(id => { document.getElementById(id).value = ''; });
     applyFilters();
   });
   document.getElementById('sortSelect').addEventListener('change', applyFilters);
-  document.getElementById('loadMoreBtn').addEventListener('click', () => {
-    displayed += PAGE_SIZE;
-    paint();
+  document.getElementById('loadMoreBtn').addEventListener('click', () => { displayed += PAGE_SIZE; paint(); });
+  document.getElementById('filterCity').addEventListener('keydown', e => { if (e.key === 'Enter') applyFilters(); });
+
+  // Card click → open detail (excluding .btn-ask-small and .btn-save)
+  document.getElementById('listingsGrid').addEventListener('click', e => {
+    const askBtn = e.target.closest('.btn-ask-small');
+    if (askBtn) {
+      e.stopPropagation();
+      document.getElementById('modalListingTitle').textContent = 'Oferta: ' + askBtn.dataset.title;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('mName').focus();
+      return;
+    }
+    const saveBtn = e.target.closest('.btn-save');
+    if (saveBtn) {
+      e.stopPropagation();
+      saveBtn.classList.toggle('saved');
+      return;
+    }
+    const card = e.target.closest('.listing-card');
+    if (!card) return;
+    const id = card.dataset.id;
+    const listing = allListings.find(l => l.id === id);
+    if (listing) openDetail(listing);
   });
 
-  document.getElementById('filterCity').addEventListener('keydown', e => {
-    if (e.key === 'Enter') applyFilters();
+  // Detail overlay close
+  document.getElementById('detailClose').addEventListener('click', closeDetail);
+  document.getElementById('detailOverlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('detailOverlay')) closeDetail();
+  });
+
+  // Keyboard: Enter on card opens detail
+  document.getElementById('listingsGrid').addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const card = e.target.closest('.listing-card');
+      if (!card) return;
+      const listing = allListings.find(l => l.id === card.dataset.id);
+      if (listing) openDetail(listing);
+    }
+  });
+
+  // Back button closes detail
+  window.addEventListener('popstate', () => {
+    if (document.getElementById('detailOverlay').classList.contains('open')) closeDetail();
   });
 }
 
@@ -413,37 +739,27 @@ function bindModal() {
   const closeBtn = document.getElementById('modalClose');
   const submitBtn = document.getElementById('modalSubmit');
 
-  document.getElementById('listingsGrid').addEventListener('click', e => {
-    const btn = e.target.closest('.btn-ask');
-    if (!btn) return;
-    document.getElementById('modalListingTitle').textContent =
-      'Oferta: ' + btn.dataset.title;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('mName').focus();
-  });
-
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (document.getElementById('modalOverlay').classList.contains('open')) { closeModal(); return; }
+      if (document.getElementById('detailOverlay').classList.contains('open')) { closeDetail(); }
+    }
+  });
 
   submitBtn.addEventListener('click', () => {
     const name  = document.getElementById('mName').value.trim();
     const phone = document.getElementById('mPhone').value.trim();
-    if (!name || !phone) {
-      alert('Proszę podać imię i telefon.');
-      return;
-    }
-    submitBtn.textContent = 'Wysłano';
+    if (!name || !phone) { alert('Proszę podać imię i telefon.'); return; }
+    submitBtn.textContent = 'Wysłano zapytanie';
+    submitBtn.setAttribute('aria-label', 'Zapytanie zostało wysłane');
     submitBtn.style.background = '#22c55e';
     setTimeout(() => {
       closeModal();
       submitBtn.textContent = 'Wyślij zapytanie';
       submitBtn.style.background = '';
-      document.getElementById('mName').value = '';
-      document.getElementById('mPhone').value = '';
-      document.getElementById('mEmail').value = '';
-      document.getElementById('mMsg').value = '';
+      ['mName','mPhone','mEmail','mMsg'].forEach(id => { document.getElementById(id).value = ''; });
     }, 2000);
   });
 }
@@ -458,14 +774,12 @@ function bindNav() {
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
-
   const hamburger = document.getElementById('hamburger');
   const navLinks  = document.getElementById('navLinks');
   if (!hamburger || !navLinks) return;
   hamburger.addEventListener('click', () => {
-    const open = navLinks.style.display === 'flex';
-    navLinks.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:#fff;padding:20px 40px;gap:20px;border-bottom:1px solid #e0e0e0;z-index:700';
-    hamburger.setAttribute('aria-expanded', String(!open));
+    navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
   });
 }
 
