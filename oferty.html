@@ -507,8 +507,8 @@ function renderCard(l, idx) {
         <div class="listing-badges">
           <span class="listing-badge ${escHtml(l.type)}">${typeLabel}</span>
           ${catLabel ? '<span class="listing-badge listing-badge-cat">' + catLabel + '</span>' : ''}
-          ${featuredMark}
         </div>
+        ${featuredMark}
         ${imgCount > 1 ? '<span class="listing-img-count"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>' + imgCount + '</span>' : ''}
         <div class="listing-photo-overlay">
           <span class="listing-view-label">Zobacz szczegóły</span>
