@@ -187,6 +187,7 @@ body {
   max-width: 1200px; margin: 0 auto;
   padding: 32px 40px;
   position: relative;
+  overflow: hidden;
 }
 .listings-page::before {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -197,7 +198,7 @@ body {
 .listings-page > * { position: relative; z-index: 1; }
 .listings-meta {
   display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 24px; gap: 16px;
 }
 .listings-count { font-size: .85rem; color: var(--text-muted); }
 .listings-count strong { color: var(--primary); }
