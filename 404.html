@@ -10,7 +10,7 @@
       var path = window.location.pathname;
       var match = path.match(/^\/oferta\/(.+?)(?:\/)?$/);
       if (match) {
-        var slug = match[1];
+        var slug = decodeURIComponent(match[1]);
         window.location.replace('/oferta.html?slug=' + encodeURIComponent(slug));
       } else {
         // Not an offer URL - show actual 404

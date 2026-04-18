@@ -576,7 +576,7 @@ async function loadOffer() {
     // Rewrite URL to clean path format: /oferta/slug
     if (offer.slug) {
       var cleanPath = '/oferta/' + encodeURIComponent(offer.slug);
-      if (window.location.pathname !== cleanPath) {
+      if (window.location.pathname + window.location.search !== cleanPath) {
         window.history.replaceState(null, '', cleanPath);
       }
     }
