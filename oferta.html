@@ -573,6 +573,14 @@ async function loadOffer() {
       return;
     }
 
+    // Rewrite URL to clean path format: /oferta/slug
+    if (offer.slug) {
+      var cleanPath = '/oferta/' + encodeURIComponent(offer.slug);
+      if (window.location.pathname !== cleanPath) {
+        window.history.replaceState(null, '', cleanPath);
+      }
+    }
+
     setSeoMeta(offer);
     renderOffer(offer);
   } catch (err) {

@@ -513,7 +513,7 @@ function renderCard(l, idx) {
   const shortDescText = l.shortDesc || l.desc || '';
   const safeShortDesc = escHtml(shortDescText.substring(0, 150));
 
-  const offerUrl = 'oferta.html?slug=' + encodeURIComponent(l.slug || l.id);
+  const offerUrl = '/oferta/' + encodeURIComponent(l.slug || l.id);
 
   return `
     <article class="listing-card" data-id="${safeId}" data-slug="${escHtml(l.slug || l.id)}">
@@ -800,7 +800,7 @@ function bindFilters() {
   if (location.hash.startsWith('#oferta-')) {
     const hashSlug = decodeURIComponent(location.hash.substring(8));
     if (hashSlug) {
-      window.location.href = 'oferta.html?slug=' + encodeURIComponent(hashSlug);
+      window.location.href = '/oferta/' + encodeURIComponent(hashSlug);
     }
   }
 
