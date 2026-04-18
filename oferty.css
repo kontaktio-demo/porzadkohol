@@ -191,8 +191,7 @@ body {
 .listings-page::before {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
   height: 400px;
-  background: url('images/section-bg-1.webp') bottom center/cover no-repeat;
-  opacity: .025; filter: grayscale(100%);
+  background: #fff;
   pointer-events: none; z-index: 0;
 }
 .listings-page > * { position: relative; z-index: 1; }
