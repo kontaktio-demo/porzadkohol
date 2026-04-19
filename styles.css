@@ -1141,7 +1141,11 @@ p { font-weight: 400; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1920&q=70') top center / cover no-repeat;
+  background: url('images/lodz-panorama-1.webp') top center / cover no-repeat;
+  background-image: image-set(
+    url('images/lodz-panorama-1.avif') type('image/avif'),
+    url('images/lodz-panorama-1.webp') type('image/webp')
+  );
   opacity: 0.12;
   filter: grayscale(100%);
   pointer-events: none;
@@ -1517,6 +1521,13 @@ p { font-weight: 400; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-grid .footer-brand,
   .footer-grid .footer-col:last-child { grid-column: auto; }
+  .footer::before {
+    background-image: url('images/lodz-panorama-1-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-panorama-1-mobile.avif') type('image/avif'),
+      url('images/lodz-panorama-1-mobile.webp') type('image/webp')
+    );
+  }
   .cookie-inner { flex-direction: column; align-items: stretch; }
   .cookie-actions { justify-content: stretch; }
   .cookie-actions .cookie-btn { flex: 1; }
@@ -2083,7 +2094,7 @@ p { font-weight: 400; }
     );
   }
 
-  /* Unsplash photo scales well so no mobile-specific swap needed. */
+  /* Local Łódź panorama scales well; swap to mobile crop on small screens. */
   .service-cta::before {
     background-image:
       linear-gradient(180deg, rgba(10, 10, 14, 0.85), rgba(10, 10, 14, 0.93)),
