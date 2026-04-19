@@ -118,55 +118,11 @@
     updateScroll();
   }
 
-  function initWaveDividers() {
-    var wavePairs = [
-      { after: '.hero',           type: 'wave1' },
-      { after: '.stats',          type: 'wave2' },
-      { after: '.about',          type: 'wave3' },
-      { after: '.distinguishes',  type: 'wave1' },
-      { after: '.services',       type: 'wave2' },
-      { after: '.developer',      type: 'wave3' },
-      { after: '.agent-section',  type: 'wave1' },
-      { after: '.testimonials',   type: 'wave2' },
-      { after: '.partners',       type: 'wave3' },
-    ];
-
-    var waveSVGs = {
-      wave1: '<svg class="bg-wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C240,55 480,0 720,30 C960,60 1200,5 1440,30 L1440,60 L0,60Z" fill="currentColor"/></svg>',
-      wave2: '<svg class="bg-wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 C360,50 720,0 1080,35 C1260,48 1380,15 1440,20 L1440,60 L0,60Z" fill="currentColor"/></svg>',
-      wave3: '<svg class="bg-wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,35 C180,10 360,50 540,25 C720,0 900,45 1080,20 C1260,0 1380,40 1440,25 L1440,60 L0,60Z" fill="currentColor"/></svg>',
-    };
-
-    wavePairs.forEach(function (cfg) {
-      var source = document.querySelector(cfg.after);
-      if (!source) return;
-
-      var next = source.nextElementSibling;
-      if (!next) return;
-
-      var divider = document.createElement('div');
-      divider.className = 'bg-wave-divider';
-      divider.setAttribute('aria-hidden', 'true');
-      divider.innerHTML = waveSVGs[cfg.type];
-
-      var isNextAlt = next.classList.contains('bg-alt');
-      var isNextFooter = next.classList.contains('footer');
-      if (isNextFooter) {
-        divider.style.color = '#1a1a1a';
-      } else if (isNextAlt) {
-        divider.style.color = '#f4f4f4';
-      } else {
-        divider.style.color = '#ffffff';
-      }
-
-      source.style.position = 'relative';
-      source.appendChild(divider);
-    });
-  }
-
   function boot() {
     initParticleCanvas();
-    initWaveDividers();
+    // Wave dividers were removed — simple, clean section transitions
+    // read better than ornamental SVG curves between contrasting
+    // (image vs. dark) sections.
     initScrollDecorations();
   }
 
