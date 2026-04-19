@@ -1771,10 +1771,10 @@ p { font-weight: 400; }
   );
 }
 .service-hero-bg--wynajem {
-  background-image: url('images/lodz-architektura-2.webp');
+  background-image: url('images/lodz-tlo-cta.webp');
   background-image: image-set(
-    url('images/lodz-architektura-2.avif') type('image/avif'),
-    url('images/lodz-architektura-2.webp') type('image/webp')
+    url('images/lodz-tlo-cta.avif') type('image/avif'),
+    url('images/lodz-tlo-cta.webp') type('image/webp')
   );
 }
 .service-hero-bg--skup {
@@ -1860,10 +1860,10 @@ p { font-weight: 400; }
     );
   }
   .service-hero-bg--wynajem {
-    background-image: url('images/lodz-architektura-2-mobile.webp');
+    background-image: url('images/lodz-tlo-cta-mobile.webp');
     background-image: image-set(
-      url('images/lodz-architektura-2-mobile.avif') type('image/avif'),
-      url('images/lodz-architektura-2-mobile.webp') type('image/webp')
+      url('images/lodz-tlo-cta-mobile.avif') type('image/avif'),
+      url('images/lodz-tlo-cta-mobile.webp') type('image/webp')
     );
   }
   .service-hero-bg--skup {
