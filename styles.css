@@ -330,6 +330,52 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
 }
 .stat span { font-size:.8rem; font-weight:500; color:var(--text-muted); letter-spacing:.04em; }
 
+/* Brand pillars */
+.pillars { background:var(--bg); }
+.pillars-grid {
+  display:grid; grid-template-columns:repeat(2,1fr);
+  max-width:var(--container); margin:0 auto;
+  padding:0 clamp(20px,5vw,60px);
+}
+@media(min-width:640px){ .pillars-grid { grid-template-columns:repeat(4,1fr); } }
+
+.pillar {
+  padding:clamp(36px,4vw,60px) clamp(20px,3vw,36px);
+  text-align:center;
+  border-right:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center; gap:.6rem;
+}
+.pillar:last-child { border-right:none; }
+
+.pillar-icon {
+  display:flex; align-items:center; justify-content:center;
+  width:52px; height:52px;
+  border-radius:50%;
+  background:var(--bg-alt);
+  color:var(--primary);
+  margin-bottom:.4rem;
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.pillar:hover .pillar-icon {
+  background:var(--primary);
+  color:#fff;
+  transform:scale(1.08);
+}
+
+.pillar-title {
+  display:block;
+  font-family:"Inter",system-ui,sans-serif;
+  font-size:clamp(.85rem,1.6vw,1rem); font-weight:700;
+  color:var(--primary); line-height:1.25;
+  letter-spacing:-.01em;
+}
+.pillar-text {
+  font-size:.78rem; font-weight:400;
+  color:var(--text-muted); line-height:1.5;
+  letter-spacing:.02em;
+  max-width:200px;
+}
+
 .about-img-stack { position:relative; aspect-ratio:1/1.1; max-width:480px; }
 
 .about-img {
@@ -814,6 +860,10 @@ button[type="submit"] { margin-top:8px; }
   .stat { border-bottom:1px solid var(--border); }
   .stat:nth-child(2),.stat:nth-child(4){ border-right:none; }
   .stat:nth-child(3),.stat:nth-child(4){ border-bottom:none; }
+
+  .pillar { border-bottom:1px solid var(--border); }
+  .pillar:nth-child(2),.pillar:nth-child(4){ border-right:none; }
+  .pillar:nth-child(3),.pillar:nth-child(4){ border-bottom:none; }
 
   .about-img-stack { max-width:100%; }
   .about-img-main  { width:80%; height:70%; }
