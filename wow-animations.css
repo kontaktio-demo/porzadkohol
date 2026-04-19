@@ -1,17 +1,29 @@
 .reveal.reveal-left {
   transform: translateX(-80px) translateY(0) scale(1);
 }
+.reveal.reveal-left.visible {
+  transform: translateX(0) translateY(0) scale(1);
+}
 
 .reveal.reveal-right {
   transform: translateX(80px) translateY(0) scale(1);
+}
+.reveal.reveal-right.visible {
+  transform: translateX(0) translateY(0) scale(1);
 }
 
 .reveal.reveal-scale {
   transform: scale(.75) translateY(0);
 }
+.reveal.reveal-scale.visible {
+  transform: scale(1) translateY(0);
+}
 
 .reveal.reveal-flip {
   transform: perspective(800px) rotateX(12deg) translateY(50px) scale(.97);
+}
+.reveal.reveal-flip.visible {
+  transform: perspective(800px) rotateX(0) translateY(0) scale(1);
 }
 
 .reveal.reveal-blur {
@@ -20,10 +32,14 @@
 }
 .reveal.reveal-blur.visible {
   filter: blur(0);
+  transform: translateY(0) scale(1);
 }
 
 .reveal.reveal-rotate {
   transform: rotate(-6deg) translateY(50px) scale(.92);
+}
+.reveal.reveal-rotate.visible {
+  transform: rotate(0) translateY(0) scale(1);
 }
 
 .reveal.reveal-zoom {
@@ -31,6 +47,7 @@
   filter: blur(6px);
 }
 .reveal.reveal-zoom.visible {
+  transform: scale(1) translateY(0);
   filter: blur(0);
 }
 

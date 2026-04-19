@@ -1614,6 +1614,7 @@ p { font-weight: 400; }
 .service-intro {
   padding: clamp(70px, 8vw, 110px) 0;
   background: var(--c-bg);
+  overflow: hidden;
 }
 .service-intro .container {
   display: grid;
