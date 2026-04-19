@@ -512,11 +512,11 @@ p { font-weight: 400; }
 .usp-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(180deg, rgba(10, 10, 14, 0.78), rgba(10, 10, 14, 0.85)),
-    url('images/section-bg-1.webp');
-  background-size: cover;
-  background-position: center;
+  /* Solid dark backdrop — no photo here so the hero image is followed by a
+     non-photo section before the next visual block (about). */
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(212, 177, 115, 0.08), transparent 60%),
+    linear-gradient(180deg, #0e0e10 0%, #14141a 100%);
   z-index: 0;
 }
 .usp .container { position: relative; z-index: 2; }
@@ -582,7 +582,13 @@ p { font-weight: 400; }
   inset: 0;
   background-image:
     linear-gradient(180deg, rgba(246, 245, 242, 0.95), rgba(246, 245, 242, 0.92)),
-    url('https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=1920&q=80');
+    url('images/lodz-panorama-2.webp');
+  background-image:
+    linear-gradient(180deg, rgba(246, 245, 242, 0.95), rgba(246, 245, 242, 0.92)),
+    image-set(
+      url('images/lodz-panorama-2.avif') type('image/avif'),
+      url('images/lodz-panorama-2.webp') type('image/webp')
+    );
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -776,7 +782,13 @@ p { font-weight: 400; }
   inset: 0;
   background-image:
     linear-gradient(180deg, rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.88)),
-    url('https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=1920&q=80');
+    url('images/lodz-panorama-1.webp');
+  background-image:
+    linear-gradient(180deg, rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.88)),
+    image-set(
+      url('images/lodz-panorama-1.avif') type('image/avif'),
+      url('images/lodz-panorama-1.webp') type('image/webp')
+    );
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -1119,7 +1131,14 @@ p { font-weight: 400; }
   content: '';
   position: absolute;
   inset: 0;
-  background: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1920&q=70') top center / cover no-repeat;
+  background: url('images/lodz-tlo-cta.webp') top center / cover no-repeat;
+  background-image: image-set(
+    url('images/lodz-tlo-cta.avif') type('image/avif'),
+    url('images/lodz-tlo-cta.webp') type('image/webp')
+  );
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
   opacity: 0.07;
   filter: grayscale(100%);
   pointer-events: none;
@@ -1749,7 +1768,16 @@ p { font-weight: 400; }
   inset: 0;
   background:
     linear-gradient(180deg, rgba(10, 10, 14, 0.85), rgba(10, 10, 14, 0.93)),
-    url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1920&q=70') center/cover no-repeat;
+    url('images/lodz-tlo-cta.webp') center/cover no-repeat;
+  background-image:
+    linear-gradient(180deg, rgba(10, 10, 14, 0.85), rgba(10, 10, 14, 0.93)),
+    image-set(
+      url('images/lodz-tlo-cta.avif') type('image/avif'),
+      url('images/lodz-tlo-cta.webp') type('image/webp')
+    );
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   opacity: 1;
   z-index: 0;
 }
@@ -1789,4 +1817,286 @@ p { font-weight: 400; }
   .howto-grid { grid-template-columns: 1fr; }
   .service-hero-actions .btn,
   .service-cta-actions .btn { width: 100%; }
+}
+
+/* ============================================================
+   PHOTO SLOTS — AVIF (primary) + WebP (fallback) via image-set,
+   plus mobile-optimized variants under @media (max-width: 768px).
+   Backgrounds without a custom dark/light overlay use the plain
+   form; otherwise the overlay is repeated alongside the image-set.
+   ============================================================ */
+
+/* About — main interior portrait */
+.about-img-main--photo {
+  background-image: url('images/wnetrze-1.webp');
+  background-image: image-set(
+    url('images/wnetrze-1.avif') type('image/avif'),
+    url('images/wnetrze-1.webp') type('image/webp')
+  );
+}
+
+/* About — secondary inset photo */
+.about-img-secondary--photo {
+  background-image: url('images/wnetrze-2.webp');
+  background-image: image-set(
+    url('images/wnetrze-2.avif') type('image/avif'),
+    url('images/wnetrze-2.webp') type('image/webp')
+  );
+}
+
+/* Agent — portrait/interior */
+.agent-photo--photo {
+  background-image: url('images/agentka-portret.webp');
+  background-image: image-set(
+    url('images/agentka-portret.avif') type('image/avif'),
+    url('images/agentka-portret.webp') type('image/webp')
+  );
+}
+
+/* Service hero backgrounds — one variant per subpage */
+.service-hero-bg--sprzedaz {
+  background-image: url('images/lodz-architektura-1.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-1.avif') type('image/avif'),
+    url('images/lodz-architektura-1.webp') type('image/webp')
+  );
+}
+.service-hero-bg--wynajem {
+  background-image: url('images/lodz-architektura-2.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-2.avif') type('image/avif'),
+    url('images/lodz-architektura-2.webp') type('image/webp')
+  );
+}
+.service-hero-bg--skup {
+  background-image: url('images/lodz-architektura-3.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-3.avif') type('image/avif'),
+    url('images/lodz-architektura-3.webp') type('image/webp')
+  );
+}
+.service-hero-bg--off-market {
+  background-image: url('images/lodz-architektura-4.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-4.avif') type('image/avif'),
+    url('images/lodz-architektura-4.webp') type('image/webp')
+  );
+}
+.service-hero-bg--deweloperskie {
+  background-image: url('images/lodz-architektura-5.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-5.avif') type('image/avif'),
+    url('images/lodz-architektura-5.webp') type('image/webp')
+  );
+}
+.service-hero-bg--wycena {
+  background-image: url('images/lodz-architektura-6.webp');
+  background-image: image-set(
+    url('images/lodz-architektura-6.avif') type('image/avif'),
+    url('images/lodz-architektura-6.webp') type('image/webp')
+  );
+}
+
+/* --------------------------------------------------------------
+   Mobile-optimized variants — load smaller files on phones/tablets.
+   -------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .about-img-main--photo {
+    background-image: url('images/wnetrze-1-mobile.webp');
+    background-image: image-set(
+      url('images/wnetrze-1-mobile.avif') type('image/avif'),
+      url('images/wnetrze-1-mobile.webp') type('image/webp')
+    );
+  }
+  .about-img-secondary--photo {
+    background-image: url('images/wnetrze-2-mobile.webp');
+    background-image: image-set(
+      url('images/wnetrze-2-mobile.avif') type('image/avif'),
+      url('images/wnetrze-2-mobile.webp') type('image/webp')
+    );
+  }
+  .agent-photo--photo {
+    background-image: url('images/agentka-portret-mobile.webp');
+    background-image: image-set(
+      url('images/agentka-portret-mobile.avif') type('image/avif'),
+      url('images/agentka-portret-mobile.webp') type('image/webp')
+    );
+  }
+
+  .about-bg {
+    background-image:
+      linear-gradient(180deg, rgba(246, 245, 242, 0.95), rgba(246, 245, 242, 0.92)),
+      url('images/lodz-panorama-2-mobile.webp');
+    background-image:
+      linear-gradient(180deg, rgba(246, 245, 242, 0.95), rgba(246, 245, 242, 0.92)),
+      image-set(
+        url('images/lodz-panorama-2-mobile.avif') type('image/avif'),
+        url('images/lodz-panorama-2-mobile.webp') type('image/webp')
+      );
+  }
+  .process-bg {
+    background-image:
+      linear-gradient(180deg, rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.88)),
+      url('images/lodz-panorama-1-mobile.webp');
+    background-image:
+      linear-gradient(180deg, rgba(10, 10, 14, 0.82), rgba(10, 10, 14, 0.88)),
+      image-set(
+        url('images/lodz-panorama-1-mobile.avif') type('image/avif'),
+        url('images/lodz-panorama-1-mobile.webp') type('image/webp')
+      );
+  }
+
+  .service-hero-bg--sprzedaz {
+    background-image: url('images/lodz-architektura-1-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-1-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-1-mobile.webp') type('image/webp')
+    );
+  }
+  .service-hero-bg--wynajem {
+    background-image: url('images/lodz-architektura-2-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-2-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-2-mobile.webp') type('image/webp')
+    );
+  }
+  .service-hero-bg--skup {
+    background-image: url('images/lodz-architektura-3-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-3-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-3-mobile.webp') type('image/webp')
+    );
+  }
+  .service-hero-bg--off-market {
+    background-image: url('images/lodz-architektura-4-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-4-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-4-mobile.webp') type('image/webp')
+    );
+  }
+  .service-hero-bg--deweloperskie {
+    background-image: url('images/lodz-architektura-5-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-5-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-5-mobile.webp') type('image/webp')
+    );
+  }
+  .service-hero-bg--wycena {
+    background-image: url('images/lodz-architektura-6-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-architektura-6-mobile.avif') type('image/avif'),
+      url('images/lodz-architektura-6-mobile.webp') type('image/webp')
+    );
+  }
+}
+
+/* ============================================================
+   SERVICE INTRO `.visual` photos — one per subpage, AVIF + WebP.
+   ============================================================ */
+.service-visual--sprzedaz {
+  background-image: url('images/oferta-sprzedaz.webp');
+  background-image: image-set(
+    url('images/oferta-sprzedaz.avif') type('image/avif'),
+    url('images/oferta-sprzedaz.webp') type('image/webp')
+  );
+}
+.service-visual--wynajem {
+  background-image: url('images/oferta-wynajem.webp');
+  background-image: image-set(
+    url('images/oferta-wynajem.avif') type('image/avif'),
+    url('images/oferta-wynajem.webp') type('image/webp')
+  );
+}
+.service-visual--skup {
+  background-image: url('images/oferta-skup.webp');
+  background-image: image-set(
+    url('images/oferta-skup.avif') type('image/avif'),
+    url('images/oferta-skup.webp') type('image/webp')
+  );
+}
+.service-visual--off-market {
+  background-image: url('images/oferta-off-market.webp');
+  background-image: image-set(
+    url('images/oferta-off-market.avif') type('image/avif'),
+    url('images/oferta-off-market.webp') type('image/webp')
+  );
+}
+.service-visual--deweloperskie {
+  background-image: url('images/oferta-deweloperskie.webp');
+  background-image: image-set(
+    url('images/oferta-deweloperskie.avif') type('image/avif'),
+    url('images/oferta-deweloperskie.webp') type('image/webp')
+  );
+}
+.service-visual--wycena {
+  background-image: url('images/oferta-wycena.webp');
+  background-image: image-set(
+    url('images/oferta-wycena.avif') type('image/avif'),
+    url('images/oferta-wycena.webp') type('image/webp')
+  );
+}
+
+@media (max-width: 768px) {
+  .service-visual--sprzedaz {
+    background-image: url('images/oferta-sprzedaz-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-sprzedaz-mobile.avif') type('image/avif'),
+      url('images/oferta-sprzedaz-mobile.webp') type('image/webp')
+    );
+  }
+  .service-visual--wynajem {
+    background-image: url('images/oferta-wynajem-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-wynajem-mobile.avif') type('image/avif'),
+      url('images/oferta-wynajem-mobile.webp') type('image/webp')
+    );
+  }
+  .service-visual--skup {
+    background-image: url('images/oferta-skup-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-skup-mobile.avif') type('image/avif'),
+      url('images/oferta-skup-mobile.webp') type('image/webp')
+    );
+  }
+  .service-visual--off-market {
+    background-image: url('images/oferta-off-market-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-off-market-mobile.avif') type('image/avif'),
+      url('images/oferta-off-market-mobile.webp') type('image/webp')
+    );
+  }
+  .service-visual--deweloperskie {
+    background-image: url('images/oferta-deweloperskie-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-deweloperskie-mobile.avif') type('image/avif'),
+      url('images/oferta-deweloperskie-mobile.webp') type('image/webp')
+    );
+  }
+  .service-visual--wycena {
+    background-image: url('images/oferta-wycena-mobile.webp');
+    background-image: image-set(
+      url('images/oferta-wycena-mobile.avif') type('image/avif'),
+      url('images/oferta-wycena-mobile.webp') type('image/webp')
+    );
+  }
+
+  /* Lighter dark-overlay backdrop for footer + service CTA on phones. */
+  .footer::before {
+    background-image: url('images/lodz-tlo-cta-mobile.webp');
+    background-image: image-set(
+      url('images/lodz-tlo-cta-mobile.avif') type('image/avif'),
+      url('images/lodz-tlo-cta-mobile.webp') type('image/webp')
+    );
+  }
+  .service-cta::before {
+    background-image:
+      linear-gradient(180deg, rgba(10, 10, 14, 0.85), rgba(10, 10, 14, 0.93)),
+      url('images/lodz-tlo-cta-mobile.webp');
+    background-image:
+      linear-gradient(180deg, rgba(10, 10, 14, 0.85), rgba(10, 10, 14, 0.93)),
+      image-set(
+        url('images/lodz-tlo-cta-mobile.avif') type('image/avif'),
+        url('images/lodz-tlo-cta-mobile.webp') type('image/webp')
+      );
+  }
 }
