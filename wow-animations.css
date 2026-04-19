@@ -306,7 +306,7 @@
   transition: transform .4s var(--ease), box-shadow .4s var(--ease);
 }
 .off-market-banner:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 .off-market-img {
@@ -314,7 +314,7 @@
 }
 .off-market-banner:hover .off-market-img {
   filter: grayscale(0%);
-  transform: scale(1.03);
+  transform: scale(1.01);
 }
 
 .skup-highlight {
