@@ -7,38 +7,49 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#1a1a1a">
-  <title>MWW Mieszkanie - Biuro Nieruchomości Łódź</title>
-  <meta name="description" content="MWW Mieszkanie - profesjonalne biuro nieruchomości z Łodzi. Sprzedaż, wynajem, oferty deweloperskie, skup za gotówkę i oferty off the market. Zaufaj ekspertom.">
-  <meta name="keywords" content="biuro nieruchomości Łódź, sprzedaż mieszkań Łódź, wynajem mieszkań Łódź, MWW Mieszkanie, pośrednik nieruchomości, Magdalena Wałowska-Wojtczak">
+  <meta name="theme-color" content="#0e0e10">
+  <title>MWW Mieszkanie — Biuro Nieruchomości w Łodzi</title>
+  <meta name="description" content="MWW Mieszkanie — biuro nieruchomości w Łodzi. Pomagamy kupować, sprzedawać i wynajmować mieszkania, domy i lokale komercyjne. Indywidualne podejście do każdego klienta.">
+  <meta name="keywords" content="biuro nieruchomości Łódź, sprzedaż mieszkań Łódź, wynajem Łódź, MWW Mieszkanie">
   <meta name="author" content="MWW Mieszkanie">
-  <meta property="og:title" content="MWW Mieszkanie - Biuro Nieruchomości Łódź">
-  <meta property="og:description" content="Profesjonalne biuro nieruchomości w Łodzi z indywidualnym podejściem do każdego klienta.">
+  <meta property="og:title" content="MWW Mieszkanie — Biuro Nieruchomości w Łodzi">
+  <meta property="og:description" content="Biuro nieruchomości w Łodzi. Sprzedaż, wynajem, skup za gotówkę i oferty deweloperskie. Indywidualne podejście do każdego klienta.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2'><path d='M3 22V8L12 2l9 6v14'/><line x1='9' y1='22' x2='9' y2='14'/><line x1='15' y1='22' x2='15' y2='14'/><rect x='9' y='14' width='6' height='8'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e0e10' stroke-width='2'><path d='M3 22V8L12 2l9 6v14'/><line x1='9' y1='22' x2='9' y2='14'/><line x1='15' y1='22' x2='15' y2='14'/><rect x='9' y='14' width='6' height='8'/></svg>">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Manrope: nowoczesny, czytelny font bezszeryfowy. -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="wow-animations.css">
 </head>
 <body class="preloading">
 
+<!-- ============================================================
+     PRELOADER
+     ============================================================ -->
 <div id="preloader" role="status" aria-label="Ładowanie strony MWW Mieszkanie">
   <div class="preloader-inner">
     <div class="preloader-logo">MWW <strong>Mieszkanie</strong></div>
     <div class="preloader-bar"><div class="preloader-fill"></div></div>
-    <span class="preloader-text">Twój partner w nieruchomościach</span>
+    <span class="preloader-text">Biuro nieruchomości — Łódź</span>
   </div>
 </div>
 
+<!-- ============================================================
+     NAVIGATION — sticky top, glassmorphism
+     Order: Start · O nas · Usługi · Oferty · Agentka · Partnerzy · Kontakt
+     ============================================================ -->
 <header class="nav" id="nav">
-  <a href="#hero" class="logo" aria-label="MWW Mieszkanie - strona główna">MWW <strong>Mieszkanie</strong></a>
+  <a href="#hero" class="logo" aria-label="MWW Mieszkanie — strona główna">MWW <strong>Mieszkanie</strong></a>
 
   <nav class="nav-links" id="navLinks" role="navigation" aria-label="Nawigacja główna">
-    <a href="oferty.html" class="nav-link">Oferty</a>
+    <a href="#hero"      class="nav-link">Start</a>
     <a href="#o-nas"     class="nav-link">O nas</a>
-    <a href="#oferta"    class="nav-link">Oferta</a>
+    <a href="#uslugi"    class="nav-link">Usługi</a>
+    <a href="oferty.html" class="nav-link">Oferty</a>
     <a href="#agent"     class="nav-link">Agentka</a>
     <a href="#partnerzy" class="nav-link">Partnerzy</a>
     <a href="#kontakt"   class="nav-link">Kontakt</a>
@@ -46,7 +57,8 @@
 
   <div class="nav-right">
     <a href="tel:+48515488951" class="btn btn-primary nav-cta">
-      <svg class="nav-cta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>&nbsp;+48&nbsp;515&nbsp;488&nbsp;951
+      <svg class="nav-cta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +48&nbsp;515&nbsp;488&nbsp;951
     </a>
     <button class="hamburger" id="hamburger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
@@ -54,218 +66,104 @@
   </div>
 </header>
 
-<section id="hero" class="hero" aria-label="MWW Mieszkanie - Biuro Nieruchomości Łódź">
+<!-- ============================================================
+     1. HERO — full-screen Łódź photo + dark overlay + parallax
+     ============================================================ -->
+<section id="hero" class="hero" aria-label="MWW Mieszkanie — Biuro Nieruchomości Łódź">
+  <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
 
   <div class="hero-content reveal">
     <p class="hero-eyebrow">Łódź &amp; Województwo Łódzkie</p>
     <h1>
-      <span class="hero-title-light">Nieruchomości w Łodzi</span><br>
-      <span class="hero-title-accent">na każdym etapie</span>
+      <span class="hero-title-light">Nieruchomości</span>
+      <span class="hero-title-accent">w sercu Łodzi</span>
     </h1>
     <p class="hero-subtitle">
-      Sprzedaż, wynajem, skup i&nbsp;inwestycje deweloperskie.<br class="br-desktop">
-      Twój ekspert z&nbsp;<strong>wykształceniem prawniczym</strong> i&nbsp;<strong>ponad 5-letnim doświadczeniem</strong>.
+      Sprzedaż, wynajem, skup i&nbsp;oferty deweloperskie.<br>
+      Magdalena Wałowska-Wojtczak — magister prawa UŁ, ponad 5&nbsp;lat doświadczenia na rynku.
     </p>
     <div class="hero-actions">
-      <a href="#oferta"  class="btn btn-primary btn-lg">Poznaj ofertę</a>
-      <a href="#kontakt" class="btn btn-outline btn-lg">Umów spotkanie</a>
+      <a href="#uslugi"  class="btn btn-primary btn-lg">Poznaj ofertę</a>
+      <a href="#kontakt" class="btn btn-ghost-light btn-lg">Umów spotkanie</a>
     </div>
-  </div>
-
-    <div class="skyline-wrap" aria-hidden="true">
-    <svg class="skyline-svg" viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#4a7fb5"/>
-          <stop offset="35%" stop-color="#7badd4"/>
-          <stop offset="60%" stop-color="#c4a87c"/>
-          <stop offset="80%" stop-color="#e8b968"/>
-          <stop offset="100%" stop-color="#f0c97a"/>
-        </linearGradient>
-        <linearGradient id="buildGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#2a3a50"/>
-          <stop offset="100%" stop-color="#1a2535"/>
-        </linearGradient>
-      </defs>
-
-            <rect width="1440" height="520" fill="url(#skyGrad)"/>
-
-            <circle cx="1100" cy="240" r="70" fill="#f5d47a" opacity="0.5"/>
-      <circle cx="1100" cy="240" r="45" fill="#f8e0a0" opacity="0.7"/>
-
-            <ellipse cx="300" cy="180" rx="100" ry="20" fill="rgba(255,255,255,0.25)"/>
-      <ellipse cx="340" cy="175" rx="60" ry="15" fill="rgba(255,255,255,0.2)"/>
-      <ellipse cx="800" cy="150" rx="80" ry="16" fill="rgba(255,255,255,0.2)"/>
-      <ellipse cx="830" cy="145" rx="50" ry="12" fill="rgba(255,255,255,0.18)"/>
-
-            <path d="M0 380 Q60 340 120 360 Q180 340 240 355 Q300 330 360 350 Q420 325 480 345 Q540 320 600 340 Q660 315 720 335 Q780 310 840 330 Q900 310 960 325 Q1020 305 1080 320 Q1140 300 1200 315 Q1260 295 1320 310 Q1380 290 1440 305 L1440 520 L0 520Z" fill="#3a5a45" opacity="0.35"/>
-
-            <path d="M0 410 Q50 380 100 395 Q160 370 220 390 Q280 365 340 385 Q400 360 460 380 Q520 355 580 375 Q640 350 700 370 Q760 348 820 365 Q880 345 940 360 Q1000 340 1060 355 Q1120 335 1180 350 Q1240 330 1300 345 Q1360 325 1440 340 L1440 520 L0 520Z" fill="#2e4a3a" opacity="0.45"/>
-
-            <g fill="url(#buildGrad)">
-                <rect x="0" y="400" width="35" height="120"/>
-        <rect x="38" y="410" width="28" height="110"/>
-        <rect x="70" y="395" width="30" height="125"/>
-
-                <rect x="110" y="380" width="40" height="140"/>
-        <rect x="108" y="378" width="44" height="4" rx="1"/>
-        <rect x="155" y="395" width="35" height="125"/>
-        <rect x="195" y="370" width="45" height="150"/>
-        <rect x="193" y="368" width="49" height="4" rx="1"/>
-
-                <rect x="258" y="310" width="12" height="210"/>
-        <rect x="254" y="306" width="20" height="8" rx="2"/>
-        <rect x="252" y="300" width="24" height="8" rx="1"/>
-
-                <rect x="285" y="365" width="50" height="155"/>
-        <rect x="283" y="362" width="54" height="5" rx="1"/>
-        <rect x="340" y="385" width="35" height="135"/>
-        <rect x="380" y="375" width="42" height="145"/>
-        <rect x="378" y="372" width="46" height="5" rx="1"/>
-
-                <rect x="440" y="340" width="30" height="180"/>
-        <polygon points="455,260 440,340 470,340"/>
-        <rect x="452" y="248" width="6" height="16"/>
-        <line x1="455" y1="245" x2="455" y2="238" stroke="#2a3a50" stroke-width="2"/>
-
-                <rect x="490" y="320" width="70" height="200"/>
-        <rect x="486" y="316" width="78" height="6" rx="1"/>
-        <rect x="500" y="330" width="10" height="12" fill="#4a6a7a" opacity="0.6"/>
-        <rect x="520" y="330" width="10" height="12" fill="#4a6a7a" opacity="0.6"/>
-        <rect x="540" y="330" width="10" height="12" fill="#4a6a7a" opacity="0.6"/>
-        <rect x="500" y="350" width="10" height="12" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="520" y="350" width="10" height="12" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="540" y="350" width="10" height="12" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="500" y="370" width="10" height="12" fill="#4a6a7a" opacity="0.4"/>
-        <rect x="520" y="370" width="10" height="12" fill="#4a6a7a" opacity="0.4"/>
-        <rect x="540" y="370" width="10" height="12" fill="#4a6a7a" opacity="0.4"/>
-
-                <rect x="580" y="280" width="14" height="240"/>
-        <rect x="576" y="275" width="22" height="8" rx="2"/>
-        <rect x="574" y="269" width="26" height="8" rx="1"/>
-
-                <rect x="615" y="360" width="55" height="160"/>
-        <rect x="613" y="357" width="59" height="5" rx="1"/>
-        <rect x="675" y="380" width="40" height="140"/>
-        <rect x="720" y="350" width="48" height="170"/>
-        <rect x="718" y="347" width="52" height="5" rx="1"/>
-
-                <rect x="785" y="290" width="35" height="230"/>
-        <rect x="783" y="286" width="39" height="6" rx="1"/>
-        <rect x="790" y="300" width="8" height="10" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="805" y="300" width="8" height="10" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="790" y="316" width="8" height="10" fill="#4a6a7a" opacity="0.4"/>
-        <rect x="805" y="316" width="8" height="10" fill="#4a6a7a" opacity="0.4"/>
-
-                <rect x="835" y="375" width="45" height="145"/>
-        <rect x="885" y="390" width="35" height="130"/>
-        <rect x="925" y="370" width="50" height="150"/>
-        <rect x="923" y="367" width="54" height="5" rx="1"/>
-
-                <rect x="990" y="295" width="12" height="225"/>
-        <rect x="986" y="290" width="20" height="8" rx="2"/>
-
-                <rect x="1020" y="380" width="42" height="140"/>
-        <rect x="1068" y="365" width="50" height="155"/>
-        <rect x="1066" y="362" width="54" height="5" rx="1"/>
-        <rect x="1125" y="385" width="38" height="135"/>
-
-                <rect x="1175" y="310" width="38" height="210"/>
-        <rect x="1173" y="306" width="42" height="6" rx="1"/>
-        <rect x="1180" y="318" width="8" height="10" fill="#4a6a7a" opacity="0.5"/>
-        <rect x="1198" y="318" width="8" height="10" fill="#4a6a7a" opacity="0.5"/>
-
-                <rect x="1225" y="390" width="40" height="130"/>
-        <rect x="1270" y="380" width="45" height="140"/>
-        <rect x="1268" y="377" width="49" height="5" rx="1"/>
-        <rect x="1320" y="395" width="35" height="125"/>
-        <rect x="1360" y="405" width="40" height="115"/>
-        <rect x="1405" y="400" width="35" height="120"/>
-      </g>
-
-            <g opacity="0.7">
-                <rect x="502" y="390" width="8" height="8" fill="#f5d47a" opacity="0.6" rx="1"/>
-        <rect x="522" y="400" width="8" height="8" fill="#f5d47a" opacity="0.5" rx="1"/>
-        <rect x="542" y="390" width="8" height="8" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="502" y="420" width="8" height="8" fill="#f5d47a" opacity="0.5" rx="1"/>
-        <rect x="542" y="430" width="8" height="8" fill="#f5d47a" opacity="0.3" rx="1"/>
-
-                <rect x="792" y="340" width="6" height="6" fill="#f5d47a" opacity="0.5" rx="1"/>
-        <rect x="807" y="360" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="792" y="380" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-
-                <rect x="1182" y="340" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="1200" y="360" width="6" height="6" fill="#f5d47a" opacity="0.5" rx="1"/>
-        <rect x="1182" y="380" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-
-                <rect x="120" y="410" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-        <rect x="205" y="400" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="295" y="395" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-        <rect x="395" y="405" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="630" y="395" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-        <rect x="735" y="385" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="940" y="400" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-        <rect x="1080" y="395" width="6" height="6" fill="#f5d47a" opacity="0.4" rx="1"/>
-        <rect x="1285" y="410" width="6" height="6" fill="#f5d47a" opacity="0.3" rx="1"/>
-      </g>
-
-            <rect x="0" y="500" width="1440" height="20" fill="#1a2535"/>
-
-    </svg>
   </div>
 
   <div class="hero-scroll" aria-hidden="true">
     <span>Odkryj</span>
     <div class="scroll-line"></div>
   </div>
-
 </section>
 
-<section class="pillars" aria-label="Filary MWW Mieszkanie">
-  <div class="pillars-grid">
-    <div class="pillar reveal">
-      <span class="pillar-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </span>
-      <strong class="pillar-title">Pełne bezpieczeństwo</strong>
-      <span class="pillar-text">Każda transakcja pod opieką licencjonowanych specjalistów</span>
+<!-- ============================================================
+     2. DLACZEGO MY (USP) — image background + dark overlay
+     ============================================================ -->
+<section class="usp" aria-labelledby="usp-heading">
+  <div class="usp-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-header section-header-center reveal">
+      <p class="eyebrow">Dlaczego my</p>
+      <h2 id="usp-heading">Profesjonalne podejście.<br>Indywidualna obsługa.</h2>
+      <p class="section-desc">
+        Łączymy wiedzę prawną, znajomość lokalnego rynku i&nbsp;rzetelne podejście do klienta.
+        Każdą transakcję prowadzimy od początku do końca — bez przekazywania sprawy z&nbsp;rąk do rąk.
+      </p>
     </div>
-    <div class="pillar reveal">
-      <span class="pillar-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-      </span>
-      <strong class="pillar-title">Relacja, nie transakcja</strong>
-      <span class="pillar-text">Budujemy zaufanie — wracasz do nas z kolejną inwestycją</span>
-    </div>
-    <div class="pillar reveal">
-      <span class="pillar-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      </span>
-      <strong class="pillar-title">Znajomość rynku</strong>
-      <span class="pillar-text">Łódź to nasz teren — znamy każdą dzielnicę i jej potencjał</span>
-    </div>
-    <div class="pillar reveal">
-      <span class="pillar-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      </span>
-      <strong class="pillar-title">Kompleksowa obsługa</strong>
-      <span class="pillar-text">Od wyceny, przez formalności, aż po przekazanie kluczy</span>
+
+    <div class="usp-grid">
+      <article class="usp-card reveal reveal-scale">
+        <span class="usp-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <h3>Pełne bezpieczeństwo</h3>
+        <p>Każda transakcja pod opieką licencjonowanego pośrednika z&nbsp;tytułem magistra prawa.</p>
+      </article>
+
+      <article class="usp-card reveal reveal-scale">
+        <span class="usp-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </span>
+        <h3>Relacja, nie transakcja</h3>
+        <p>Stawiamy na zaufanie i&nbsp;długą współpracę — wielu klientów wraca do nas z&nbsp;kolejnymi sprawami.</p>
+      </article>
+
+      <article class="usp-card reveal reveal-scale">
+        <span class="usp-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <h3>Znajomość Łodzi</h3>
+        <p>EC1, OFF&nbsp;Piotrkowska, Manufaktura, Księży Młyn — znamy każdą dzielnicę i&nbsp;jej potencjał.</p>
+      </article>
+
+      <article class="usp-card reveal reveal-scale">
+        <span class="usp-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </span>
+        <h3>Kompleksowa obsługa</h3>
+        <p>Od wyceny, przez marketing, negocjacje, formalności — aż po przekazanie kluczy.</p>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- ============================================================
+     3. O NAS — Łódź photo background (subtle)
+     ============================================================ -->
 <section id="o-nas" class="section about" aria-labelledby="about-heading">
+  <div class="about-bg" aria-hidden="true"></div>
   <div class="container two-col">
+
     <div class="about-visuals reveal reveal-left">
       <div class="about-img-stack">
         <div class="about-img about-img-main"
              style="background-image:url('images/about-photo.webp')"
-             role="img" aria-label="Eleganckie wnętrze mieszkania w Łodzi"></div>
+             role="img" aria-label="Wnętrze mieszkania w Łodzi"></div>
         <div class="about-img about-img-secondary"
              style="background-image:url('images/about-secondary.webp')"
-             role="img" aria-label="Łódź - panorama miasta"></div>
+             role="img" aria-label="Łódź — panorama miasta"></div>
         <div class="about-award-badge" aria-label="Działamy w Łodzi i województwie łódzkim">
-          <span aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8L12 2l9 6v14"/><line x1="9" y1="22" x2="9" y2="14"/><line x1="15" y1="22" x2="15" y2="14"/><rect x="9" y="14" width="6" height="8"/></svg></span>
+          <span aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8L12 2l9 6v14"/><line x1="9" y1="22" x2="9" y2="14"/><line x1="15" y1="22" x2="15" y2="14"/><rect x="9" y="14" width="6" height="8"/></svg>
+          </span>
           <p>Łódź &amp; region</p>
         </div>
       </div>
@@ -273,215 +171,196 @@
 
     <div class="text reveal reveal-right">
       <p class="eyebrow">Kim jesteśmy</p>
-      <h2 id="about-heading">Pasja i profesjonalizm<br>w jednym miejscu</h2>
+      <h2 id="about-heading">Pasja i&nbsp;profesjonalizm<br>w&nbsp;jednym miejscu.</h2>
       <p class="lead">
-        MWW Mieszkanie to nowoczesne biuro nieruchomości, gdzie <strong>każdy klient traktowany jest wyjątkowo</strong> - bo każda nieruchomość zasługuje na właściwe podejście.
+        MWW&nbsp;Mieszkanie to nowoczesne biuro nieruchomości, gdzie <strong>każdy klient traktowany jest wyjątkowo</strong> — bo każda nieruchomość zasługuje na właściwe podejście.
       </p>
       <p>
-        Działamy na terenie Łodzi i całego województwa łódzkiego. Rozumiemy, że nieruchomość to nie tylko metraż i lokalizacja - to emocje, plany i ważne życiowe decyzje. Dlatego towarzyszymy Ci <strong>od pierwszego kontaktu aż do finalizacji transakcji</strong>. <strong>Lubimy trudne wyzwania</strong> - i zawsze szukamy rozwiązania.
+        Działamy na terenie Łodzi i&nbsp;całego województwa łódzkiego. Towarzyszymy klientom <strong>od pierwszego kontaktu aż do finalizacji transakcji</strong>: profesjonalna sesja zdjęciowa, rzetelna wycena, negocjacje, obecność u&nbsp;notariusza.
       </p>
       <p>
-        Naszą codziennością są zarówno klasyczne transakcje sprzedaży i wynajmu, jak i sprawy nietypowe - <strong>nieruchomości z obciążeniami, sporami spadkowymi, rewitalizowane kamienice czy obiekty zabytkowe</strong>. Każde zlecenie prowadzimy osobiście, z pełną dyskrecją i&nbsp;dbałością o&nbsp;najmniejszy szczegół - od profesjonalnej sesji zdjęciowej i&nbsp;rzetelnej wyceny, przez negocjacje, aż po obecność u&nbsp;notariusza.
+        Naszą codziennością są zarówno klasyczne transakcje sprzedaży i&nbsp;wynajmu, jak i&nbsp;sprawy nietypowe — <strong>nieruchomości z&nbsp;obciążeniami, sporami spadkowymi, rewitalizowane kamienice czy obiekty zabytkowe</strong>.
       </p>
-      <p>
-        Znajomość lokalnego rynku, sprawdzona sieć kontaktów i&nbsp;indywidualne podejście - tak, żeby Twoja transakcja przebiegła <strong>spokojnie, bezpiecznie i&nbsp;na najlepszych możliwych warunkach</strong>. Niezależnie od tego, czy sprzedajesz pierwszą kawalerkę, czy zarządzasz portfelem inwestycyjnym - <strong>u nas znajdziesz partnera, który rozumie Twoje potrzeby</strong>.
-      </p>
+
       <ul class="features-list" aria-label="Nasze przewagi">
         <li>
           <span class="feature-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
           <div>
             <strong>Pełen zakres usług</strong>
-            <span>Wycena, sprzedaż, wynajem, skup - wszystko w jednym biurze</span>
+            <span>Wycena, sprzedaż, wynajem, skup — wszystko w&nbsp;jednym biurze</span>
           </div>
         </li>
         <li>
           <span class="feature-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11H9a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H7m10-8V7a2 2 0 0 0-2-2h-1M7 7H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/></svg></span>
           <div>
             <strong>Współpraca na rynku</strong>
-            <span>Pracujemy na wyłączność, ale otwarcie współpracujemy z innymi agentami</span>
+            <span>Pracujemy na wyłączność, otwarcie współpracujemy z&nbsp;innymi agentami</span>
           </div>
         </li>
         <li>
           <span class="feature-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 9l9-7 9 7"/><polyline points="3 9 3 17 9 21 15 21 21 17 21 9"/></svg></span>
           <div>
-            <strong>Wiedza prawna i branżowa</strong>
-            <span>Magister prawa UŁ, licencja pośrednika i zarządcy nieruchomości</span>
+            <strong>Wiedza prawna</strong>
+            <span>Magister prawa UŁ, licencja pośrednika i&nbsp;zarządcy nieruchomości</span>
           </div>
         </li>
         <li>
           <span class="feature-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></span>
           <div>
-            <strong>Nieruchomości bez granic</strong>
-            <span>Kamienice, biurowce, zabytkowe obiekty - żadne wyzwanie nas nie zatrzyma</span>
+            <strong>Bez granic</strong>
+            <span>Kamienice, biurowce, obiekty zabytkowe — żadne wyzwanie nas nie zatrzyma</span>
           </div>
         </li>
       </ul>
-      <a href="#kontakt" class="btn btn-primary">Porozmawiajmy o Twojej nieruchomości</a>
+
+      <a href="#kontakt" class="btn btn-primary">Porozmawiajmy o&nbsp;Twojej nieruchomości</a>
     </div>
   </div>
 </section>
 
-<section class="section distinguishes bg-alt" aria-labelledby="dist-heading">
+<!-- ============================================================
+     4. USŁUGI — kafelki (icon + title + desc + link)
+     ============================================================ -->
+<section id="uslugi" class="section services bg-alt" aria-labelledby="services-heading">
   <div class="container">
     <div class="section-header section-header-center reveal">
-      <p class="eyebrow">Przewagi MWW</p>
-      <h2 id="dist-heading">Dlaczego warto<br>nam zaufać?</h2>
-      <p class="section-desc"><strong>Nie mówimy <em>„nie da się"</em></strong>. Mamy kontakty, narzędzia i determinację, żeby przeprowadzić Cię przez każdą transakcję. Łączymy <strong>wiedzę prawną</strong>, doświadczenie rynkowe oraz osobiste zaangażowanie - to mieszanka, dzięki której nasi klienci wracają do nas i&nbsp;polecają nas dalej. Każdy z&nbsp;poniższych filarów to nie hasło marketingowe, ale <strong>realna wartość</strong>, którą dostarczamy na co dzień.</p>
-    </div>
-    <div class="dist-grid">
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-        <h3>Rzetelna wycena</h3>
-        <p>Precyzyjna analiza wartości rynkowej oparta na aktualnych danych - <strong>bez zawyżania, bez zaniżania</strong>. Bierzemy pod uwagę lokalizację, stan techniczny, potencjał inwestycyjny i&nbsp;trendy w&nbsp;Twojej dzielnicy.</p>
-      </div>
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div>
-        <h3>Od A do Z</h3>
-        <p>Obsługujemy całość procesu: od przygotowania oferty, przez prezentacje, aż po <strong>podpisanie aktu notarialnego</strong>. Doradzamy w&nbsp;kwestiach prawnych, kredytowych i&nbsp;podatkowych - tak, by żaden etap Cię nie zaskoczył.</p>
-      </div>
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <h3>Szeroka sieć</h3>
-        <p>Dzięki współpracy z biurami i agentami w całym regionie Twoja oferta trafia do <strong>dużo większego grona kupujących</strong>. Korzystamy z&nbsp;wiodących portali, social mediów i&nbsp;własnej bazy zweryfikowanych klientów - w&nbsp;tym inwestorów szukających okazji poza rynkiem publicznym.</p>
-      </div>
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <h3>Wyłączność, która procentuje</h3>
-        <p>Umowy na wyłączność oznaczają, że poświęcamy Twojej nieruchomości <strong>maksimum uwagi i zaangażowania</strong> - profesjonalna sesja zdjęciowa, indywidualna strategia marketingowa i&nbsp;jeden agent prowadzący sprawę od początku do końca.</p>
-      </div>
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="12" y1="3" x2="12" y2="21"/><path d="M6 8h2m-2 4h2m8-4h2m-2 4h2"/></svg></div>
-        <h3>Trudne przypadki? Proszę!</h3>
-        <p>Nieruchomości z obciążeniami, skomplikowanym stanem prawnym czy wymagające rewitalizacji - <strong>to właśnie lubimy najbardziej</strong>. Sprawy spadkowe, podziały współwłasności, lokale zadłużone czy obiekty zabytkowe traktujemy jak wyzwanie, a&nbsp;nie problem.</p>
-      </div>
-      <div class="dist-card reveal reveal-scale">
-        <div class="dist-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3>Ekspresowa decyzja</h3>
-        <p>Skup nieruchomości w <strong>48 godzin</strong> - gotówka, brak zbędnych formalności, <strong>pewność transakcji</strong>. Idealne rozwiązanie, gdy zależy Ci na czasie, a&nbsp;klasyczna sprzedaż mogłaby trwać miesiącami.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="oferta" class="section services" aria-labelledby="services-heading">
-  <div class="container">
-    <div class="section-header reveal">
       <p class="eyebrow">Zakres działania</p>
-      <h2 id="services-heading">Nasza oferta</h2>
-      <p class="section-desc"><strong>Kompleksowe wsparcie nieruchomościowe</strong> - niezależnie od tego, czy sprzedajesz, kupujesz, wynajmujesz czy potrzebujesz gotówki natychmiast. Każdą usługę dostosowujemy do <strong>indywidualnej sytuacji</strong>: innego podejścia wymaga sprzedaż mieszkania rodzinnego, innego - lokalu inwestycyjnego, a&nbsp;jeszcze innego - kamienicy z&nbsp;potencjałem do rewitalizacji. Poniżej znajdziesz pełen zakres tego, czym się zajmujemy - a&nbsp;jeśli Twoja sprawa nie mieści się w&nbsp;żadnej z&nbsp;kategorii, <strong>i tak zadzwoń</strong>. Lubimy wyzwania.</p>
+      <h2 id="services-heading">Nasze usługi</h2>
+      <p class="section-desc">
+        Pomagamy w&nbsp;sprzedaży, wynajmie i&nbsp;skupie nieruchomości. Doradzamy też przy sprawach trudniejszych — spadkach, rewitalizacjach kamienic czy obiektach zabytkowych.
+      </p>
     </div>
 
     <div class="services-grid">
 
-            <article id="sprzedaz" class="service-card reveal reveal-scale" aria-labelledby="sale-heading">
-        <div class="service-img"
-             style="background-image:url('images/hero-bg.webp')"
-             role="img" aria-label="Sprzedaż domu jednorodzinnego">
-          <div class="service-tag">Sprzedaż</div>
+      <article id="sprzedaz" class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
-        <div class="service-body">
-          <h3 id="sale-heading">Sprzedaż</h3>
-          <p>Skutecznie sprzedajemy <strong>każdy rodzaj nieruchomości</strong> - zawsze w najlepszej możliwej cenie i czasie. Profesjonalne zdjęcia, opis, rzut 2D, ekspozycja w&nbsp;najważniejszych portalach oraz <strong>aktywne dotarcie do zweryfikowanych kupujących</strong> z&nbsp;naszej bazy.</p>
-          <ul class="service-list" aria-label="Co sprzedajemy">
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> Mieszkania</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> Domy</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 22"/><path d="M17 8C17 8 21 14 15 18C9 22 5 18 5 18"/></svg> Działki</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 22V12l6-4v4l6-4v4l6-4v10"/><line x1="2" y1="22" x2="22" y2="22"/></svg> Nieruchomości komercyjne</li>
-          </ul>
-          <a href="#kontakt" class="btn btn-primary btn-sm">Sprawdź ofertę ></a>
-        </div>
+        <h3>Sprzedaż</h3>
+        <p>Sprzedajemy mieszkania, domy, działki i&nbsp;lokale komercyjne. Profesjonalne zdjęcia, opis, ekspozycja w&nbsp;najważniejszych portalach i&nbsp;dotarcie do zweryfikowanych kupujących.</p>
+        <a href="#kontakt" class="service-link">Dowiedz się więcej →</a>
       </article>
 
-            <article id="wynajem" class="service-card reveal reveal-scale" aria-labelledby="rental-heading">
-        <div class="service-img"
-             style="background-image:url('images/about-secondary.webp')"
-             role="img" aria-label="Przestronne mieszkanie do wynajęcia">
-          <div class="service-tag">Wynajem</div>
+      <article id="wynajem" class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <div class="service-body">
-          <h3 id="rental-heading">Wynajem</h3>
-          <p><strong>Krótko i długoterminowy</strong> wynajem mieszkań oraz szerokie spektrum powierzchni komercyjnych i magazynowych. Weryfikujemy najemców, przygotowujemy bezpieczne umowy i&nbsp;w&nbsp;razie potrzeby <strong>kompleksowo zarządzamy</strong> Twoją nieruchomością.</p>
-          <ul class="service-list" aria-label="Co wynajmujemy">
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg> Mieszkania (krótko- i długoterminowo)</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Biura i powierzchnie coworkingowe</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l1-6h16l1 6"/><path d="M3 9h18v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M9 21v-6h6v6"/></svg> Lokale usługowo-handlowe</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 6l10-4 10 4v14H2z"/><rect x="8" y="14" width="8" height="6"/></svg> Hale i magazyny</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 22V6l9-4 9 4v16"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="12"/></svg> Kamienice i biurowce</li>
-          </ul>
-          <a href="#kontakt" class="btn btn-primary btn-sm">Sprawdź ofertę ></a>
-        </div>
+        <h3>Wynajem</h3>
+        <p>Krótko- i&nbsp;długoterminowy wynajem mieszkań oraz lokali użytkowych. Weryfikujemy najemców, przygotowujemy bezpieczne umowy, a&nbsp;w&nbsp;razie potrzeby pomagamy w&nbsp;zarządzaniu.</p>
+        <a href="#kontakt" class="service-link">Dowiedz się więcej →</a>
       </article>
 
-            <article id="skup" class="service-card reveal reveal-scale" aria-labelledby="skup-heading">
-        <div class="service-img"
-             style="background-image:url('images/section-bg-1.webp')"
-             role="img" aria-label="Szybki skup nieruchomości za gotówkę">
-          <div class="service-tag">Skup</div>
+      <article id="skup" class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="service-body">
-          <h3 id="skup-heading">Skup za gotówkę</h3>
-          <p>Kiedy czas gra kluczową rolę - odkupimy Twoje mieszkanie, dom lub działkę <strong>za gotówkę, błyskawicznie</strong> i bez komplikacji. Akceptujemy nieruchomości <strong>w każdym stanie technicznym i prawnym</strong> - również zadłużone, z&nbsp;lokatorem czy odziedziczone w&nbsp;spadku.</p>
-          <div class="skup-highlight" aria-label="Czas realizacji">
-            <span class="skup-time"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 48h</span>
-            <span>do sfinalizowania transakcji</span>
-          </div>
-          <a href="#kontakt" class="btn btn-primary btn-sm">Zapytaj o wycenę ></a>
+        <h3>Skup za gotówkę</h3>
+        <p>Odkupimy nieruchomość za gotówkę nawet w&nbsp;48&nbsp;godzin — w&nbsp;każdym stanie technicznym i&nbsp;prawnym, również zadłużoną, z&nbsp;lokatorem czy odziedziczoną w&nbsp;spadku.</p>
+        <a href="#kontakt" class="service-link">Dowiedz się więcej →</a>
+      </article>
+
+      <article id="deweloper" class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l10-6 10 6v14"/><path d="M9 22V12h6v10"/></svg>
         </div>
+        <h3>Oferty deweloperskie</h3>
+        <p>Współpracujemy ze sprawdzonymi deweloperami w&nbsp;Łodzi. Pomożemy znaleźć inwestycję dopasowaną do Twoich oczekiwań — bez prowizji od kupującego.</p>
+        <a href="oferty.html" class="service-link">Zobacz oferty →</a>
+      </article>
+
+      <article id="off-market" class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18 22l-6-4-6 4 1.5-8.5L2 9h7z"/></svg>
+        </div>
+        <h3>Oferty bez ogłoszenia</h3>
+        <p>Mamy też nieruchomości, które nie trafiają do publicznych serwisów — kamienice, lokale, biura. Jeśli czegoś szukasz, zapytaj — być może mamy to w&nbsp;naszej bazie.</p>
+        <a href="#kontakt" class="service-link">Zapytaj o&nbsp;oferty →</a>
+      </article>
+
+      <article class="service-card reveal reveal-scale">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Wycena nieruchomości</h3>
+        <p>Rzetelna analiza wartości rynkowej oparta o&nbsp;aktualne dane — bez zawyżania i&nbsp;bez zaniżania. Pierwsza wycena jest bezpłatna i&nbsp;niezobowiązująca.</p>
+        <a href="#kontakt" class="service-link">Zamów wycenę →</a>
       </article>
 
     </div>
+  </div>
+</section>
 
-        <div id="off-market" class="off-market-banner reveal" aria-labelledby="offmarket-heading">
-      <div class="off-market-content">
-        <div class="off-market-text">
-          <p class="eyebrow">Oferty ekskluzywne</p>
-          <h3 id="offmarket-heading">Off the Market</h3>
-          <p>Unikatowe nieruchomości <strong>niedostępne w ogólnodostępnych serwisach</strong>. Atrakcyjne tereny inwestycyjne, kamienice, biurowce, a nawet zabytkowe pałacyki, winnice czy stok narciarski - <strong>to nasza specjalność</strong>.</p>
-          <p>Oferty off-market trafiają wyłącznie do <strong>wąskiego, zaufanego grona inwestorów</strong>. Działamy z&nbsp;pełną dyskrecją: bez publicznych ogłoszeń, bez ujawniania szczegółów osobom trzecim, ze starannie dobraną dokumentacją. Jeżeli szukasz <strong>okazji, której nie znajdziesz na portalach</strong> - lub chcesz sprzedać nieruchomość bez ekspozycji w&nbsp;internecie - jesteś we&nbsp;właściwym miejscu.</p>
-          <a href="#kontakt" class="btn btn-primary">Zapytaj o oferty prywatne</a>
-        </div>
-        <div class="off-market-img"
-             style="background-image:url('images/about-photo.webp')"
-             role="img" aria-label="Ekskluzywna nieruchomość off the market"></div>
+<!-- ============================================================
+     5. PROCES WSPÓŁPRACY — 4 kroki, Łódź photo bg + dark overlay
+     ============================================================ -->
+<section class="process" aria-labelledby="process-heading">
+  <div class="process-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-header section-header-center reveal">
+      <p class="eyebrow">Krok po kroku</p>
+      <h2 id="process-heading">Jak wygląda<br>współpraca z&nbsp;nami?</h2>
+      <p class="section-desc">Cały proces jest przejrzysty i&nbsp;uporządkowany. Od pierwszego telefonu do podpisania aktu notarialnego — <strong>wiesz, co się dzieje na każdym etapie</strong>.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step reveal reveal-scale">
+        <div class="process-number" aria-hidden="true">01</div>
+        <h3>Bezpłatna konsultacja</h3>
+        <p>Spotykamy się lub rozmawiamy telefonicznie. Poznajemy Twoją sytuację i&nbsp;przedstawiamy <strong>realistyczną ocenę rynkową</strong> nieruchomości — bez zobowiązań.</p>
+      </div>
+      <div class="process-step reveal reveal-scale">
+        <div class="process-number" aria-hidden="true">02</div>
+        <h3>Strategia i&nbsp;przygotowanie</h3>
+        <p>Opracowujemy <strong>indywidualny plan działania</strong> — sesja zdjęciowa, home staging, opis oferty i&nbsp;dobór kanałów promocji.</p>
+      </div>
+      <div class="process-step reveal reveal-scale">
+        <div class="process-number" aria-hidden="true">03</div>
+        <h3>Aktywna sprzedaż</h3>
+        <p>Ekspozycja na portalach, w&nbsp;social mediach i&nbsp;naszej bazie klientów. Prezentacje, weryfikacja kupujących i&nbsp;<strong>raportowanie postępów</strong>.</p>
+      </div>
+      <div class="process-step reveal reveal-scale">
+        <div class="process-number" aria-hidden="true">04</div>
+        <h3>Negocjacje i&nbsp;finalizacja</h3>
+        <p>Negocjujemy najlepsze warunki, przygotowujemy dokumentację i&nbsp;towarzyszymy Ci <strong>u&nbsp;notariusza</strong> — żebyś mógł podpisać umowę z&nbsp;pełnym spokojem.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================================
+     AGENT — Magdalena (kept as bridge between Process and Opinions)
+     ============================================================ -->
 <section id="agent" class="section agent-section" aria-labelledby="agent-heading">
   <div class="container two-col two-col-reverse">
     <div class="text reveal reveal-right">
       <p class="eyebrow">Twój ekspert</p>
       <h2 id="agent-heading">Magdalena<br>Wałowska-Wojtczak</h2>
       <p class="lead">
-        Dla mnie nieruchomości to nie tylko praca - to <strong>autentyczna pasja</strong>.
+        Dla mnie nieruchomości to nie tylko praca — to <strong>autentyczna pasja</strong>.
       </p>
       <p>
-        Ukończyłam <strong>prawo na Uniwersytecie Łódzkim</strong>, a dziś łączę wiedzę prawniczą z wieloletnim doświadczeniem pośrednika i zarządcy nieruchomości. Jestem członkiem <strong>SPRNPC</strong> i aktywnie działam na rynku od ponad 5 lat. Każdą sprawę traktuję priorytetowo - bo <strong>dla moich klientów nie ma rzeczy niemożliwych</strong>.
+        Ukończyłam <strong>prawo na Uniwersytecie Łódzkim</strong>, a&nbsp;dziś łączę wiedzę prawniczą z&nbsp;wieloletnim doświadczeniem pośrednika i&nbsp;zarządcy nieruchomości. Jestem członkiem <strong>SPRNPC</strong>. Każdą sprawę traktuję priorytetowo.
       </p>
       <p>
-        Przeprowadziłam <strong>ponad 200 transakcji</strong> - od mieszkań pierwszego zakupu, przez kamienice z&nbsp;potencjałem inwestycyjnym, po nieruchomości komercyjne i&nbsp;skomplikowane sprawy spadkowe. Wierzę, że dobrze przeprowadzona transakcja to taka, w&nbsp;której obie strony wstają od stołu zadowolone - i&nbsp;właśnie do tego dążę przy każdym zleceniu.
-      </p>
-      <p>
-        Specjalizuję się w&nbsp;nieruchomościach wymagających <strong>niestandardowego podejścia</strong> - obciążonych prawnie, z&nbsp;nieuregulowanym stanem własnościowym, zabytkowych czy przeznaczonych do rewitalizacji. Dla wielu agentów to „trudne przypadki" - dla mnie to codzienność i&nbsp;źródło zawodowej satysfakcji.
+        Przeprowadziłam <strong>ponad 200 transakcji</strong> — od kawalerek pierwszego zakupu po skomplikowane sprawy spadkowe i&nbsp;kamienice z&nbsp;potencjałem inwestycyjnym.
       </p>
       <blockquote class="agent-quote">
-        <em>„Nie ma dla mnie słowa niemożliwe - jest tylko pytanie: jak to zrobić?"</em>
+        <em>„Nie ma dla mnie słowa niemożliwe — jest tylko pytanie: jak to&nbsp;zrobić?"</em>
       </blockquote>
       <ul class="agent-credentials" aria-label="Kwalifikacje Magdaleny Wałowskiej-Wojtczak">
-        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><span>Magister Prawa - Uniwersytet Łódzki</span></li>
+        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span><span>Magister Prawa — Uniwersytet Łódzki</span></li>
         <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M13 11h5m-5 3h4"/></svg></span><span>Licencjonowany pośrednik nieruchomości</span></li>
-        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V12M21 22V12M12 3L2 12h20z"/><rect x="7" y="12" width="4" height="10"/><rect x="13" y="12" width="4" height="10"/><line x1="3" y1="22" x2="21" y2="22"/></svg></span><span>Licencjonowany zarządca nieruchomości</span></li>
-        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 11H9a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H7m10-8V7a2 2 0 0 0-2-2h-1M7 7H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/></svg></span><span>Członek SPRNPC</span></li>
-        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Ponad 5 lat aktywnej pracy na rynku</span></li>
+        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V12M21 22V12M12 3L2 12h20z"/><rect x="7" y="12" width="4" height="10"/><rect x="13" y="12" width="4" height="10"/></svg></span><span>Licencjonowany zarządca nieruchomości</span></li>
+        <li><span aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span>Ponad 5 lat aktywnej pracy na rynku</span></li>
       </ul>
-      <a href="#kontakt" class="btn btn-primary">Umów spotkanie z Magdaleną</a>
+      <a href="#kontakt" class="btn btn-primary">Umów spotkanie z&nbsp;Magdaleną</a>
     </div>
 
     <div class="agent-visual reveal reveal-left">
       <div class="agent-photo"
            style="background-image:url('images/about-photo.webp')"
-           role="img" aria-label="Magdalena Wałowska-Wojtczak - agentka nieruchomości MWW Mieszkanie"></div>
+           role="img" aria-label="Magdalena Wałowska-Wojtczak — agentka MWW Mieszkanie"></div>
       <div class="agent-card-float" aria-label="Dane biura MWW Mieszkanie">
         <strong>MWW Mieszkanie</strong>
         <span>ul. Sienkiewicza 85/87 lok.&nbsp;8</span>
@@ -491,16 +370,19 @@
   </div>
 </section>
 
-<section class="section testimonials bg-alt" aria-labelledby="testimonials-heading">
+<!-- ============================================================
+     6. OPINIE KLIENTÓW
+     ============================================================ -->
+<section class="section testimonials" aria-labelledby="testimonials-heading">
   <div class="container">
     <div class="section-header section-header-center reveal">
       <p class="eyebrow">Głos klientów</p>
-      <h2 id="testimonials-heading">Co mówią<br>o współpracy z nami?</h2>
+      <h2 id="testimonials-heading">Co mówią o&nbsp;współpracy z&nbsp;nami?</h2>
     </div>
     <div class="testimonials-grid">
       <blockquote class="testimonial-card reveal reveal-blur">
         <div class="testimonial-stars" aria-label="Ocena 5 na 5">★★★★★</div>
-        <p><em>„Magdalena przeprowadziła sprzedaż naszego mieszkania od początku do końca. Doskonała znajomość rynku, szybka decyzyjność i <strong>pełne zaangażowanie</strong>. Wynik powyżej oczekiwań!"</em></p>
+        <p><em>„Magdalena przeprowadziła sprzedaż naszego mieszkania od początku do końca. Doskonała znajomość rynku, szybka decyzyjność i&nbsp;<strong>pełne zaangażowanie</strong>. Wynik powyżej oczekiwań!"</em></p>
         <footer>
           <strong>Anna K.</strong>
           <span>Sprzedaż mieszkania, Łódź Śródmieście</span>
@@ -508,7 +390,7 @@
       </blockquote>
       <blockquote class="testimonial-card reveal reveal-blur">
         <div class="testimonial-stars" aria-label="Ocena 5 na 5">★★★★★</div>
-        <p><em>„Szukałem lokalu biurowego w centrum Łodzi i w ciągu tygodnia MWW Mieszkanie znalazło idealne miejsce. <strong>Profesjonalizm, konkret i zero marnowania czasu.</strong>"</em></p>
+        <p><em>„Szukałem lokalu biurowego w&nbsp;centrum Łodzi i&nbsp;w&nbsp;ciągu tygodnia MWW Mieszkanie znalazło idealne miejsce. <strong>Profesjonalizm, konkret i&nbsp;zero marnowania czasu.</strong>"</em></p>
         <footer>
           <strong>Marek W.</strong>
           <span>Wynajem powierzchni biurowej</span>
@@ -516,7 +398,7 @@
       </blockquote>
       <blockquote class="testimonial-card reveal reveal-blur">
         <div class="testimonial-stars" aria-label="Ocena 5 na 5">★★★★★</div>
-        <p><em>„Potrzebowałem sprzedać działkę bardzo szybko. <strong>Skup w 48h to nie slogan - to rzeczywistość.</strong> Wszystko załatwione, gotówka na koncie. Polecam z czystym sumieniem."</em></p>
+        <p><em>„Potrzebowałem sprzedać działkę bardzo szybko. <strong>Skup w&nbsp;48h to nie slogan — to rzeczywistość.</strong> Wszystko załatwione, gotówka na koncie. Polecam z&nbsp;czystym sumieniem."</em></p>
         <footer>
           <strong>Tomasz R.</strong>
           <span>Ekspresowy skup działki</span>
@@ -526,73 +408,44 @@
   </div>
 </section>
 
-<section class="section process" aria-labelledby="process-heading">
-  <div class="container">
-    <div class="section-header section-header-center reveal">
-      <p class="eyebrow">Krok po kroku</p>
-      <h2 id="process-heading">Jak wygląda<br>współpraca z nami?</h2>
-      <p class="section-desc">Cały proces jest przejrzysty i uporządkowany. Od pierwszego telefonu do podpisania aktu notarialnego - <strong>wiesz, co się dzieje na każdym etapie</strong>. Nie zostawiamy Cię z pytaniami bez odpowiedzi.</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-step reveal reveal-scale">
-        <div class="process-number" aria-hidden="true">01</div>
-        <h3>Bezpłatna konsultacja</h3>
-        <p>Spotykamy się lub rozmawiamy telefonicznie. Poznajemy Twoją sytuację, potrzeby i oczekiwania. Przedstawiamy <strong>realistyczną ocenę rynkową</strong> nieruchomości - bez zobowiązań.</p>
-      </div>
-      <div class="process-step reveal reveal-scale">
-        <div class="process-number" aria-hidden="true">02</div>
-        <h3>Strategia i przygotowanie</h3>
-        <p>Opracowujemy <strong>indywidualny plan działania</strong> - profesjonalna sesja zdjęciowa, home staging, opis oferty i wybór kanałów promocji dopasowanych do Twojej nieruchomości.</p>
-      </div>
-      <div class="process-step reveal reveal-scale">
-        <div class="process-number" aria-hidden="true">03</div>
-        <h3>Aktywna sprzedaż</h3>
-        <p>Ekspozycja na portalach, w social mediach i w naszej bazie klientów. Prowadzimy prezentacje, weryfikujemy kupujących i <strong>na bieżąco raportujemy postępy</strong>.</p>
-      </div>
-      <div class="process-step reveal reveal-scale">
-        <div class="process-number" aria-hidden="true">04</div>
-        <h3>Negocjacje i finalizacja</h3>
-        <p>Negocjujemy najlepsze warunki, przygotowujemy dokumentację i towarzyszymy Ci <strong>u notariusza</strong>. Sprawdzamy każdy szczegół, żebyś mógł podpisać umowę z pełnym spokojem.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ============================================================
+     7. PARTNERZY
+     ============================================================ -->
 <section id="partnerzy" class="section partners" aria-labelledby="partners-heading">
   <div class="container">
     <div class="section-header section-header-center reveal">
       <p class="eyebrow">Sprawdzone marki</p>
       <h2 id="partners-heading">Nasi partnerzy</h2>
-      <p class="section-desc">Współpracujemy z <strong>czołowymi kancelariami prawnymi, notariuszami</strong> oraz firmami wspierającymi rynek nieruchomości w Łodzi. Dzięki sprawdzonej sieci specjalistów - od doradców kredytowych po ekipy remontowe - możemy zaoferować naszym klientom <strong>kompleksową obsługę w jednym miejscu</strong>, oszczędzając ich czas i&nbsp;eliminując ryzyko. Każdy partner przeszedł naszą wewnętrzną weryfikację - <strong>rekomendujemy tylko firmy, z&nbsp;których usług sami korzystamy</strong>.</p>
+      <p class="section-desc">Pracujemy ze sprawdzonymi kancelariami prawnymi, notariuszami i&nbsp;firmami wspierającymi rynek nieruchomości w&nbsp;Łodzi. Polecamy tylko te, z&nbsp;których usług sami korzystamy.</p>
     </div>
     <div class="partners-grid">
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 6l9 4 9-4"/><path d="M3 6v12l9 3 9-3V6"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 6l9 4 9-4"/><path d="M3 6v12l9 3 9-3V6"/></svg></div>
         <strong>Legal Architects</strong>
         <span>Kancelaria Redlicki</span>
       </div>
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <strong>Agnieszka</strong>
         <span>Harajda-Tarlecka</span>
       </div>
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
         <strong>Dino Polska</strong>
         <span>S.A.</span>
       </div>
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
         <strong>KW Notariusze</strong>
         <span>Kancelaria Notarialna</span>
       </div>
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <strong>Rent Planet</strong>
         <span>Platforma wynajmu</span>
       </div>
       <div class="partner-card reveal reveal-scale">
-        <div class="partner-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12z"/></svg></div>
+        <div class="partner-icon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12z"/></svg></div>
         <strong>Cermag</strong>
         <span>Budownictwo</span>
       </div>
@@ -600,12 +453,15 @@
   </div>
 </section>
 
-<section id="kontakt" class="section contact" aria-labelledby="contact-heading">
+<!-- ============================================================
+     8. KONTAKT
+     ============================================================ -->
+<section id="kontakt" class="section contact bg-alt" aria-labelledby="contact-heading">
   <div class="container">
     <div class="section-header section-header-center reveal">
       <p class="eyebrow">Jesteśmy do dyspozycji</p>
-      <h2 id="contact-heading">Skontaktuj się<br>z nami</h2>
-      <p class="section-desc">Napisz, zadzwoń lub odwiedź nasze biuro w&nbsp;samym sercu Łodzi. <strong>Odpowiadamy w ciągu 24 godzin</strong> - a&nbsp;w&nbsp;sprawach pilnych jeszcze tego samego dnia. Pierwsza rozmowa i&nbsp;wycena są zawsze <strong>bezpłatne i&nbsp;niezobowiązujące</strong>. Niezależnie od tego, na jakim etapie jesteś - dopiero rozważasz sprzedaż, czy masz gotową nieruchomość - <strong>chętnie porozmawiamy</strong>.</p>
+      <h2 id="contact-heading">Skontaktuj się z&nbsp;nami</h2>
+      <p class="section-desc">Napisz, zadzwoń lub odwiedź nasze biuro w&nbsp;samym sercu Łodzi. <strong>Odpowiadamy w&nbsp;ciągu 24&nbsp;godzin</strong>. Pierwsza rozmowa i&nbsp;wycena zawsze <strong>bezpłatne i&nbsp;niezobowiązujące</strong>.</p>
     </div>
 
     <div class="contact-layout">
@@ -617,7 +473,7 @@
               <span class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
               <div>
                 <strong>Biuro</strong>
-                <span>ul. Henryka Sienkiewicza 85/87 lok. 8<br>90-057 Łódź</span>
+                <span>ul. Henryka Sienkiewicza 85/87 lok.&nbsp;8<br>90-057 Łódź</span>
               </div>
             </li>
             <li>
@@ -637,12 +493,12 @@
             <li>
               <span class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
               <div>
-                <strong>Strona internetowa</strong>
+                <strong>Strona</strong>
                 <a href="https://www.MWWmieszkanie.pl" target="_blank" rel="noopener noreferrer">www.MWWmieszkanie.pl</a>
               </div>
             </li>
             <li>
-              <span class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V12M21 22V12M12 3L2 12h20z"/><rect x="7" y="12" width="4" height="10"/><rect x="13" y="12" width="4" height="10"/><line x1="3" y1="22" x2="21" y2="22"/></svg></span>
+              <span class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V12M21 22V12M12 3L2 12h20z"/><rect x="7" y="12" width="4" height="10"/><rect x="13" y="12" width="4" height="10"/></svg></span>
               <div>
                 <strong>Dane rejestrowe</strong>
                 <span>NIP: 7262546896<br>REGON: 388690768</span>
@@ -650,8 +506,8 @@
             </li>
           </ul>
           <div class="contact-cta-btns">
-            <a href="tel:+48515488951" class="btn btn-primary" style="gap:8px;display:inline-flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Zadzwoń</a>
-            <a href="mailto:mwwmieszkanie@interia.pl" class="btn btn-outline" style="gap:8px;display:inline-flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Napisz</a>
+            <a href="tel:+48515488951" class="btn btn-primary">Zadzwoń</a>
+            <a href="mailto:mwwmieszkanie@interia.pl" class="btn btn-outline">Napisz</a>
           </div>
         </div>
       </div>
@@ -659,10 +515,10 @@
       <div class="contact-form-wrap reveal reveal-right">
         <form id="contactForm" class="contact-form" novalidate aria-label="Formularz kontaktowy MWW Mieszkanie">
           <h3>Napisz do nas</h3>
-          <p class="form-sub">Opisz czego potrzebujesz - wrócimy do Ciebie najszybciej jak to możliwe.</p>
+          <p class="form-sub">Opisz, czego potrzebujesz — wrócimy do Ciebie najszybciej, jak to&nbsp;możliwe.</p>
           <div class="form-row">
             <div class="form-group">
-              <label for="fname">Imię i nazwisko *</label>
+              <label for="fname">Imię i&nbsp;nazwisko *</label>
               <input type="text" id="fname" name="fname" placeholder="np. Jan Kowalski" required autocomplete="name">
             </div>
             <div class="form-group">
@@ -682,7 +538,7 @@
               <option value="wynajem">Wynajem nieruchomości</option>
               <option value="skup">Skup za gotówkę</option>
               <option value="deweloper">Oferta deweloperska</option>
-              <option value="off">Off the market</option>
+              <option value="off">Oferty bez ogłoszenia</option>
               <option value="inne">Inne pytanie</option>
             </select>
           </div>
@@ -693,28 +549,42 @@
           </div>
           <div class="form-group form-group-check">
             <input type="checkbox" id="fgdpr" name="fgdpr" required>
-            <label for="fgdpr">Wyrażam zgodę na przetwarzanie danych osobowych przez MWW Mieszkanie w celu odpowiedzi na moje zapytanie. *</label>
+            <label for="fgdpr">Wyrażam zgodę na przetwarzanie danych osobowych przez MWW Mieszkanie w&nbsp;celu odpowiedzi na moje zapytanie. *</label>
           </div>
-          <button type="submit" class="btn btn-primary btn-full">Wyślij wiadomość ></button>
+          <button type="submit" class="btn btn-primary btn-full">Wyślij wiadomość</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ============================================================
+     9. STOPKA — dark, minimal, 3 columns: O firmie / Oferta / Kontakt
+     ============================================================ -->
 <footer class="footer" role="contentinfo">
   <div class="footer-top">
     <div class="container footer-grid">
+
       <div class="footer-brand">
         <div class="footer-logo">MWW <strong>Mieszkanie</strong></div>
-        <p><strong>Profesjonalne biuro nieruchomości z pasją.</strong> Pomagamy kupować, sprzedawać i wynajmować nieruchomości na terenie Łodzi i województwa łódzkiego.</p>
+        <p>Profesjonalne biuro nieruchomości z&nbsp;pasją. Pomagamy kupować, sprzedawać i&nbsp;wynajmować nieruchomości na terenie Łodzi i&nbsp;województwa łódzkiego.</p>
         <div class="footer-social">
-          <a href="tel:+48515488951"               class="social-btn" aria-label="Zadzwoń do MWW Mieszkanie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
-          <a href="mailto:mwwmieszkanie@interia.pl" class="social-btn" aria-label="E-mail do MWW Mieszkanie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-          <a href="https://www.MWWmieszkanie.pl" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Strona MWW Mieszkanie"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
-          <a href="https://www.facebook.com/MWWMieszkanie/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook MWW Mieszkanie"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="https://www.youtube.com/mwwmieszkanie" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube MWW Mieszkanie"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon class="yt-play" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+          <a href="tel:+48515488951" class="social-btn" aria-label="Zadzwoń"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+          <a href="mailto:mwwmieszkanie@interia.pl" class="social-btn" aria-label="E-mail"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          <a href="https://www.facebook.com/MWWMieszkanie/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.youtube.com/mwwmieszkanie" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ffffff"/></svg></a>
         </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>O firmie</h4>
+        <ul>
+          <li><a href="#o-nas">O nas</a></li>
+          <li><a href="#agent">Magdalena Wałowska-Wojtczak</a></li>
+          <li><a href="#partnerzy">Nasi partnerzy</a></li>
+          <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
+          <li><a href="regulamin.html">Regulamin serwisu</a></li>
+        </ul>
       </div>
 
       <div class="footer-col">
@@ -724,42 +594,33 @@
           <li><a href="#wynajem">Wynajem</a></li>
           <li><a href="oferty.html">Oferty deweloperskie</a></li>
           <li><a href="#skup">Skup za gotówkę</a></li>
-          <li><a href="#off-market">Off the market</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>O biurze</h4>
-        <ul>
-          <li><a href="#o-nas">O nas</a></li>
-          <li><a href="#agent">Magdalena Wałowska-Wojtczak</a></li>
-          <li><a href="#partnerzy">Nasi partnerzy</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
-          <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
-          <li><a href="regulamin.html">Regulamin serwisu</a></li>
+          <li><a href="#off-market">Oferty bez ogłoszenia</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Kontakt</h4>
         <address class="footer-address" aria-label="Adres biura MWW Mieszkanie">
-          <p>ul. Henryka Sienkiewicza 85/87 lok. 8<br>90-057 Łódź</p>
+          <p>ul. Henryka Sienkiewicza 85/87 lok.&nbsp;8<br>90-057 Łódź</p>
           <p><a href="tel:+48515488951">+48 515 488 951</a></p>
           <p><a href="mailto:mwwmieszkanie@interia.pl">mwwmieszkanie@interia.pl</a></p>
         </address>
       </div>
+
     </div>
   </div>
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>© 2026 MWW Mieszkanie - Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
-      <p>Wszelkie prawa zastrzeżone.</p>
+      <p>© 2026 MWW Mieszkanie — Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
       <p>Stworzone przez <a href="https://kontaktio.pl" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">kontaktio.pl</a></p>
     </div>
   </div>
 </footer>
 
+<!-- ============================================================
+     STICKY BAR (mobile quick contact)
+     ============================================================ -->
 <div id="stickyBar" class="sticky-bar" role="complementary" aria-label="Szybki kontakt" aria-hidden="true">
   <a href="tel:+48515488951" class="sticky-phone">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -771,11 +632,14 @@
   </button>
 </div>
 
+<!-- ============================================================
+     COOKIE CONSENT
+     ============================================================ -->
 <div id="cookieConsent" class="cookie-consent" role="dialog" aria-labelledby="cookieTitle" aria-modal="true">
   <div class="cookie-inner">
     <div class="cookie-text">
       <strong id="cookieTitle">Używamy plików cookies</strong>
-      <p>Ta strona używa plików cookie w celu zapewnienia najlepszej jakości usług. Możesz zaakceptować wszystkie, odmówić lub wybrać, które cookies akceptujesz.</p>
+      <p>Ta strona używa plików cookie w&nbsp;celu zapewnienia najlepszej jakości usług. Możesz zaakceptować wszystkie, odmówić lub wybrać, które cookies akceptujesz.</p>
     </div>
     <div class="cookie-actions">
       <button id="cookieCustomize" class="cookie-btn cookie-btn-ghost">Dostosuj</button>
@@ -783,16 +647,16 @@
       <button id="cookieAccept" class="cookie-btn cookie-btn-primary">Akceptuj wszystkie</button>
     </div>
   </div>
-    <div id="cookieCustomPanel" class="cookie-custom-panel" hidden>
+  <div id="cookieCustomPanel" class="cookie-custom-panel" hidden>
     <div class="cookie-checks">
       <label class="cookie-check">
-        <input type="checkbox" checked disabled> <span><strong>Niezbędne</strong> - wymagane do działania strony</span>
+        <input type="checkbox" checked disabled> <span><strong>Niezbędne</strong> — wymagane do działania strony</span>
       </label>
       <label class="cookie-check">
-        <input type="checkbox" id="cookieAnalytics"> <span><strong>Analityczne</strong> - pomagają nam ulepszać stronę</span>
+        <input type="checkbox" id="cookieAnalytics"> <span><strong>Analityczne</strong> — pomagają nam ulepszać stronę</span>
       </label>
       <label class="cookie-check">
-        <input type="checkbox" id="cookieMarketing"> <span><strong>Marketingowe</strong> - spersonalizowane treści i reklamy</span>
+        <input type="checkbox" id="cookieMarketing"> <span><strong>Marketingowe</strong> — spersonalizowane treści i&nbsp;reklamy</span>
       </label>
     </div>
     <div class="cookie-actions cookie-actions-panel">
@@ -800,6 +664,32 @@
     </div>
   </div>
 </div>
+
+<!-- ============================================================
+     PARALLAX (subtle) — only the hero background image moves
+     ============================================================ -->
+<script>
+  (function () {
+    var heroBg = document.getElementById('heroBg');
+    if (!heroBg) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var ticking = false;
+    function update() {
+      var y = window.scrollY || window.pageYOffset;
+      // subtle parallax: image moves slower than scroll
+      heroBg.style.transform = 'translate3d(0,' + (y * 0.18) + 'px, 0) scale(1.04)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+    update();
+  })();
+</script>
 
 <script src="script.js" defer></script>
 <script src="background-effects.js" defer></script>
