@@ -17,7 +17,7 @@
 
     function resize() {
       w = canvas.width = window.innerWidth;
-      h = canvas.height = document.documentElement.scrollHeight;
+      h = canvas.height = window.innerHeight;
     }
 
     function createParticles() {
@@ -83,14 +83,6 @@
         createParticles();
       }, 250);
     });
-
-    var ro = new ResizeObserver(function () {
-      var newH = document.documentElement.scrollHeight;
-      if (Math.abs(newH - h) > 50) {
-        h = canvas.height = newH;
-      }
-    });
-    ro.observe(document.body);
   }
 
   function initScrollDecorations() {
