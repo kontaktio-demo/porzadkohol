@@ -433,9 +433,10 @@ h1 .hero-title-light,.hero h1 { color:rgba(255,255,255,.95); }
 
 .services-grid {
   display:grid; gap:32px;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  grid-template-columns:1fr;
   margin-bottom:48px;
 }
+@media(min-width:1024px){ .services-grid { grid-template-columns:repeat(3,1fr); } }
 
 .service-card {
   border-radius:var(--radius-lg);
