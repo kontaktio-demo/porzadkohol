@@ -23,9 +23,6 @@
       '.reveal-flip', '.reveal-blur', '.reveal-rotate', '.reveal-zoom',
       '.section-header', '.listing-card'
     ];
-    // Skip elements that already carry the base `.reveal` class - those are
-    // owned by initScrollReveal() in script.js and observing them here would
-    // attach two observers (and two .visible toggles) to the same element.
     var nodeList = document.querySelectorAll(selectors.join(','));
     var unique = [];
     for (var i = 0; i < nodeList.length; i++) {

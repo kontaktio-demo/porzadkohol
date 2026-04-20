@@ -109,7 +109,6 @@ h1, h2, h3, h4 {
 .nav-link.active { color: var(--gold); }
 .nav-link.active::after { background: var(--gold); height: 2px; }
 
-/* Featured nav link - "Oferty" highlighted across all pages as primary */
 .nav-link-featured { color: var(--gold); }
 .nav-link-featured::before {
   content: '';
@@ -275,15 +274,12 @@ h1, h2, h3, h4 {
   display: flex; flex-direction: column; gap: 6px;
   flex: 1 1 160px; min-width: 160px;
 }
-/* Range groups (Cena, Powierzchnia) need room for two inputs side by side */
 .filter-group.filter-group-range {
   flex: 1.6 1 220px; min-width: 220px;
 }
 .filter-group label {
   font-size: .72rem; font-weight: 700; letter-spacing: .12em;
   text-transform: uppercase; color: var(--text-muted);
-  /* Reserve two lines so wrapping labels (e.g. "Dzielnica / lokalizacja")
-     don't push their input out of alignment with neighbouring fields. */
   min-height: 2.2em;
   display: flex; align-items: flex-end;
   line-height: 1.1;

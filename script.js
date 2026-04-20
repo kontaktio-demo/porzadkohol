@@ -19,8 +19,6 @@ function initPreloader() {
   const hide = () => {
     preloader.classList.add('hidden');
     document.body.classList.remove('preloading');
-    // Remove from DOM after the fade-out so its child animations
-    // (preload bar, pulsing text) stop consuming paint cycles.
     setTimeout(() => { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 800);
   };
   if (document.readyState === 'complete') hide();
@@ -114,7 +112,6 @@ function initCounters() {
   stats.forEach(stat => observer.observe(stat));
 }
 
-/* ---------- FORM VALIDATION & ANTI-SPAM ---------- */
 function initForm() {
   const form = document.getElementById('contactForm');
   if (!form) return;
@@ -136,43 +133,35 @@ function initForm() {
 
     let hasError = false;
 
-    // Honeypot
     const trap = form.querySelector('input[name="website"]');
     if (trap && trap.value) { return; }
-    // Time trap (form filled too fast = bot)
     if (Date.now() - created < 1500) { return; }
 
-    // Name: 2-80 chars, allow letters, spaces, hyphens, polish chars
     const name = (nameEl.value || '').trim();
     if (!name || name.length < 2 || name.length > 80 ||
         !/^[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż][A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż\s'\-\.]{1,79}$/.test(name)) {
       showError(nameEl, 'Wpisz poprawne imię i nazwisko (2-80 znaków).'); hasError = true;
     }
 
-    // Email: standard regex, max 254 chars
     const email = (emailEl.value || '').trim();
     if (!email || email.length > 254 ||
         !/^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(email)) {
       showError(emailEl, 'Wpisz poprawny adres e-mail.'); hasError = true;
     }
 
-    // Phone: optional, but if filled must look like a phone
     const phone = (phoneEl.value || '').trim();
     if (phone && (phone.length > 20 || !/^[\+0-9 ()\-]{7,20}$/.test(phone))) {
       showError(phoneEl, 'Wpisz poprawny numer telefonu.'); hasError = true;
     }
 
-    // Message: 10-2000 chars
     const msg = (msgEl.value || '').trim();
     if (!msg || msg.length < 10 || msg.length > 2000) {
       showError(msgEl, 'Wiadomość powinna mieć 10-2000 znaków.'); hasError = true;
     }
-    // Reject obvious URL spam
     if (msg && (msg.match(/https?:\/\//gi) || []).length > 2) {
       showError(msgEl, 'Wiadomość zawiera za dużo linków.'); hasError = true;
     }
 
-    // GDPR
     if (!gdprEl.checked) {
       showError(gdprEl, 'Zgoda jest wymagana.'); hasError = true;
     }
@@ -196,17 +185,12 @@ function initForm() {
     }, 900);
   });
 
-  // Per-field max length enforcement
   const limits = { fname: 80, femail: 254, fphone: 20, fmessage: 2000 };
   Object.keys(limits).forEach(id => {
     const el = form.querySelector('#' + id);
     if (el && !el.maxLength) el.setAttribute('maxlength', String(limits[id]));
   });
 
-  // Live filtering for the phone field: only digits, spaces, +, -, (, )
-  // are allowed. This blocks letters and other garbage at typing time
-  // (and also strips them out of pasted content) instead of waiting for
-  // the submit-time validator to complain.
   const phoneInput = form.querySelector('#fphone');
   if (phoneInput) {
     phoneInput.setAttribute('inputmode', 'tel');
@@ -224,9 +208,6 @@ function initForm() {
     phoneInput.addEventListener('paste', () => setTimeout(sanitizePhone, 0));
   }
 
-  // Live trim for the name field: digits and obvious junk shouldn't be
-  // typeable in a name. Allow letters (incl. Polish), spaces, hyphens,
-  // apostrophes and periods.
   const nameInput = form.querySelector('#fname');
   if (nameInput) {
     const sanitizeName = () => {
@@ -352,12 +333,10 @@ function initCookieConsent() {
   });
 }
 
-/* ---------- TELEPHONE CONFIRMATION MODAL (mobile) ---------- */
 function initTelConfirm() {
   const isMobile = matchMedia('(max-width: 900px)').matches || ('ontouchstart' in window);
   if (!isMobile) return;
 
-  // Build modal
   const overlay = document.createElement('div');
   overlay.className = 'tel-confirm-overlay';
   overlay.setAttribute('role', 'dialog');
@@ -408,7 +387,6 @@ function initTelConfirm() {
   }, true);
 }
 
-/* ---------- SMOOTH IN-PAGE ANCHOR SCROLL (account for sticky nav) ---------- */
 function initSmoothAnchors() {
   const navEl = document.getElementById('nav');
   function navOffset() {
@@ -426,7 +404,6 @@ function initSmoothAnchors() {
     const a = e.target.closest('a[href*="#"]');
     if (!a) return;
     const href = a.getAttribute('href') || '';
-    // Same-page anchor
     let id = '';
     if (href.startsWith('#')) id = href.slice(1);
     else {
@@ -442,20 +419,11 @@ function initSmoothAnchors() {
     history.replaceState(null, '', '#' + id);
   });
 
-  // Re-apply offset when the page is opened directly with a #hash, because
-  // the browser's native jump happens before the fixed nav height is known.
   if (location.hash && location.hash.length > 1) {
     const id = decodeURIComponent(location.hash.slice(1));
-    // Run after layout settles (fonts, images above the fold).
     requestAnimationFrame(() => {
       scrollToId(id, false);
-      // One more pass after a short delay in case late layout shifts occurred.
       setTimeout(() => scrollToId(id, false), 250);
     });
   }
 }
-
-/* ---------- BASIC FRONT-END PROTECTION ----------
- * The actual hardening lives in `mww-shield.js`, which is included
- * on every page so the marketing site does not leak stack traces
- * or internal endpoints to casual visitors. */

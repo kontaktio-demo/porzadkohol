@@ -1,9 +1,4 @@
 'use strict';
-/* Tiny client-side hardening shield - shared by every page.
- * Disables casual right-click / devtools shortcuts, silences the
- * console, and swallows uncaught errors so the marketing site does
- * not leak stack traces or internal endpoints to casual visitors.
- * Real security is enforced by HTTP headers and the API. */
 (function () {
   function isEditable(t) {
     if (!t) return false;
