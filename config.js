@@ -1,9 +1,4 @@
 'use strict';
-/* MWW runtime configuration.
- * Endpoint identifiers are intentionally obfuscated so that the build
- * artefacts shipped to the browser do not contain plaintext infrastructure
- * hints. This is a deterrent against casual inspection only - all real
- * security is enforced by HTTP headers, CORS and the server-side API. */
 (function (g) {
   var _k = 0x5A;
   function _d(b) {

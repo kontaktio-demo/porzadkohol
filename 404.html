@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <title>Przekierowanie...</title>
   <script>
-    // Handle /oferta/slug pretty URLs on GitHub Pages
-    // GitHub Pages serves 404.html for unknown paths - we use this to route offer detail pages
     (function() {
       var path = window.location.pathname;
       var match = path.match(/^\/oferta\/(.+?)(?:\/)?$/);
@@ -13,7 +11,6 @@
         var slug = decodeURIComponent(match[1]);
         window.location.replace('/oferta.html?slug=' + encodeURIComponent(slug));
       } else {
-        // Not an offer URL - show actual 404
         document.title = 'Strona nie znaleziona - MWW Mieszkanie';
         document.getElementById('content').style.display = 'block';
       }
