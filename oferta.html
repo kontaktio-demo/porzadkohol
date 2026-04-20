@@ -44,7 +44,7 @@
     <a href="/index.html"           class="nav-link">Start</a>
     <a href="/index.html#o-nas"     class="nav-link">O nas</a>
     <a href="/index.html#uslugi"    class="nav-link">Usługi</a>
-    <a href="/oferty.html"          class="nav-link active">Oferty</a>
+    <a href="/oferty.html"          class="nav-link nav-link-featured active">Oferty</a>
     <a href="/index.html#agent"     class="nav-link">Agentka</a>
     <a href="/index.html#partnerzy" class="nav-link">Partnerzy</a>
     <a href="/index.html#kontakt"   class="nav-link">Kontakt</a>
@@ -485,6 +485,10 @@ function renderOffer(l) {
           '</a>' +
         '</div>' +
         (l.agentName ? '<div class="offer-agent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>' + escHtml(l.agentName) + '</span></div>' : '') +
+        '<div class="offer-source" title="Oferta wystawiona bezpośrednio przez biuro MWW Mieszkanie">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>' +
+          '<span>Oferta wystawiona przez <strong>MWW Mieszkanie</strong> jako pośrednik lub właściciel - bezpośredni kontakt z&nbsp;biurem.</span>' +
+        '</div>' +
       '</div>' +
     '</div>' +
     (safeDesc ? '<div class="offer-section"><h2>Opis</h2><div class="offer-desc-text" itemprop="description">' + safeDesc + '</div></div>' : '') +

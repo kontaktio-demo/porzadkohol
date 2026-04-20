@@ -106,7 +106,32 @@ h1, h2, h3, h4 {
 }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
-.nav-link.active { color: var(--primary); }
+.nav-link.active { color: var(--gold); }
+.nav-link.active::after { background: var(--gold); height: 2px; }
+
+/* Featured nav link - "Oferty" highlighted across all pages as primary */
+.nav-link-featured { color: var(--gold); }
+.nav-link-featured::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 8px;
+  vertical-align: middle;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 0 rgba(184, 146, 74, .5);
+  animation: featuredPulse 2.4s var(--ease) infinite;
+}
+.nav-link-featured::after { background: var(--gold); }
+.nav-link-featured:hover { color: var(--gold); }
+@keyframes featuredPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 146, 74, .45); }
+  50%      { box-shadow: 0 0 0 5px rgba(184, 146, 74, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-featured::before { animation: none; }
+}
 
 .nav-right { display: flex; align-items: center; gap: 14px; }
 .nav-cta   { padding: 11px 20px; font-size: .85rem; gap: 7px; }
@@ -205,6 +230,33 @@ h1, h2, h3, h4 {
 }
 .page-header p a { color: var(--gold-soft); }
 .page-header p a:hover { color: #fff; }
+
+.page-header-note {
+  margin-top: 22px !important;
+  padding: 14px 18px;
+  background: rgba(184, 146, 74, 0.1);
+  border: 1px solid rgba(184, 146, 74, 0.28);
+  border-radius: var(--radius);
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, .88) !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+}
+.page-header-note strong { color: var(--gold-soft); font-weight: 700; }
+.page-header-note-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fff;
+  margin-top: 2px;
+}
 
 .filter-bar {
   background: #fff;
@@ -1169,6 +1221,14 @@ h1, h2, h3, h4 {
   }
   .nav-links.open { transform: translateX(0); }
   .nav-link    { font-size: 1.1rem; padding: 8px 0; }
+  .nav-link.active {
+    color: var(--gold);
+    border-left: 3px solid var(--gold);
+    padding-left: 12px;
+  }
+  .nav-link.active::after { display: none; }
+  .nav-link-featured { font-weight: 700; }
+  .nav-link-featured::before { margin-right: 10px; width: 7px; height: 7px; }
   .nav-cta     { display: none; }
   .hamburger   { display: flex; }
 

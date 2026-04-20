@@ -342,7 +342,37 @@ p { font-weight: 400; }
   transition: width 0.35s var(--ease);
 }
 .nav-link:hover { color: var(--c-ink); }
-.nav-link:hover::after { width: 100%; }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+.nav-link.active { color: var(--c-gold); }
+.nav-link.active::after { background: var(--c-gold); height: 2px; }
+
+/* Featured nav link - "Oferty" highlighted across all pages as primary */
+.nav-link-featured {
+  color: var(--c-gold);
+}
+.nav-link-featured::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  margin-right: 8px;
+  vertical-align: middle;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 0 rgba(184, 146, 74, .5);
+  animation: featuredPulse 2.4s var(--ease) infinite;
+}
+.nav-link-featured::after { background: var(--c-gold); }
+.nav-link-featured:hover { color: var(--c-gold); }
+@keyframes featuredPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 146, 74, .45); }
+  50%      { box-shadow: 0 0 0 5px rgba(184, 146, 74, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-link-featured::before { animation: none; }
+}
 
 .nav-right {
   display: flex;
@@ -1422,6 +1452,19 @@ p { font-weight: 400; }
   }
   .nav-link::after { display: none; }
   .nav-link:last-child { border-bottom: none; }
+  .nav-link.active {
+    color: var(--c-gold);
+    border-left: 3px solid var(--c-gold);
+    padding-left: 12px;
+  }
+  .nav-link-featured {
+    color: var(--c-gold);
+    font-weight: 700;
+  }
+  .nav-link-featured::before {
+    margin-right: 10px;
+    width: 7px; height: 7px;
+  }
   .hamburger { display: flex; }
   .nav-cta { display: none; }
 

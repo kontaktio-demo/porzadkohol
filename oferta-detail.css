@@ -220,6 +220,26 @@
   border-top: 1px solid var(--border-soft);
 }
 
+.offer-source {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: rgba(184, 146, 74, .08);
+  border: 1px solid rgba(184, 146, 74, .25);
+  border-radius: var(--radius);
+}
+.offer-source svg {
+  flex-shrink: 0;
+  color: var(--gold);
+  margin-top: 2px;
+}
+.offer-source strong { color: var(--primary); font-weight: 700; }
+
 .offer-section {
   background: #fff;
   border: 1px solid var(--border-soft);
