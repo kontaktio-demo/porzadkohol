@@ -23,7 +23,15 @@
       '.reveal-flip', '.reveal-blur', '.reveal-rotate', '.reveal-zoom',
       '.section-header', '.listing-card'
     ];
-    enhancedElements = document.querySelectorAll(selectors.join(','));
+    // Skip elements that already carry the base `.reveal` class - those are
+    // owned by initScrollReveal() in script.js and observing them here would
+    // attach two observers (and two .visible toggles) to the same element.
+    var nodeList = document.querySelectorAll(selectors.join(','));
+    var unique = [];
+    for (var i = 0; i < nodeList.length; i++) {
+      if (!nodeList[i].classList.contains('reveal')) unique.push(nodeList[i]);
+    }
+    enhancedElements = unique;
     if (!enhancedElements.length) return;
 
     enhancedObserver = new IntersectionObserver(
@@ -50,18 +58,24 @@
 
     cards.forEach(function (card) {
       card.classList.add('tilt-3d');
+      var pendingX = 0, pendingY = 0, ticking = false;
+
+      function apply() {
+        ticking = false;
+        var rect = card.getBoundingClientRect();
+        var midX = rect.width / 2;
+        var midY = rect.height / 2;
+        var rotateY = ((pendingX - midX) / midX) * TILT_MAX_DEG;
+        var rotateX = ((midY - pendingY) / midY) * TILT_MAX_DEG;
+        card.style.transform =
+          'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px) scale(1.01)';
+      }
 
       card.addEventListener('mousemove', function (e) {
         var rect = card.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        var midX = rect.width / 2;
-        var midY = rect.height / 2;
-        var rotateY = ((x - midX) / midX) * TILT_MAX_DEG;
-        var rotateX = ((midY - y) / midY) * TILT_MAX_DEG;
-
-        card.style.transform =
-          'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px) scale(1.01)';
+        pendingX = e.clientX - rect.left;
+        pendingY = e.clientY - rect.top;
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
       });
 
       card.addEventListener('mouseleave', function () {
@@ -76,12 +90,19 @@
     var buttons = document.querySelectorAll('.btn-primary, .btn-outline');
 
     buttons.forEach(function (btn) {
+      var pendingX = 0, pendingY = 0, ticking = false;
+
+      function apply() {
+        ticking = false;
+        btn.style.transform =
+          'translate(' + (pendingX * MAGNETIC_STRENGTH) + 'px,' + (pendingY * MAGNETIC_STRENGTH) + 'px) translateY(-3px) scale(1.02)';
+      }
+
       btn.addEventListener('mousemove', function (e) {
         var rect = btn.getBoundingClientRect();
-        var x = e.clientX - rect.left - rect.width / 2;
-        var y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform =
-          'translate(' + (x * MAGNETIC_STRENGTH) + 'px,' + (y * MAGNETIC_STRENGTH) + 'px) translateY(-3px) scale(1.02)';
+        pendingX = e.clientX - rect.left - rect.width / 2;
+        pendingY = e.clientY - rect.top - rect.height / 2;
+        if (!ticking) { ticking = true; requestAnimationFrame(apply); }
       });
 
       btn.addEventListener('mouseleave', function () {
@@ -96,8 +117,10 @@
 
     var heroContent = hero.querySelector('.hero-content');
     var heroScroll = hero.querySelector('.hero-scroll');
+    var ticking = false;
 
     function update() {
+      ticking = false;
       var scrollY = window.scrollY;
       var heroH = hero.offsetHeight;
 
@@ -119,7 +142,7 @@
     }
 
     window.addEventListener('scroll', function () {
-      requestAnimationFrame(update);
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
     }, { passive: true });
     update();
   }
@@ -130,14 +153,18 @@
     bar.setAttribute('aria-hidden', 'true');
     document.body.appendChild(bar);
 
+    var ticking = false;
     function update() {
+      ticking = false;
       var scrollTop = window.scrollY;
       var docHeight = document.documentElement.scrollHeight - window.innerHeight;
       var progress = docHeight > 0 ? scrollTop / docHeight : 0;
       bar.style.transform = 'scaleX(' + progress + ')';
     }
 
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
     update();
   }
 
@@ -184,46 +211,6 @@
     }, 4000);
   }
 
-  function resetAllAnimations() {
-    document.querySelectorAll('.reveal.visible').forEach(function (el) {
-      el.classList.remove('visible');
-    });
-    document.querySelectorAll('.section-header.visible').forEach(function (el) {
-      el.classList.remove('visible');
-    });
-
-    if (enhancedObserver && enhancedElements) {
-      enhancedElements.forEach(function (el) {
-        enhancedObserver.observe(el);
-      });
-    }
-
-    if (window.__scrollRevealReset) window.__scrollRevealReset();
-    if (window.__counterReset) window.__counterReset();
-  }
-
-  function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-      anchor.addEventListener('click', function (e) {
-        var id = this.getAttribute('href');
-        if (id === '#') return;
-        var target = document.querySelector(id);
-        if (!target) return;
-
-        e.preventDefault();
-        var navHeight = 72;
-        var top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-
-        resetAllAnimations();
-
-        window.scrollTo({
-          top: top,
-          behavior: 'smooth'
-        });
-      });
-    });
-  }
-
   function boot() {
     initEnhancedReveal();
     initTiltCards();
@@ -232,7 +219,6 @@
     initScrollProgress();
     initStatGlow();
     initHeroTyping();
-    initSmoothScroll();
   }
 
   if (document.readyState === 'loading') {

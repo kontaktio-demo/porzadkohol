@@ -304,10 +304,10 @@ function isOfferSaved(id) {
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
 }
 function deleteCookie(name) {
-  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax';
+  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax;Secure';
 }
 function getCookie(name) {
   const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -914,7 +914,7 @@ function initCookieConsent() {
   const consent = document.getElementById('cookieConsent');
   if (!consent) return;
   if (getCookie('mww_cookie_consent')) return;
-  setTimeout(() => consent.classList.add('show'), 1500);
+  setTimeout(() => consent.classList.add('show'), 700);
 
   document.getElementById('cookieAccept').addEventListener('click', () => {
     const prefs = {necessary:true, analytics:true, marketing:true};

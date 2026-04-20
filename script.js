@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookieConsent();
   initTelConfirm();
   initSmoothAnchors();
-  initBasicProtection();
 });
 
 function initPreloader() {
@@ -20,9 +19,12 @@ function initPreloader() {
   const hide = () => {
     preloader.classList.add('hidden');
     document.body.classList.remove('preloading');
+    // Remove from DOM after the fade-out so its child animations
+    // (preload bar, pulsing text) stop consuming paint cycles.
+    setTimeout(() => { if (preloader.parentNode) preloader.parentNode.removeChild(preloader); }, 800);
   };
-  if (document.readyState === 'complete') setTimeout(hide, 800);
-  else window.addEventListener('load', () => setTimeout(hide, 800));
+  if (document.readyState === 'complete') hide();
+  else window.addEventListener('load', hide, { once: true });
 }
 
 function initNav() {
@@ -329,7 +331,7 @@ function initCookieConsent() {
     if (prefs.marketing) setCookie('mww_marketing', '1', 365); else deleteCookie('mww_marketing');
   }
   if (getCookie('mww_cookie_consent')) return;
-  setTimeout(() => consent.classList.add('show'), 1200);
+  setTimeout(() => consent.classList.add('show'), 600);
   document.getElementById('cookieAccept').addEventListener('click', () => {
     applyCookieConsent({necessary:true, analytics:true, marketing:true});
     consent.classList.remove('show');
@@ -456,6 +458,4 @@ function initSmoothAnchors() {
 /* ---------- BASIC FRONT-END PROTECTION ----------
  * The actual hardening lives in `mww-shield.js`, which is included
  * on every page so the marketing site does not leak stack traces
- * or internal endpoints to casual visitors. Kept here as a no-op
- * for backward compatibility with the original boot sequence. */
-function initBasicProtection() { /* handled by mww-shield.js */ }
+ * or internal endpoints to casual visitors. */

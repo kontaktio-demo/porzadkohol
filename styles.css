@@ -33,6 +33,9 @@
   --nav-h: 78px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --primary: var(--c-ink);
+  --accent: var(--c-gold);
 }
 
 html {
@@ -239,6 +242,10 @@ p { font-weight: 400; }
   visibility: hidden;
   pointer-events: none;
 }
+#preloader.hidden .preloader-fill,
+#preloader.hidden .preloader-text {
+  animation: none;
+}
 .preloader-inner { text-align: center; color: #fff; }
 .preloader-logo {
   font-size: 1.5rem;
@@ -395,7 +402,6 @@ p { font-weight: 400; }
   background-position: center 30%;
   background-repeat: no-repeat;
   will-change: transform;
-  transition: transform 0.1s linear;
   z-index: 0;
 }
 

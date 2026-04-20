@@ -584,10 +584,10 @@ function showError() {
 function setCookie(name, value, days) {
   var d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax;Secure';
 }
 function deleteCookie(name) {
-  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax';
+  document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax;Secure';
 }
 function getCookie(name) {
   var v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
@@ -700,7 +700,7 @@ function initCookieConsent() {
   var consent = document.getElementById('cookieConsent');
   if (!consent) return;
   if (getCookie('mww_cookie_consent')) return;
-  setTimeout(function() { consent.classList.add('show'); }, 1500);
+  setTimeout(function() { consent.classList.add('show'); }, 700);
 
   document.getElementById('cookieAccept').addEventListener('click', function() {
     applyCookieConsent({necessary:true, analytics:true, marketing:true});
