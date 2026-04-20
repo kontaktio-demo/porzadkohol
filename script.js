@@ -200,6 +200,45 @@ function initForm() {
     const el = form.querySelector('#' + id);
     if (el && !el.maxLength) el.setAttribute('maxlength', String(limits[id]));
   });
+
+  // Live filtering for the phone field: only digits, spaces, +, -, (, )
+  // are allowed. This blocks letters and other garbage at typing time
+  // (and also strips them out of pasted content) instead of waiting for
+  // the submit-time validator to complain.
+  const phoneInput = form.querySelector('#fphone');
+  if (phoneInput) {
+    phoneInput.setAttribute('inputmode', 'tel');
+    phoneInput.setAttribute('pattern', '[+0-9 ()\\-]{7,20}');
+    const sanitizePhone = () => {
+      const before = phoneInput.value;
+      const after = before.replace(/[^\d+\s()\-]/g, '');
+      if (after !== before) {
+        const pos = phoneInput.selectionStart;
+        phoneInput.value = after;
+        try { phoneInput.setSelectionRange(pos - (before.length - after.length), pos - (before.length - after.length)); } catch (_) {}
+      }
+    };
+    phoneInput.addEventListener('input', sanitizePhone);
+    phoneInput.addEventListener('paste', () => setTimeout(sanitizePhone, 0));
+  }
+
+  // Live trim for the name field: digits and obvious junk shouldn't be
+  // typeable in a name. Allow letters (incl. Polish), spaces, hyphens,
+  // apostrophes and periods.
+  const nameInput = form.querySelector('#fname');
+  if (nameInput) {
+    const sanitizeName = () => {
+      const before = nameInput.value;
+      const after = before.replace(/[^A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż\s'\-\.]/g, '');
+      if (after !== before) {
+        const pos = nameInput.selectionStart;
+        nameInput.value = after;
+        try { nameInput.setSelectionRange(pos - (before.length - after.length), pos - (before.length - after.length)); } catch (_) {}
+      }
+    };
+    nameInput.addEventListener('input', sanitizeName);
+    nameInput.addEventListener('paste', () => setTimeout(sanitizeName, 0));
+  }
 }
 
 function showError(input, message) {
@@ -371,8 +410,16 @@ function initTelConfirm() {
 function initSmoothAnchors() {
   const navEl = document.getElementById('nav');
   function navOffset() {
-    return (navEl ? navEl.offsetHeight : 78) + 8;
+    return (navEl ? navEl.offsetHeight : 78) + 16;
   }
+  function scrollToId(id, smooth) {
+    const target = document.getElementById(id);
+    if (!target) return false;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - navOffset();
+    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+    return true;
+  }
+
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href*="#"]');
     if (!a) return;
@@ -387,13 +434,23 @@ function initSmoothAnchors() {
       } catch {}
     }
     if (!id) return;
-    const target = document.getElementById(id);
-    if (!target) return;
+    if (!document.getElementById(id)) return;
     e.preventDefault();
-    const top = target.getBoundingClientRect().top + window.pageYOffset - navOffset();
-    window.scrollTo({ top, behavior: 'smooth' });
+    scrollToId(id, true);
     history.replaceState(null, '', '#' + id);
   });
+
+  // Re-apply offset when the page is opened directly with a #hash, because
+  // the browser's native jump happens before the fixed nav height is known.
+  if (location.hash && location.hash.length > 1) {
+    const id = decodeURIComponent(location.hash.slice(1));
+    // Run after layout settles (fonts, images above the fold).
+    requestAnimationFrame(() => {
+      scrollToId(id, false);
+      // One more pass after a short delay in case late layout shifts occurred.
+      setTimeout(() => scrollToId(id, false), 250);
+    });
+  }
 }
 
 /* ---------- BASIC FRONT-END PROTECTION ----------

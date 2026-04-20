@@ -215,15 +215,26 @@ h1, h2, h3, h4 {
 }
 .filter-inner {
   max-width: 1240px; margin: 0 auto;
-  display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end;
+  display: flex; flex-wrap: wrap;
+  column-gap: 22px; row-gap: 18px;
+  align-items: flex-end;
 }
 .filter-group {
   display: flex; flex-direction: column; gap: 6px;
-  flex: 1; min-width: 140px;
+  flex: 1 1 160px; min-width: 160px;
+}
+/* Range groups (Cena, Powierzchnia) need room for two inputs side by side */
+.filter-group.filter-group-range {
+  flex: 1.6 1 220px; min-width: 220px;
 }
 .filter-group label {
   font-size: .72rem; font-weight: 700; letter-spacing: .12em;
   text-transform: uppercase; color: var(--text-muted);
+  /* Reserve two lines so wrapping labels (e.g. "Dzielnica / lokalizacja")
+     don't push their input out of alignment with neighbouring fields. */
+  min-height: 2.2em;
+  display: flex; align-items: flex-end;
+  line-height: 1.1;
 }
 .filter-group select,
 .filter-group input {
@@ -249,8 +260,8 @@ h1, h2, h3, h4 {
 .filter-group input:focus {
   outline: none; background: #fff; border-color: var(--primary);
 }
-.filter-price { display: flex; gap: 6px; }
-.filter-price input { width: 90px; flex: 1; }
+.filter-price { display: flex; gap: 8px; }
+.filter-price input { width: auto; min-width: 0; flex: 1 1 0; }
 .filter-btn {
   height: 44px; padding: 0 26px;
   background: var(--primary); color: #fff;
@@ -1162,8 +1173,10 @@ h1, h2, h3, h4 {
   .hamburger   { display: flex; }
 
   .filter-bar { padding: 18px 22px; position: relative; top: 0; }
-  .filter-inner { gap: 12px; }
-  .filter-group { min-width: calc(50% - 6px); }
+  .filter-inner { column-gap: 14px; row-gap: 14px; }
+  .filter-group { flex-basis: calc(50% - 7px); min-width: calc(50% - 7px); }
+  .filter-group.filter-group-range { flex-basis: calc(50% - 7px); min-width: calc(50% - 7px); }
+  .filter-group label { min-height: 0; }
 
   .page-header   { padding: 70px 22px 50px; }
 
@@ -1194,7 +1207,8 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 540px) {
-  .filter-group { min-width: 100%; }
+  .filter-group,
+  .filter-group.filter-group-range { flex-basis: 100%; min-width: 100%; }
   .filter-price input { width: 100%; }
   .modal           { padding: 30px 22px; border-radius: var(--radius-lg); }
   .page-header h1  { font-size: 1.85rem; }

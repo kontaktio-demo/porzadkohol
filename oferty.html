@@ -84,18 +84,18 @@
       <label for="filterCity">Dzielnica / lokalizacja</label>
       <input type="text" id="filterCity" placeholder="np. Śródmieście" maxlength="100">
     </div>
-    <div class="filter-group">
+    <div class="filter-group filter-group-range">
       <label>Cena (PLN)</label>
       <div class="filter-price">
-        <input type="number" id="filterPriceMin" placeholder="Od" min="0">
-        <input type="number" id="filterPriceMax" placeholder="Do" min="0">
+        <input type="number" id="filterPriceMin" placeholder="Od" min="0" inputmode="numeric">
+        <input type="number" id="filterPriceMax" placeholder="Do" min="0" inputmode="numeric">
       </div>
     </div>
-    <div class="filter-group">
+    <div class="filter-group filter-group-range">
       <label>Powierzchnia (m²)</label>
       <div class="filter-price">
-        <input type="number" id="filterAreaMin" placeholder="Od" min="0">
-        <input type="number" id="filterAreaMax" placeholder="Do" min="0">
+        <input type="number" id="filterAreaMin" placeholder="Od" min="0" inputmode="numeric">
+        <input type="number" id="filterAreaMax" placeholder="Do" min="0" inputmode="numeric">
       </div>
     </div>
     <div class="filter-group">
@@ -401,13 +401,10 @@ function applyFilters() {
   const areaMinEl  = document.getElementById('filterAreaMin');
   const areaMaxEl  = document.getElementById('filterAreaMax');
 
-  let pMin = Math.max(0, parseInt(priceMinEl.value) || 0);
-  let pMax = parseInt(priceMaxEl.value) || Infinity;
-  let aMin = Math.max(0, parseInt(areaMinEl.value) || 0);
-  let aMax = parseInt(areaMaxEl.value) || Infinity;
-
-  if (pMax !== Infinity) pMax = Math.max(0, pMax);
-  if (aMax !== Infinity) aMax = Math.max(0, aMax);
+  let pMin = Math.max(0, parseInt(priceMinEl.value, 10) || 0);
+  let pMax = priceMaxEl.value === '' ? Infinity : Math.max(0, parseInt(priceMaxEl.value, 10) || 0);
+  let aMin = Math.max(0, parseInt(areaMinEl.value, 10) || 0);
+  let aMax = areaMaxEl.value  === '' ? Infinity : Math.max(0, parseInt(areaMaxEl.value, 10) || 0);
 
   if (pMin > 0 && pMax !== Infinity && pMin > pMax) {
     const tmp = pMin;
@@ -748,8 +745,9 @@ function closeDetail() {
 function bindFilters() {
   document.getElementById('filterApply').addEventListener('click', applyFilters);
   document.getElementById('filterReset').addEventListener('click', () => {
-    ['filterType','filterCat','filterRooms','sortSelect'].forEach(id => { document.getElementById(id).value = ''; });
+    ['filterType','filterCat','filterRooms'].forEach(id => { document.getElementById(id).value = ''; });
     ['filterCity','filterPriceMin','filterPriceMax','filterAreaMin','filterAreaMax'].forEach(id => { document.getElementById(id).value = ''; });
+    document.getElementById('sortSelect').value = 'default';
     applyFilters();
   });
   document.getElementById('sortSelect').addEventListener('change', applyFilters);
@@ -823,6 +821,32 @@ function bindModal() {
       if (document.getElementById('detailOverlay').classList.contains('open')) { closeDetail(); }
     }
   });
+
+  // Live filtering: only digits, +, -, spaces and parentheses in the phone field.
+  const mPhone = document.getElementById('mPhone');
+  if (mPhone) {
+    mPhone.setAttribute('inputmode', 'tel');
+    mPhone.setAttribute('pattern', '[+0-9 ()\\-]{7,20}');
+    mPhone.setAttribute('maxlength', '20');
+    const sanitize = () => {
+      const before = mPhone.value;
+      const after = before.replace(/[^\d+\s()\-]/g, '');
+      if (after !== before) mPhone.value = after;
+    };
+    mPhone.addEventListener('input', sanitize);
+    mPhone.addEventListener('paste', () => setTimeout(sanitize, 0));
+  }
+  const mName = document.getElementById('mName');
+  if (mName) {
+    mName.setAttribute('maxlength', '100');
+    const sanitize = () => {
+      const before = mName.value;
+      const after = before.replace(/[^A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż\s'\-\.]/g, '');
+      if (after !== before) mName.value = after;
+    };
+    mName.addEventListener('input', sanitize);
+    mName.addEventListener('paste', () => setTimeout(sanitize, 0));
+  }
 
   submitBtn.addEventListener('click', () => {
     const name  = document.getElementById('mName').value.trim();

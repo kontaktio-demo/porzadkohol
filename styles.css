@@ -37,12 +37,12 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-h);
+  scroll-padding-top: calc(var(--nav-h) + 16px);
   -webkit-text-size-adjust: 100%;
 }
 
 section[id], div[id], article[id] {
-  scroll-margin-top: calc(var(--nav-h) + 12px);
+  scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 
 body {

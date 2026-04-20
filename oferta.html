@@ -642,6 +642,32 @@ function bindModal() {
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
   });
 
+  // Live filtering: only digits, +, -, spaces and parentheses in the phone field.
+  var mPhone = document.getElementById('mPhone');
+  if (mPhone) {
+    mPhone.setAttribute('inputmode', 'tel');
+    mPhone.setAttribute('pattern', '[+0-9 ()\\-]{7,20}');
+    mPhone.setAttribute('maxlength', '20');
+    var sanitizePhone = function() {
+      var before = mPhone.value;
+      var after = before.replace(/[^\d+\s()\-]/g, '');
+      if (after !== before) mPhone.value = after;
+    };
+    mPhone.addEventListener('input', sanitizePhone);
+    mPhone.addEventListener('paste', function() { setTimeout(sanitizePhone, 0); });
+  }
+  var mName = document.getElementById('mName');
+  if (mName) {
+    mName.setAttribute('maxlength', '100');
+    var sanitizeName = function() {
+      var before = mName.value;
+      var after = before.replace(/[^A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż\s'\-\.]/g, '');
+      if (after !== before) mName.value = after;
+    };
+    mName.addEventListener('input', sanitizeName);
+    mName.addEventListener('paste', function() { setTimeout(sanitizeName, 0); });
+  }
+
   submitBtn.addEventListener('click', function() {
     var name  = document.getElementById('mName').value.trim();
     var phone = document.getElementById('mPhone').value.trim();
