@@ -1,5 +1,23 @@
 User-agent: *
 Allow: /
+Allow: /images/
+Allow: /*.css$
+Allow: /*.js$
 Disallow: /404.html
+Disallow: /oferta.html?
+
+# AI / LLM crawlers - allowed (public real-estate office content)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://www.MWWmieszkanie.pl/sitemap.xml
+Host: https://www.MWWmieszkanie.pl
