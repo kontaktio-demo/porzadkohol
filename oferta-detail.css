@@ -229,8 +229,8 @@
   font-size: .82rem;
   line-height: 1.5;
   color: var(--text);
-  background: rgba(184, 146, 74, .08);
-  border: 1px solid rgba(184, 146, 74, .25);
+  background: rgba(189, 142, 68, .08);
+  border: 1px solid rgba(189, 142, 68, .25);
   border-radius: var(--radius);
 }
 .offer-source svg {
