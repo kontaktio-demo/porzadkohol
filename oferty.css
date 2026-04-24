@@ -89,19 +89,34 @@ h1, h2, h3, h4 {
 .logo {
   display: inline-flex;
   align-items: center;
-  line-height: 0;
+  font-family: 'Unbounded', 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
   color: var(--primary);
   flex-shrink: 0;
+  padding: 4px 2px;
+  transition: color .3s var(--ease), text-shadow .3s var(--ease);
 }
-.logo picture { display: inline-flex; }
-.logo img {
-  height: 56px;
-  width: 56px;
-  display: block;
-  transition: transform .4s var(--ease);
+.logo .logo-mark {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-soft) 35%, var(--gold) 70%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.logo:hover img { transform: scale(1.04); }
-.logo:hover  { color: var(--primary); }
+.logo .logo-sub {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(14, 14, 16, 0.18);
+  font-size: 0.62em;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.logo:hover { text-shadow: 0 4px 14px rgba(189, 142, 68, 0.3); }
 
 .nav-links { display: flex; gap: 38px; align-items: center; }
 .nav-link {
@@ -978,15 +993,33 @@ h1, h2, h3, h4 {
 }
 .footer-logo {
   display: inline-flex;
-  align-items: center;
-  line-height: 0;
+  align-items: baseline;
+  font-family: 'Unbounded', 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #fff;
   margin-bottom: 18px;
+  transition: text-shadow .4s var(--ease);
 }
-.footer-logo picture { display: inline-flex; }
-.footer-logo img {
-  width: 88px;
-  height: 88px;
-  display: block;
+.footer-logo:hover { text-shadow: 0 8px 22px rgba(189, 142, 68, 0.4); }
+.footer-logo .logo-mark {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-soft) 35%, var(--gold) 70%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-logo .logo-sub {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footer-brand p {

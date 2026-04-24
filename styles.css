@@ -20,6 +20,12 @@
   --c-gold-soft: #d6b378;
   --c-gold-light: #ecd29c;
   --c-gold-deep: #8d6a32;
+  /* Navy accent palette — secondary accent to reduce gold dominance.
+     Use --c-navy on light backgrounds, --c-navy-light on dark backgrounds. */
+  --c-navy: #1a2a4a;
+  --c-navy-soft: #2a3f6e;
+  --c-navy-light: #8aa0cc;
+  --c-navy-deep: #0f1b33;
   --c-dark: #111114;
   --c-dark-2: #1a1a1f;
   --c-logo-gray: #2f2f2f;
@@ -28,6 +34,10 @@
   --gradient-gold: linear-gradient(135deg, #ecd29c 0%, #d6b378 35%, #bd8e44 70%, #8d6a32 100%);
   --gradient-gold-soft: linear-gradient(135deg, #ecd29c 0%, #d6b378 60%, #bd8e44 100%);
   --gradient-gold-line: linear-gradient(90deg, transparent 0%, var(--c-gold) 50%, transparent 100%);
+
+  --gradient-navy: linear-gradient(135deg, #2a3f6e 0%, #1a2a4a 60%, #0f1b33 100%);
+  --gradient-navy-soft: linear-gradient(135deg, #3a548f 0%, #2a3f6e 60%, #1a2a4a 100%);
+  --gradient-navy-line: linear-gradient(90deg, transparent 0%, var(--c-navy) 50%, transparent 100%);
 
   /* Real-gold shimmer: multi-stop gradient with bright highlight + deep shadow stops,
      used at large background-size with animated background-position to mimic the way
@@ -52,6 +62,8 @@
   --shadow-lg: 0 20px 50px rgba(14, 14, 16, 0.12);
   --shadow-gold: 0 10px 30px rgba(189, 142, 68, 0.28);
   --shadow-gold-lg: 0 18px 48px rgba(189, 142, 68, 0.35);
+  --shadow-navy: 0 10px 30px rgba(26, 42, 74, 0.28);
+  --shadow-navy-lg: 0 18px 48px rgba(26, 42, 74, 0.35);
 
   --radius-sm: 10px;
   --radius: 14px;
@@ -150,7 +162,7 @@ p { font-weight: 400; }
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--c-gold);
+  color: var(--c-navy);
   margin-bottom: 18px;
 }
 
@@ -159,7 +171,7 @@ p { font-weight: 400; }
   display: inline-block;
   width: 32px;
   height: 1px;
-  background: var(--gradient-gold);
+  background: var(--gradient-navy);
   vertical-align: middle;
   border-radius: 1px;
 }
@@ -169,14 +181,14 @@ p { font-weight: 400; }
   justify-content: center;
 }
 .section-header-center .eyebrow::before {
-  background: linear-gradient(90deg, transparent 0%, var(--c-gold) 100%);
+  background: linear-gradient(90deg, transparent 0%, var(--c-navy) 100%);
 }
 .section-header-center .eyebrow::after {
   content: '';
   display: inline-block;
   width: 32px;
   height: 1px;
-  background: linear-gradient(90deg, var(--c-gold) 0%, transparent 100%);
+  background: linear-gradient(90deg, var(--c-navy) 0%, transparent 100%);
   border-radius: 1px;
 }
 
@@ -312,49 +324,22 @@ p { font-weight: 400; }
 .preloader-inner { text-align: center; color: #fff; }
 .preloader-logo {
   position: relative;
-  width: 150px;
-  height: 150px;
   margin: 0 auto 30px;
-  display: grid;
-  place-items: center;
-}
-.preloader-logo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg,
-    rgba(236, 210, 156, 0) 0%,
-    rgba(236, 210, 156, 0) 25%,
-    var(--c-gold-light) 50%,
-    var(--c-gold) 70%,
-    rgba(189, 142, 68, 0) 95%);
-  -webkit-mask: radial-gradient(circle, transparent 60%, #000 62%);
-          mask: radial-gradient(circle, transparent 60%, #000 62%);
-  animation: preloaderSpin 2.4s linear infinite;
-}
-.preloader-logo::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(236, 210, 156, 0.18) 0%, rgba(189, 142, 68, 0) 70%);
-  pointer-events: none;
-}
-@keyframes preloaderSpin {
-  to { transform: rotate(360deg); }
-}
-.preloader-logo picture {
   display: inline-flex;
-  position: relative;
-  z-index: 1;
-}
-.preloader-logo img {
-  width: 110px;
-  height: 110px;
-  display: block;
-  border-radius: 50%;
-  filter: drop-shadow(0 6px 18px rgba(189, 142, 68, 0.45));
+  align-items: center;
+  justify-content: center;
+  padding: 18px 28px;
+  font-family: 'Unbounded', 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #fff;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 24px rgba(189, 142, 68, 0.35);
 }
 .preloader-bar {
   width: 220px;
@@ -415,20 +400,26 @@ p { font-weight: 400; }
   position: relative;
   display: inline-flex;
   align-items: center;
-  line-height: 0;
-  color: var(--c-ink);
+  font-family: 'Unbounded', 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #fff;
   flex-shrink: 0;
   isolation: isolate;
+  padding: 4px 2px;
+  transition: color 0.4s var(--ease), text-shadow 0.4s var(--ease);
 }
 .logo::before {
   content: '';
   position: absolute;
-  inset: -14px;
-  background: radial-gradient(closest-side, rgba(236, 210, 156, 0.45) 0%, rgba(214, 179, 120, 0.18) 45%, rgba(189, 142, 68, 0) 75%);
-  border-radius: 50%;
+  inset: -10px -16px;
+  background: radial-gradient(closest-side, rgba(236, 210, 156, 0.35) 0%, rgba(214, 179, 120, 0.12) 55%, rgba(189, 142, 68, 0) 80%);
+  border-radius: 18px;
   opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  transform: scale(0.9);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
   z-index: -1;
   pointer-events: none;
 }
@@ -437,25 +428,28 @@ p { font-weight: 400; }
   opacity: 1;
   transform: scale(1);
 }
-.logo picture { display: inline-flex; }
-.logo img {
-  height: 72px;
-  width: 72px;
-  display: block;
-  border-radius: 50%;
-  transition: transform 0.55s var(--ease), filter 0.45s var(--ease);
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+.logo .logo-mark {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.logo:hover img {
-  transform: scale(1.06) rotate(-4deg);
-  filter: drop-shadow(0 6px 16px rgba(189, 142, 68, 0.55));
+.logo .logo-sub {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.62em;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
 }
-.logo:hover { color: var(--c-ink); }
+.logo:hover { color: #fff; text-shadow: 0 4px 16px rgba(189, 142, 68, 0.45); }
 .logo:focus-visible {
-  outline: none;
-}
-.logo:focus-visible img {
-  box-shadow: 0 0 0 3px rgba(214, 179, 120, 0.55);
+  outline: 2px solid rgba(214, 179, 120, 0.7);
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .nav-links {
@@ -485,8 +479,8 @@ p { font-weight: 400; }
 .nav-link:hover { color: #fff; }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
-.nav-link.active { color: var(--c-gold); }
-.nav-link.active::after { background: var(--c-gold); height: 2px; }
+.nav-link.active { color: var(--c-navy-light); }
+.nav-link.active::after { background: var(--c-navy-light); height: 2px; }
 
 .nav-link-featured {
   color: var(--c-gold);
@@ -714,7 +708,7 @@ p { font-weight: 400; }
 }
 .usp .container { position: relative; z-index: 2; }
 .usp h2 { color: #fff; }
-.usp .eyebrow { color: var(--c-gold-soft); }
+.usp .eyebrow { color: var(--c-navy); }
 .usp .section-desc { color: rgba(255, 255, 255, 0.72); }
 
 .usp-grid {
@@ -854,7 +848,7 @@ p { font-weight: 400; }
   font-size: 0.9rem;
   z-index: 3;
 }
-.about-award-badge svg { color: var(--c-gold); }
+.about-award-badge svg { color: var(--c-navy); }
 .about-award-badge p { margin: 0; font-weight: 700; }
 
 .text .lead {
@@ -1035,7 +1029,7 @@ p { font-weight: 400; }
 }
 .process .container { position: relative; z-index: 2; }
 .process h2 { color: #fff; }
-.process .eyebrow { color: var(--c-gold-soft); }
+.process .eyebrow { color: var(--c-navy); }
 .process .section-desc { color: rgba(255, 255, 255, 0.72); }
 
 .process-grid {
@@ -1155,7 +1149,7 @@ p { font-weight: 400; }
   font-weight: 600;
   font-size: 0.95rem;
 }
-.agent-credentials svg { color: var(--c-gold); }
+.agent-credentials svg { color: var(--c-navy); }
 
 .testimonials { background: var(--c-bg); }
 
@@ -1403,30 +1397,36 @@ p { font-weight: 400; }
 .footer-logo {
   position: relative;
   display: inline-flex;
-  align-items: center;
-  line-height: 0;
-  padding: 6px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(236, 210, 156, 0.12) 0%, rgba(189, 142, 68, 0) 65%),
-    var(--c-logo-gray);
-  box-shadow:
-    inset 0 0 0 1px rgba(214, 179, 120, 0.35),
-    0 8px 24px rgba(0, 0, 0, 0.35);
-  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  align-items: baseline;
+  font-family: 'Unbounded', 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #fff;
+  padding: 4px 0;
+  transition: transform 0.5s var(--ease), text-shadow 0.5s var(--ease);
 }
 .footer-logo:hover {
-  transform: translateY(-2px) rotate(-3deg);
-  box-shadow:
-    inset 0 0 0 1px rgba(236, 210, 156, 0.6),
-    0 12px 32px rgba(189, 142, 68, 0.35);
+  transform: translateY(-2px);
+  text-shadow: 0 8px 22px rgba(189, 142, 68, 0.4);
 }
-.footer-logo picture { display: inline-flex; }
-.footer-logo img {
-  width: 88px;
-  height: 88px;
-  display: block;
-  border-radius: 50%;
+.footer-logo .logo-mark {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-logo .logo-sub {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .footer-social {
@@ -1627,7 +1627,6 @@ p { font-weight: 400; }
     --nav-h: 70px;
   }
   body { font-size: 15px; }
-  .logo img { height: 64px; width: 64px; }
 
   h1 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); }
   h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
@@ -1748,9 +1747,6 @@ p { font-weight: 400; }
   .hero-subtitle { font-size: 0.95rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; }
-  .logo img { height: 56px; width: 56px; }
-  .footer-logo img { width: 76px; height: 76px; }
-  .preloader-logo img { width: 90px; height: 90px; }
   .usp-grid { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
@@ -2482,7 +2478,7 @@ p { font-weight: 400; }
 .service-intro--dark .text h2 { color: #fff; }
 .service-intro--dark .text p { color: rgba(255, 255, 255, 0.78); }
 .service-intro--dark .text p strong { color: #fff; }
-.service-intro--dark .eyebrow { color: var(--c-gold-soft); }
+.service-intro--dark .eyebrow { color: var(--c-navy-light); }
 
 .howto-timeline {
   margin: 50px auto 0;
@@ -2868,46 +2864,27 @@ p { font-weight: 400; }
   animation: goldShimmer 2.5s linear infinite;
 }
 
-/* Logo halo: gentle breathing glow + slow shimmer overlay around the badge.
-   The logo itself stays untouched; only the surrounding halo + a soft sheen
-   over the round image hints at metallic light play. */
+/* Logo halo: subtle radial sheen behind the wordmark on hover. */
 .logo::after,
 .footer-logo::after {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
+  inset: -8px -14px;
+  border-radius: 14px;
   background:
     radial-gradient(circle at 30% 25%,
-      rgba(255, 244, 214, 0.45) 0%,
-      rgba(236, 210, 156, 0.18) 25%,
-      rgba(255, 244, 214, 0) 55%);
+      rgba(255, 244, 214, 0.35) 0%,
+      rgba(236, 210, 156, 0.14) 30%,
+      rgba(255, 244, 214, 0) 65%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s var(--ease);
-  z-index: 2;
+  z-index: -1;
   mix-blend-mode: screen;
 }
 .logo:hover::after,
 .footer-logo:hover::after {
   opacity: 1;
-  animation: goldHaloMove 3.5s var(--ease) infinite;
-}
-@keyframes goldHaloMove {
-  0%, 100% { transform: rotate(0deg); }
-  50%      { transform: rotate(180deg); }
-}
-
-/* Preloader ring: stronger shimmer (already animated by spin, this enriches the gradient) */
-.preloader-logo::before {
-  background: conic-gradient(from 0deg,
-    rgba(255, 244, 214, 0) 0%,
-    rgba(255, 244, 214, 0) 20%,
-    var(--c-gold-light) 38%,
-    #fff4d6 50%,
-    var(--c-gold-light) 62%,
-    var(--c-gold) 75%,
-    rgba(189, 142, 68, 0) 95%);
 }
 
 @media (prefers-reduced-motion: reduce) {
