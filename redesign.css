@@ -2132,3 +2132,351 @@ body.oferty,
 .featured-star {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
+
+/* =====================================================================
+   30. OFERTY PAGE — header backdrop image, compact non-sticky filter,
+       and mobile-friendly horizontal listing cards (olx/otomoto-style)
+   ===================================================================== */
+
+/* --- Page header on oferty.html: bring back a background image like
+       the homepage hero, with a dark overlay so text stays readable. --- */
+.page-header {
+  background: var(--color-ink) !important;
+  color: var(--color-white) !important;
+  border-bottom: 1px solid var(--color-line-soft) !important;
+  padding: clamp(120px, 14vw, 170px) 0 clamp(40px, 5vw, 60px) !important;
+  position: relative;
+  overflow: hidden;
+  text-align: left !important;
+}
+.page-header::before {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: url('images/lodz-panorama-1.webp') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  z-index: 0 !important;
+}
+.page-header::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg,
+    rgba(10, 10, 14, 0.55) 0%,
+    rgba(10, 10, 14, 0.65) 60%,
+    rgba(10, 10, 14, 0.78) 100%) !important;
+  z-index: 1 !important;
+}
+.page-header-inner {
+  position: relative;
+  z-index: 2;
+}
+.page-header h1 {
+  color: var(--color-white) !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+.page-header p {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+.page-header p a {
+  color: var(--color-white) !important;
+  text-decoration-color: rgba(255, 255, 255, 0.55) !important;
+}
+.page-header p a:hover {
+  color: var(--color-white) !important;
+  text-decoration-color: var(--color-white) !important;
+}
+.page-header-note {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.page-header-note-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.page-header-note strong {
+  color: var(--color-white) !important;
+}
+.page-header-note-badge {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: var(--color-white) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* --- Filter bar: not sticky any more, slimmer padding so it doesn't
+       eat too much viewport when scrolling. --- */
+.filter-bar {
+  position: static !important;
+  top: auto !important;
+  margin: 22px auto !important;
+  padding: 14px clamp(14px, 2vw, 20px) !important;
+}
+.filter-inner {
+  column-gap: 14px !important;
+  row-gap: 12px !important;
+  align-items: flex-end !important;
+}
+.filter-group label {
+  min-height: 0 !important;
+  margin-bottom: 4px !important;
+  font-size: 0.75rem !important;
+}
+.filter-group input,
+.filter-group select {
+  height: 40px !important;
+  padding: 0 12px !important;
+  font-size: 0.88rem !important;
+}
+.filter-group select {
+  padding-right: 30px !important;
+}
+.filter-btn {
+  height: 40px !important;
+  padding: 0 22px !important;
+  font-size: 0.88rem !important;
+}
+.filter-reset {
+  height: 40px !important;
+  padding: 0 12px !important;
+  font-size: 0.85rem !important;
+}
+
+/* --- Mobile: olx/otomoto-style horizontal listing cards. Image on the
+       left, info on the right — much easier to scan on small screens. --- */
+@media (max-width: 640px) {
+  .listings-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  .listing-card {
+    flex-direction: row !important;
+    align-items: stretch !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+  .listing-card-link {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .listing-photo {
+    flex: 0 0 38% !important;
+    max-width: 38% !important;
+    height: auto !important;
+    min-height: 150px !important;
+    aspect-ratio: auto !important;
+  }
+  .listing-photo img {
+    height: 100% !important;
+    min-height: 150px !important;
+  }
+  .listing-body {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 12px 14px 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .listing-price {
+    font-size: 1.1rem !important;
+  }
+  .listing-price-row {
+    margin-bottom: 4px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .listing-price-m2 {
+    margin-left: 0 !important;
+    width: 100%;
+    font-size: 0.74rem !important;
+  }
+  .listing-title {
+    font-size: 0.95rem !important;
+    margin: 4px 0 6px !important;
+    -webkit-line-clamp: 2;
+  }
+  .listing-pills {
+    margin-bottom: 6px !important;
+    gap: 4px !important;
+  }
+  .pill {
+    font-size: 0.72rem !important;
+    padding: 3px 7px !important;
+  }
+  .listing-location {
+    font-size: 0.78rem !important;
+    margin-bottom: 4px !important;
+  }
+  .listing-desc { display: none !important; }
+  .listing-footer {
+    padding-top: 6px !important;
+    border-top: none !important;
+    margin-top: auto !important;
+  }
+  .listing-time {
+    font-size: 0.72rem !important;
+  }
+  .listing-actions-bar {
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 10px 10px !important;
+    border-left: 1px solid var(--color-line-soft) !important;
+    border-top: none !important;
+    flex: 0 0 auto !important;
+  }
+  .btn-ask-small {
+    padding: 7px 10px !important;
+    font-size: 0.78rem !important;
+  }
+  .btn-ask-small svg { display: none; }
+  .btn-save {
+    padding: 7px 10px !important;
+  }
+  .listing-badges {
+    top: 8px !important;
+    left: 8px !important;
+    gap: 4px !important;
+  }
+  .listing-badge {
+    font-size: 0.66rem !important;
+    padding: 3px 8px !important;
+  }
+  .listing-img-count {
+    bottom: 8px !important;
+    right: 8px !important;
+    padding: 3px 8px !important;
+    font-size: 0.68rem !important;
+  }
+  .listing-badge-featured {
+    top: 8px !important;
+    right: 8px !important;
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* On the dark page header, scale the body text and padding down too. */
+  .page-header { padding: 100px 0 36px !important; }
+  .page-header-inner { padding: 0 18px !important; }
+  .page-header h1 { font-size: 1.85rem !important; }
+}
+
+/* =====================================================================
+   31. UNIFIED MINIMALIST FOOTER — same on every page
+   ===================================================================== */
+footer.footer.footer-mini {
+  background: var(--color-surface) !important;
+  border-top: 1px solid var(--color-line-soft) !important;
+  padding: 0 !important;
+  color: var(--color-ink-2) !important;
+}
+.footer-mini-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 36px clamp(20px, 4vw, 40px) 28px;
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 0.8fr;
+  gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+}
+.footer-mini-brand .footer-logo {
+  display: inline-block;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--color-ink) !important;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.footer-mini-brand .footer-logo strong {
+  color: var(--color-ink) !important;
+  font-weight: 800;
+}
+.footer-mini-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.86rem !important;
+  color: var(--color-ink-mute) !important;
+  margin: 0;
+  line-height: 1.5;
+}
+.footer-mini-contact {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem !important;
+}
+.footer-mini-contact a {
+  color: var(--color-ink) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 200ms var(--ease);
+}
+.footer-mini-contact a:hover {
+  color: var(--color-accent) !important;
+}
+.footer-mini-contact span {
+  color: var(--color-ink-mute) !important;
+  font-size: 0.84rem !important;
+}
+.footer-mini-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem !important;
+}
+.footer-mini-links a {
+  color: var(--color-ink-2) !important;
+  text-decoration: none;
+  transition: color 200ms var(--ease);
+}
+.footer-mini-links a:hover {
+  color: var(--color-ink) !important;
+}
+.footer-mini-bottom {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px clamp(20px, 4vw, 40px);
+  border-top: 1px solid var(--color-line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem !important;
+  color: var(--color-ink-mute) !important;
+}
+.footer-mini-bottom a {
+  color: var(--color-ink-mute) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 200ms var(--ease);
+}
+.footer-mini-bottom a:hover {
+  color: var(--color-ink) !important;
+}
+@media (max-width: 720px) {
+  .footer-mini-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 30px 20px 24px;
+  }
+  .footer-mini-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 14px 20px;
+  }
+}
