@@ -1,0 +1,1030 @@
+/* =====================================================================
+   MWW Mieszkanie — REDESIGN OVERRIDE STYLESHEET
+   ---------------------------------------------------------------------
+   Loaded LAST on every page. Overrides palette, typography, component
+   styling on top of styles.css / oferty.css / oferta-detail.css /
+   wow-animations.css without touching the underlying files or HTML
+   structure / content / JS logic.
+
+   Aesthetic: premium boutique real-estate agency.
+   Dark elegance, warm whites, restrained gold accents, serif headings.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. NEW PALETTE — overrides BOTH `styles.css` and `oferty.css` :root
+   ------------------------------------------------------------------- */
+:root {
+  /* New canonical palette (per spec) */
+  --color-bg-primary:    #0F0F0E;
+  --color-bg-secondary:  #161614;
+  --color-bg-card:       #1C1C1A;
+  --color-bg-elevated:   #242420;
+
+  --color-gold:          #C9A96E;
+  --color-gold-light:    #E8C98A;
+  --color-gold-dark:     #A07840;
+  --color-gold-subtle:   rgba(201, 169, 110, 0.08);
+
+  --color-text-primary:   #F5F0E8;
+  --color-text-secondary: #A09880;
+  --color-text-muted:     #605848;
+  --color-text-inverse:   #0F0F0E;
+
+  --color-border:         rgba(201, 169, 110, 0.15);
+  --color-border-strong:  rgba(201, 169, 110, 0.35);
+
+  --color-success:        #7A9E7E;
+  --color-error:          #C47A6A;
+
+  /* Re-map legacy variables from styles.css so the rest of the
+     existing rules render in the new palette without rewrites. */
+  --c-bg:           var(--color-bg-primary);
+  --c-bg-alt:       var(--color-bg-secondary);
+  --c-ink:          var(--color-text-primary);
+  --c-ink-soft:     var(--color-text-primary);
+  --c-graphite:     var(--color-text-secondary);
+  --c-mute:         var(--color-text-secondary);
+  --c-line:         var(--color-border);
+  --c-gold:         var(--color-gold);
+  --c-gold-soft:    var(--color-gold-light);
+  --c-gold-light:   var(--color-gold-light);
+  --c-gold-deep:    var(--color-gold-dark);
+  --c-navy:         var(--color-gold-dark);
+  --c-navy-soft:    var(--color-gold-dark);
+  --c-navy-light:   var(--color-gold-light);
+  --c-navy-deep:    #0A0A09;
+  --c-dark:         var(--color-bg-primary);
+  --c-dark-2:       var(--color-bg-secondary);
+  --c-logo-gray:    var(--color-bg-card);
+  --c-logo-gray-2:  var(--color-bg-elevated);
+
+  --gradient-gold:       linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 60%, var(--color-gold-dark) 100%);
+  --gradient-gold-soft:  linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
+  --gradient-gold-line:  linear-gradient(90deg, transparent 0%, var(--color-gold) 50%, transparent 100%);
+  --gradient-navy:       linear-gradient(135deg, #161614 0%, #0F0F0E 100%);
+  --gradient-navy-soft:  linear-gradient(135deg, #1C1C1A 0%, #161614 100%);
+  --gradient-navy-line:  linear-gradient(90deg, transparent 0%, var(--color-border-strong) 50%, transparent 100%);
+
+  --shadow-sm:      0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-md:      0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg:      0 20px 50px rgba(0, 0, 0, 0.55);
+  --shadow-gold:    0 10px 30px rgba(201, 169, 110, 0.18);
+  --shadow-gold-lg: 0 18px 48px rgba(201, 169, 110, 0.25);
+  --shadow-navy:    0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-navy-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+
+  --radius-sm: 2px;
+  --radius:    4px;
+  --radius-lg: 6px;
+
+  --primary: var(--color-text-primary);
+  --accent:  var(--color-gold);
+
+  /* Re-map oferty.css variables */
+  --bg:           var(--color-bg-primary);
+  --bg-soft:      var(--color-bg-secondary);
+  --bg-alt:       var(--color-bg-secondary);
+  --primary-d:    var(--color-text-primary);
+  --primary-l:    var(--color-text-primary);
+  --accent-blue:  var(--color-gold);
+  --accent-green: var(--color-success);
+  --gold:         var(--color-gold);
+  --gold-soft:    var(--color-gold-light);
+  --gold-light:   var(--color-gold-light);
+  --gold-deep:    var(--color-gold-dark);
+  --navy:         var(--color-gold-dark);
+  --navy-soft:    var(--color-gold-dark);
+  --navy-deep:    #0A0A09;
+  --text:         var(--color-text-secondary);
+  --text-muted:   var(--color-text-muted);
+  --border:       var(--color-border);
+  --border-soft:  var(--color-border);
+  --dark:         var(--color-bg-primary);
+  --shadow:       0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-md:    0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg:    0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------------------------------------------------------------------
+   2. GLOBAL RESET — body, scrollbar, selection
+   ------------------------------------------------------------------- */
+html, body {
+  background: var(--color-bg-primary) !important;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: var(--color-text-secondary) !important;
+  background: var(--color-bg-primary) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--color-gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold); }
+* { scrollbar-color: var(--color-gold-dark) var(--color-bg-primary); }
+
+/* Selection */
+::selection {
+  background: rgba(201, 169, 110, 0.25);
+  color: var(--color-text-primary);
+}
+::-moz-selection {
+  background: rgba(201, 169, 110, 0.25);
+  color: var(--color-text-primary);
+}
+
+/* ---------------------------------------------------------------------
+   3. TYPOGRAPHY
+   ------------------------------------------------------------------- */
+h1, h2,
+.hero-title, .hero h1,
+.section-title, .section-header h2 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+  color: var(--color-text-primary) !important;
+}
+
+h3, h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  color: var(--color-gold) !important;
+}
+
+h5, h6 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  color: var(--color-text-primary) !important;
+  letter-spacing: 0.02em !important;
+}
+
+p, li, label, input, select, textarea, button, nav, address, span, td, th, dd, dt {
+  font-family: 'Inter', sans-serif;
+}
+
+p, li, address, dd { color: var(--color-text-secondary); }
+
+strong, b { color: var(--color-gold-light); font-weight: 600; }
+
+a { color: var(--color-gold); transition: color 0.3s ease; }
+a:hover { color: var(--color-gold-light); }
+
+/* Eyebrow / category labels */
+.eyebrow, .label-tag, .breadcrumb-current ~ *, .section-eyebrow {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--color-gold) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+}
+
+/* Decorative dashes around eyebrow */
+.eyebrow::before, .eyebrow::after,
+.label-tag::before, .label-tag::after {
+  content: '—';
+  display: inline-block;
+  margin: 0 0.6em;
+  color: var(--color-gold);
+  opacity: 0.6;
+}
+
+/* Hero subtitle / lead — Cormorant italic */
+.hero-subtitle, .lead, .about-solo-lead, .hero-eyebrow + h1 + .hero-subtitle {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: 1.25rem !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.hero-eyebrow {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--color-gold) !important;
+}
+
+/* Section descriptions */
+.section-desc, .section-header p {
+  color: var(--color-text-secondary) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ---------------------------------------------------------------------
+   4. NAVIGATION
+   ------------------------------------------------------------------- */
+.nav, header.nav, #nav {
+  background: rgba(15, 15, 14, 0.92) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: none !important;
+}
+
+.nav .logo, .footer-logo, .preloader-logo {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  color: var(--color-text-primary) !important;
+  letter-spacing: -0.01em !important;
+}
+.nav .logo strong, .footer-logo strong, .preloader-logo strong {
+  color: var(--color-gold) !important;
+  font-weight: 500 !important;
+}
+
+.preloader-text {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  color: var(--color-text-muted) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+.nav-link, .nav-links a {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  color: var(--color-text-secondary) !important;
+  transition: color 0.3s ease !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--color-text-secondary) !important;
+}
+.nav-link:hover, .nav-links a:hover, .nav-link.active {
+  color: var(--color-gold) !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+}
+.nav-link::after, .nav-link::before { background: var(--color-gold) !important; }
+
+/* Phone CTA in nav — outlined gold */
+.nav .nav-cta,
+.nav .nav-cta.btn,
+.nav .nav-cta.btn-primary {
+  background: transparent !important;
+  color: var(--color-gold) !important;
+  border: 1px solid var(--color-border-strong) !important;
+  box-shadow: none !important;
+}
+.nav .nav-cta:hover,
+.nav .nav-cta.btn-primary:hover {
+  background: var(--color-gold) !important;
+  color: var(--color-text-inverse) !important;
+  border-color: var(--color-gold) !important;
+}
+
+/* Hamburger */
+.hamburger span, .hamburger::before, .hamburger::after { background: var(--color-gold) !important; }
+
+/* Mobile menu panel */
+.nav-links.is-open, .nav-links.open, .nav-links--open {
+  background: var(--color-bg-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* ---------------------------------------------------------------------
+   5. PRELOADER
+   ------------------------------------------------------------------- */
+#preloader, .preloader {
+  background: var(--color-bg-primary) !important;
+}
+.preloader-bar { background: var(--color-bg-card) !important; }
+.preloader-fill { background: var(--color-gold) !important; }
+
+/* ---------------------------------------------------------------------
+   6. HERO
+   ------------------------------------------------------------------- */
+.hero {
+  background: var(--color-bg-primary) !important;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Subtle architectural grid + radial gold glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(ellipse at 30% 50%, rgba(201,169,110,0.06) 0%, transparent 60%),
+    linear-gradient(to right, rgba(201,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,169,110,0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 80px 80px, 80px 80px;
+}
+.hero > * { position: relative; z-index: 1; }
+
+.hero-bg, .hero .hero-bg {
+  background: linear-gradient(180deg, rgba(15,15,14,0.6) 0%, rgba(15,15,14,0.95) 100%) !important;
+  opacity: 1 !important;
+}
+
+.hero h1, .hero-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  font-size: clamp(2.8rem, 5vw, 4.5rem) !important;
+  color: var(--color-text-primary) !important;
+  letter-spacing: -0.02em !important;
+}
+.hero-title-light, .hero h1 .hero-title-light {
+  color: var(--color-text-primary) !important;
+  -webkit-text-fill-color: var(--color-text-primary) !important;
+  background: none !important;
+}
+.hero-title-accent, .hero h1 .hero-title-accent {
+  color: var(--color-gold) !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+  background: none !important;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero-scroll, .hero-scroll * {
+  color: var(--color-gold) !important;
+}
+.scroll-line { background: var(--color-gold) !important; }
+
+/* ---------------------------------------------------------------------
+   7. BUTTONS
+   ------------------------------------------------------------------- */
+.btn {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  border-radius: 2px !important;
+  letter-spacing: 0.02em !important;
+  transition: background 0.3s ease, color 0.3s ease,
+              border-color 0.3s ease, transform 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+.btn-primary {
+  background: var(--color-gold) !important;
+  color: var(--color-text-inverse) !important;
+  border: 1px solid var(--color-gold) !important;
+  box-shadow: none !important;
+}
+.btn-primary:hover {
+  background: var(--color-gold-light) !important;
+  color: var(--color-text-inverse) !important;
+  border-color: var(--color-gold-light) !important;
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(201,169,110,0.18) !important;
+}
+
+.btn-outline,
+.btn-ghost-light {
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border-strong) !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+.btn-outline:hover,
+.btn-ghost-light:hover {
+  background: transparent !important;
+  color: var(--color-gold-light) !important;
+  border-color: var(--color-gold-light) !important;
+}
+
+.btn-lg { padding: 16px 36px !important; }
+
+/* ---------------------------------------------------------------------
+   8. SECTIONS — backgrounds, borders, text
+   ------------------------------------------------------------------- */
+section, .section {
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+}
+section.bg-alt, .bg-alt, .section.bg-alt {
+  background: var(--color-bg-secondary) !important;
+}
+
+/* USP / Why us */
+.usp { background: var(--color-bg-secondary) !important; }
+.usp-bg { background: none !important; opacity: 0 !important; }
+
+.usp-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+.usp-card:hover {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-border-strong) !important;
+  box-shadow: 0 0 20px rgba(201,169,110,0.08) !important;
+  transform: translateY(-2px);
+}
+.usp-card h3, .usp-card h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  color: var(--color-gold) !important;
+  font-size: 1.4rem !important;
+}
+.usp-card p { color: var(--color-text-secondary) !important; }
+
+.usp-icon, .usp-card .usp-icon {
+  background: transparent !important;
+  border: 1px solid var(--color-border-strong) !important;
+  color: var(--color-gold) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.usp-icon svg, .usp-card svg {
+  stroke: var(--color-gold) !important;
+  stroke-width: 1.5 !important;
+  fill: none !important;
+}
+
+/* About / Kim jesteśmy */
+.about, .about--solo, .about-section {
+  background: var(--color-bg-primary) !important;
+  position: relative;
+}
+.about::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.79 0 0 0 0 0.66 0 0 0 0 0.43 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+.about-bg { background: none !important; opacity: 0 !important; }
+.about > .container { position: relative; z-index: 2; }
+
+.about-solo-lead, .about .lead, .about p {
+  color: var(--color-text-secondary) !important;
+}
+.about-solo-lead strong, .about strong { color: var(--color-gold) !important; }
+
+/* ---------------------------------------------------------------------
+   9. SERVICES (cards) — index + service subpages
+   ------------------------------------------------------------------- */
+.services { background: var(--color-bg-secondary) !important; }
+
+.service-card,
+.services-grid > article,
+.services-grid > .service-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease !important;
+}
+.service-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 16px; right: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 3rem;
+  font-weight: 500;
+  color: rgba(201,169,110,0.15);
+  pointer-events: none;
+  line-height: 1;
+}
+.service-card:hover {
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-border-strong) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(201,169,110,0.08) !important;
+}
+.service-card h3 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  color: var(--color-text-primary) !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.01em !important;
+}
+.service-card p { color: var(--color-text-secondary) !important; }
+
+.service-icon, .service-card .service-icon {
+  background: transparent !important;
+  border: 1px solid var(--color-border-strong) !important;
+  color: var(--color-gold) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.service-icon svg { stroke: var(--color-gold) !important; stroke-width: 1.5 !important; fill: none !important; }
+
+.service-link, .service-card .service-link {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  color: var(--color-gold) !important;
+  transition: letter-spacing 0.3s ease, color 0.3s ease !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+}
+.service-link:hover {
+  color: var(--color-gold-light) !important;
+  -webkit-text-fill-color: var(--color-gold-light) !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* ---------------------------------------------------------------------
+   10. PROCESS / WSPÓŁPRACA — steps
+   ------------------------------------------------------------------- */
+.process { background: var(--color-bg-secondary) !important; }
+.process-bg { background: none !important; opacity: 0 !important; }
+
+.process-step {
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.process-step h3, .process-step h4 {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  color: var(--color-text-primary) !important;
+  font-weight: 500 !important;
+}
+.process-step p { color: var(--color-text-secondary) !important; }
+.process-step strong { color: var(--color-gold-light) !important; }
+
+.process-number, .process-step .process-number {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 500 !important;
+  font-size: 4rem !important;
+  color: var(--color-gold) !important;
+  opacity: 0.4 !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+}
+
+/* ---------------------------------------------------------------------
+   11. AGENT (Magdalena) section
+   ------------------------------------------------------------------- */
+.agent-section, .section.agent-section {
+  background: var(--color-bg-primary) !important;
+  position: relative;
+  overflow: hidden;
+}
+.agent-section::after {
+  content: '';
+  position: absolute; top: 0; right: -10%;
+  width: 50%; height: 100%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 70%);
+  z-index: 0;
+}
+.agent-section > .container { position: relative; z-index: 1; }
+
+.agent-quote, blockquote.agent-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1.5rem !important;
+  color: var(--color-text-primary) !important;
+  border-left: 3px solid var(--color-gold) !important;
+  padding-left: 1.5rem !important;
+  background: transparent !important;
+}
+
+.agent-credentials, .agent-credentials li {
+  list-style: none !important;
+}
+.agent-credentials li {
+  position: relative;
+  padding-left: 1.5rem !important;
+  color: var(--color-text-secondary) !important;
+}
+.agent-credentials li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-weight: 400;
+}
+
+.agent-card-float, .agent-card-float * {
+  font-family: 'Inter', sans-serif !important;
+  color: var(--color-text-muted) !important;
+  background: var(--color-bg-card) !important;
+  border-color: var(--color-border) !important;
+}
+.agent-card-float strong { color: var(--color-text-primary) !important; }
+
+/* Agent photo styling */
+.agent-photo, img[alt*="Magdalena" i] {
+  filter: contrast(1.08) saturate(0.7) brightness(0.9) sepia(0.1) !important;
+  border: 1px solid var(--color-border-strong) !important;
+}
+.agent-visual, .agent-photo-wrapper {
+  position: relative;
+}
+.agent-visual::after, .agent-photo-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  border: 1px solid var(--color-gold);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------
+   12. TESTIMONIALS
+   ------------------------------------------------------------------- */
+.testimonials { background: var(--color-bg-secondary) !important; }
+
+.testimonial-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  padding: 2.5rem !important;
+}
+.testimonial-card:hover { border-color: var(--color-border-strong) !important; }
+.testimonial-stars, .testimonial-card .testimonial-stars {
+  color: var(--color-gold) !important;
+  -webkit-text-fill-color: var(--color-gold) !important;
+}
+.testimonial-card p, .testimonial-card .testimonial-text {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1.05rem !important;
+  color: var(--color-text-secondary) !important;
+}
+.testimonial-card cite, .testimonial-author, .testimonial-card .author-name {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  color: var(--color-text-primary) !important;
+}
+.testimonial-context, .testimonial-card .author-role, .testimonial-card .context {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* ---------------------------------------------------------------------
+   13. PARTNERS
+   ------------------------------------------------------------------- */
+.partners {
+  background: var(--color-bg-primary) !important;
+  border-top: 1px solid var(--color-border) !important;
+}
+.partner-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  color: var(--color-text-secondary) !important;
+}
+.partner-card:hover {
+  border-color: var(--color-border-strong) !important;
+  background: var(--color-bg-elevated) !important;
+}
+.partner-icon {
+  color: var(--color-gold) !important;
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+}
+.partner-icon svg { stroke: var(--color-gold) !important; }
+
+.partners img, .partner-logo img {
+  filter: brightness(0) invert(1) opacity(0.4);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.partners img:hover, .partner-logo img:hover {
+  filter: brightness(0) invert(1) opacity(0.8);
+}
+
+/* ---------------------------------------------------------------------
+   14. CONTACT — info + form
+   ------------------------------------------------------------------- */
+.contact { background: var(--color-bg-secondary) !important; }
+
+.contact-info-card,
+.contact-form-wrap,
+.contact-form {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.contact-details li, .contact-details a {
+  color: var(--color-text-secondary) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.contact-details a:hover { color: var(--color-gold) !important; }
+.contact-details strong { color: var(--color-text-primary) !important; }
+
+.contact-icon {
+  color: var(--color-gold) !important;
+  background: transparent !important;
+  border: 1px solid var(--color-border-strong) !important;
+}
+.contact-icon svg { stroke: var(--color-gold) !important; fill: none !important; }
+
+/* Form fields */
+.contact-form input,
+.contact-form select,
+.contact-form textarea,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 2px !important;
+  color: var(--color-text-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder,
+input::placeholder,
+textarea::placeholder { color: var(--color-text-muted) !important; }
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus,
+input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  border-color: var(--color-gold) !important;
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.1) !important;
+}
+.contact-form label, .form-group label {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.04em !important;
+  color: var(--color-text-secondary) !important;
+  text-transform: uppercase !important;
+}
+.form-sub { color: var(--color-text-muted) !important; }
+
+input[type="checkbox"], input[type="radio"] {
+  accent-color: var(--color-gold) !important;
+}
+.form-group-check, .form-group-check label {
+  color: var(--color-text-muted) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-size: 0.85rem !important;
+}
+
+/* ---------------------------------------------------------------------
+   15. FOOTER
+   ------------------------------------------------------------------- */
+.footer, footer.footer {
+  background: #0A0A09 !important;
+  border-top: 1px solid var(--color-border) !important;
+  color: var(--color-text-muted) !important;
+}
+.footer-top, .footer-bottom { background: transparent !important; }
+.footer-bottom { border-top: 1px solid var(--color-border) !important; }
+
+.footer-col h3, .footer-col h4, .footer-col .footer-heading {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--color-text-primary) !important;
+}
+.footer a, .footer-col a, .footer-address {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+  color: var(--color-text-muted) !important;
+  transition: color 0.2s ease !important;
+}
+.footer a:hover, .footer-col a:hover { color: var(--color-gold) !important; }
+
+.footer-bottom, .footer-bottom * {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  color: var(--color-text-muted) !important;
+  font-size: 0.8rem !important;
+}
+.footer-bottom a[href*="kontaktio"] { color: var(--color-gold) !important; }
+.footer-bottom a[href*="kontaktio"]:hover { color: var(--color-gold-light) !important; }
+
+.social-btn {
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-muted) !important;
+}
+.social-btn:hover {
+  background: transparent !important;
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold) !important;
+}
+
+/* ---------------------------------------------------------------------
+   16. STICKY MOBILE BAR
+   ------------------------------------------------------------------- */
+.sticky-bar, #stickyBar {
+  background: #0F0F0E !important;
+  border-top: 1px solid var(--color-border-strong) !important;
+  color: var(--color-text-primary) !important;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.5) !important;
+}
+.sticky-phone, .sticky-offers {
+  color: var(--color-text-primary) !important;
+}
+.sticky-phone:hover, .sticky-offers:hover { color: var(--color-gold) !important; }
+.sticky-close { color: var(--color-text-muted) !important; }
+
+/* ---------------------------------------------------------------------
+   17. COOKIE BANNER
+   ------------------------------------------------------------------- */
+.cookie-consent, #cookieConsent {
+  background: var(--color-bg-card) !important;
+  border-top: 1px solid var(--color-border-strong) !important;
+  color: var(--color-text-secondary) !important;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.5) !important;
+}
+.cookie-consent *, .cookie-text, .cookie-text * {
+  color: var(--color-text-secondary) !important;
+}
+.cookie-text strong { color: var(--color-text-primary) !important; }
+.cookie-text a { color: var(--color-gold) !important; }
+
+.cookie-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  border-radius: 2px !important;
+  transition: all 0.3s ease !important;
+}
+.cookie-btn-primary {
+  background: var(--color-gold) !important;
+  color: var(--color-text-inverse) !important;
+  border: 1px solid var(--color-gold) !important;
+}
+.cookie-btn-primary:hover {
+  background: var(--color-gold-light) !important;
+  border-color: var(--color-gold-light) !important;
+  color: var(--color-text-inverse) !important;
+}
+.cookie-btn-outline {
+  background: transparent !important;
+  color: var(--color-gold) !important;
+  border: 1px solid var(--color-border-strong) !important;
+}
+.cookie-btn-outline:hover {
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold-light) !important;
+}
+.cookie-btn-ghost {
+  background: transparent !important;
+  color: var(--color-gold) !important;
+  border: 1px solid transparent !important;
+}
+.cookie-btn-ghost:hover { color: var(--color-gold-light) !important; }
+.cookie-check, .cookie-check * { color: var(--color-text-secondary) !important; }
+.cookie-custom-panel { background: var(--color-bg-elevated) !important; border-top: 1px solid var(--color-border) !important; }
+
+/* ---------------------------------------------------------------------
+   18. SUBPAGES — service detail pages, polityka, regulamin
+   ------------------------------------------------------------------- */
+
+/* Breadcrumb */
+.breadcrumb, .breadcrumbs, nav.breadcrumb {
+  font-family: 'Inter', sans-serif !important;
+  color: var(--color-text-muted) !important;
+}
+.breadcrumb a, .breadcrumbs a { color: var(--color-text-secondary) !important; }
+.breadcrumb a:hover, .breadcrumbs a:hover { color: var(--color-gold) !important; }
+.breadcrumb .separator,
+.breadcrumb-separator,
+.breadcrumbs .sep { color: var(--color-gold) !important; }
+.breadcrumb-current,
+.breadcrumb [aria-current="page"],
+.breadcrumbs [aria-current="page"] { color: var(--color-text-primary) !important; }
+
+/* FAQ */
+.faq, .faq-section { background: var(--color-bg-secondary) !important; }
+.faq-item, .faq details, details.faq-item {
+  border-bottom: 1px solid var(--color-border) !important;
+  background: transparent !important;
+}
+.faq-item summary,
+.faq-question,
+.faq-item .question,
+.faq summary {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  color: var(--color-text-primary) !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+}
+.faq-item p,
+.faq-answer,
+.faq-item .answer {
+  font-family: 'Inter', sans-serif !important;
+  color: var(--color-text-secondary) !important;
+}
+
+/* Service-page CTA bands */
+.service-cta, .service-cta-section, .cta-section, .cta-box {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-strong) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.service-cta--dark { background: var(--color-bg-card) !important; }
+
+/* "Na czym to polega" steps on subpages reuse process styles above */
+
+/* Legal pages */
+.legal-content, .legal, article.legal {
+  background: var(--color-bg-primary) !important;
+  color: var(--color-text-secondary) !important;
+}
+.legal h1, .legal h2 { color: var(--color-text-primary) !important; }
+.legal h3, .legal h4 { color: var(--color-gold) !important; font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.legal a { color: var(--color-gold) !important; }
+.legal a:hover { color: var(--color-gold-light) !important; }
+
+/* ---------------------------------------------------------------------
+   19. OFERTY (listings) + OFERTA (detail) — palette consistency
+   ------------------------------------------------------------------- */
+.listing-card, .offer-card, .property-card,
+.offers-grid > article, .listings-grid > article {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 4px !important;
+  color: var(--color-text-secondary) !important;
+  box-shadow: none !important;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.listing-card:hover, .offer-card:hover, .property-card:hover {
+  border-color: var(--color-border-strong) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(201,169,110,0.08) !important;
+}
+.listing-card h2, .listing-card h3, .offer-card h2, .offer-card h3,
+.property-card h2, .property-card h3 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  color: var(--color-text-primary) !important;
+  font-weight: 500 !important;
+}
+.price, .listing-price, .offer-price, .property-price {
+  color: var(--color-gold) !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+/* Filter chips, tags */
+.tag, .chip, .badge, .filter-chip {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-gold) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 2px !important;
+}
+.tag.active, .chip.active, .filter-chip.active {
+  background: var(--color-gold) !important;
+  color: var(--color-text-inverse) !important;
+  border-color: var(--color-gold) !important;
+}
+
+/* ---------------------------------------------------------------------
+   20. PROPERTY IMAGES — filter for warm tonality
+   ------------------------------------------------------------------- */
+.property-image, .listing-img, .offer-image,
+img[src*="nieruchom"], img[src*="property"],
+.property-card img, .listing-card img, .offer-card img {
+  filter: contrast(1.05) saturate(0.85) brightness(0.95);
+  transition: filter 0.4s ease;
+}
+.property-image:hover, .listing-img:hover, .offer-image:hover,
+.property-card:hover img, .listing-card:hover img, .offer-card:hover img {
+  filter: contrast(1.08) saturate(0.95) brightness(1.0);
+}
+
+/* ---------------------------------------------------------------------
+   21. UTILITY — neutralize bright backgrounds left behind by base CSS
+   ------------------------------------------------------------------- */
+.section-header h2 { color: var(--color-text-primary) !important; }
+.bg-light, .bg-white { background: var(--color-bg-primary) !important; }
+hr { border-color: var(--color-border) !important; }
+
+/* Reveal anim base — keep consistent with existing wow-animations */
+.reveal { will-change: opacity, transform; }
+
+/* ---------------------------------------------------------------------
+   22. RESPONSIVE TWEAKS
+   ------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero h1, .hero-title { font-size: clamp(2rem, 8vw, 2.8rem) !important; }
+  .agent-visual::after, .agent-photo-wrapper::after { inset: 8px -8px -8px 8px; }
+  .eyebrow::before, .eyebrow::after,
+  .label-tag::before, .label-tag::after { margin: 0 0.4em; }
+}
