@@ -1219,24 +1219,16 @@ img, .visual, [role="img"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal, .reveal-scale, .reveal-blur, .reveal-left, .reveal-right,
   .hero .hero-eyebrow,
   .hero .hero-content h1,
   .hero .hero-subtitle,
   .hero .hero-actions,
   .hero .hero-scroll {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
-  .reveal, .reveal-scale, .reveal-blur, .reveal-left, .reveal-right {
     opacity: 1 !important;
     transform: none !important;
   }
