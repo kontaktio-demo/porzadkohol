@@ -8,7 +8,6 @@
 
   var TILT_MAX_DEG = 5;
   var MAGNETIC_STRENGTH = 0.15;
-  var HERO_PARALLAX_FACTOR = 0.4;
 
   var enhancedObserver;
   var enhancedElements;
@@ -112,30 +111,20 @@
     var hero = document.querySelector('.hero');
     if (!hero) return;
 
-    var heroContent = hero.querySelector('.hero-content');
     var heroScroll = hero.querySelector('.hero-scroll');
+    if (!heroScroll) return;
+
     var ticking = false;
 
     function update() {
       ticking = false;
       var scrollY = window.scrollY;
-      var heroH = hero.offsetHeight;
-
-      if (scrollY > heroH * 1.5) return;
-
-      hero.style.backgroundPositionY = (scrollY * HERO_PARALLAX_FACTOR) + 'px';
-
-      if (heroContent) {
-        heroContent.style.transform =
-          'translateY(' + (scrollY * -0.15) + 'px)';
-        heroContent.style.opacity =
-          clamp(1 - scrollY / (heroH * 0.7), 0, 1);
-      }
-
-      if (heroScroll) {
-        heroScroll.style.opacity =
-          clamp(1 - scrollY / 200, 0, 1);
-      }
+      // Only fade the scroll cue. We deliberately do NOT touch the hero
+      // background or .hero-content here — those used to fight the
+      // .reveal { ... !important } CSS rules and caused a visible jump
+      // the moment the user started scrolling. The entrance animation
+      // is now handled in pure CSS (see redesign.css §16b).
+      heroScroll.style.opacity = clamp(1 - scrollY / 200, 0, 1);
     }
 
     window.addEventListener('scroll', function () {
