@@ -11,12 +11,12 @@ em, i   { font-style: normal; }
   --bg:          #ffffff;
   --bg-soft:     #f6f5f2;
   --bg-alt:      #f1efe9;
-  --primary:     #0e0e10;     
+  --primary:     #0e0e10;
   --primary-d:   #000000;
   --primary-l:   #2a2a2e;
   --accent:      #6b6b73;
-  --accent-blue: #2563eb;     
-  --accent-green:#16a34a;     
+  --accent-blue: #2563eb;
+  --accent-green:#16a34a;
   --gold:        #b8924a;
   --gold-soft:   #d4b173;
   --text:        #2a2a2e;
@@ -57,7 +57,7 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding-top: var(--nav-h);   
+  padding-top: var(--nav-h);
 }
 
 h1, h2, h3, h4 {
@@ -963,7 +963,7 @@ h1, h2, h3, h4 {
   margin-top: auto;
   padding-top: 80px;
 }
-.footer::before { content: none; }   
+.footer::before { content: none; }
 
 .footer-top {
   padding: 0 40px 60px;

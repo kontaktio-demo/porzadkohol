@@ -1,24 +1,7 @@
-/* =====================================================================
-   MWW Mieszkanie — REDESIGN (light, clean, minimal)
-   ---------------------------------------------------------------------
-   Loaded LAST on every page. Overrides palette, typography and key
-   component styling on top of styles.css / oferty.css /
-   oferta-detail.css / wow-animations.css without touching the
-   underlying files or HTML structure (oferta.html structure is
-   intentionally left untouched — only colours / typography / spacing
-   inherit from this stylesheet).
 
-   Aesthetic: clean, minimal real-estate agency
-   (Knight Frank / Sotheby's / Engel & Völkers).
-   Pure white backgrounds, generous whitespace, strong sans-serif
-   typography, single restrained blue accent.
-   ===================================================================== */
 
-/* ---------------------------------------------------------------------
-   1. NEW LIGHT PALETTE — overrides BOTH styles.css and oferty.css :root
-   ------------------------------------------------------------------- */
 :root {
-  /* Canonical palette per spec */
+
   --color-white:        #FFFFFF;
   --color-surface:      #F5F5F7;
   --color-surface-2:    #EDEDED;
@@ -33,8 +16,6 @@
   --color-accent-hover: #1E48D9;
   --color-accent-soft:  rgba(42, 92, 255, 0.08);
 
-  /* Re-map legacy `--c-*` tokens (styles.css) onto the new palette
-     so the rest of the rules render light without rewrites. */
   --c-bg:           var(--color-white);
   --c-bg-alt:       var(--color-surface);
   --c-ink:          var(--color-ink);
@@ -55,7 +36,6 @@
   --c-logo-gray:    var(--color-surface);
   --c-logo-gray-2:  var(--color-surface-2);
 
-  /* Kill any leftover gradients — flatten to solid colours. */
   --gradient-gold:       var(--color-accent);
   --gradient-gold-soft:  var(--color-accent);
   --gradient-gold-line:  var(--color-line);
@@ -63,7 +43,6 @@
   --gradient-navy-soft:  var(--color-surface);
   --gradient-navy-line:  var(--color-line);
 
-  /* Subtle shadows */
   --shadow-xs:      0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-sm:      0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md:      0 4px 20px rgba(0, 0, 0, 0.05);
@@ -81,7 +60,6 @@
   --primary: var(--color-ink);
   --accent:  var(--color-accent);
 
-  /* Re-map oferty.css variables */
   --bg:           var(--color-white);
   --bg-soft:      var(--color-surface);
   --bg-alt:       var(--color-surface);
@@ -105,9 +83,6 @@
   --ease:         cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* ---------------------------------------------------------------------
-   2. GLOBAL RESET — body, scrollbar, selection
-   ------------------------------------------------------------------- */
 html, body {
   background: var(--color-white) !important;
 }
@@ -125,7 +100,6 @@ body {
 
 html { scroll-behavior: smooth; }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-white); }
 ::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 8px; border: 2px solid var(--color-white); }
@@ -135,8 +109,6 @@ html { scroll-behavior: smooth; }
 ::selection      { background: var(--color-accent-soft); color: var(--color-ink); }
 ::-moz-selection { background: var(--color-accent-soft); color: var(--color-ink); }
 
-/* Kill emergency-decoration noise from styles.css (ornamental SVGs,
-   gradient lines, gold glow halos, etc.) */
 .section-deco,
 .hero-deco,
 .deco-line,
@@ -153,9 +125,6 @@ html { scroll-behavior: smooth; }
   display: none !important;
 }
 
-/* ---------------------------------------------------------------------
-   3. TYPOGRAPHY — strong, clean sans
-   ------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6,
 .hero-title, .hero h1,
 .section-title, .section-header h2,
@@ -230,7 +199,6 @@ a {
 }
 a:hover { color: var(--color-accent-hover); }
 
-/* Eyebrow / category labels — small, calm */
 .eyebrow, .label-tag, .section-eyebrow,
 .hero-eyebrow, .service-hero-eyebrow {
   font-family: 'Inter', sans-serif !important;
@@ -244,14 +212,12 @@ a:hover { color: var(--color-accent-hover); }
   font-style: normal !important;
 }
 
-/* Remove decorative dashes around eyebrow */
 .eyebrow::before, .eyebrow::after,
 .label-tag::before, .label-tag::after {
   content: none !important;
   display: none !important;
 }
 
-/* Hero subtitle / lead — clean regular sans */
 .hero-subtitle, .lead, .about-solo-lead,
 .section-desc, .section-header p,
 .form-sub {
@@ -263,9 +229,6 @@ a:hover { color: var(--color-accent-hover); }
   color: var(--color-ink-2) !important;
 }
 
-/* ---------------------------------------------------------------------
-   4. LAYOUT — generous whitespace, calm spacing
-   ------------------------------------------------------------------- */
 section, .section {
   padding-top: clamp(80px, 10vw, 140px) !important;
   padding-bottom: clamp(80px, 10vw, 140px) !important;
@@ -293,15 +256,11 @@ section, .section {
 .section-header h2 { margin: 0.5rem 0 1.25rem !important; }
 .section-header .section-desc { max-width: 720px; margin-left: auto; margin-right: auto; }
 
-/* Kill stray dark backgrounds from styles.css */
 [class*="--dark"], [class*="--ink"],
 .usp-bg, .process-bg, .about-bg {
   background: transparent !important;
 }
 
-/* ---------------------------------------------------------------------
-   5. NAVIGATION — sticky, white, thin border
-   ------------------------------------------------------------------- */
 .nav, header.nav, #nav {
   background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: saturate(180%) blur(18px) !important;
@@ -340,7 +299,7 @@ section, .section {
   padding: 6px 2px !important;
   transition: color 200ms var(--ease) !important;
 }
-/* Hover-draw underline (origin left -> right) */
+
 .nav-link::before { content: none !important; display: none !important; }
 .nav-link::after {
   content: '' !important;
@@ -361,7 +320,6 @@ section, .section {
 .nav-link:hover::after,
 .nav-link.active::after { transform: scaleX(1); }
 
-/* Featured link ("Oferty"): tiny accent dot, never gold */
 .nav-link-featured, .nav-link.nav-link-featured {
   color: var(--color-ink) !important;
   font-weight: 600 !important;
@@ -401,11 +359,9 @@ section, .section {
 }
 .nav-cta-icon { display: none !important; }
 
-/* Hamburger */
 .hamburger { background: transparent !important; }
 .hamburger span { background: var(--color-ink) !important; }
 
-/* Mobile menu */
 @media (max-width: 960px) {
   .nav-links {
     background: var(--color-white) !important;
@@ -416,9 +372,6 @@ section, .section {
   .nav-link-featured { padding-left: 0 !important; }
 }
 
-/* ---------------------------------------------------------------------
-   6. PRELOADER — light
-   ------------------------------------------------------------------- */
 #preloader, .preloader {
   background: var(--color-white) !important;
 }
@@ -433,9 +386,6 @@ section, .section {
   text-transform: none !important;
 }
 
-/* ---------------------------------------------------------------------
-   7. HERO — full-bleed image, dark overlay, white type
-   ------------------------------------------------------------------- */
 .hero {
   background: var(--color-white) !important;
   min-height: 92vh !important;
@@ -512,7 +462,6 @@ section, .section {
 .hero-scroll { color: rgba(255,255,255,0.7) !important; }
 .hero-scroll .scroll-line { background: rgba(255,255,255,0.6) !important; }
 
-/* Service hero (sub-pages) */
 .service-hero {
   background: var(--color-ink) !important;
   min-height: 60vh !important;
@@ -561,9 +510,6 @@ section, .section {
 }
 .breadcrumbs-light a:hover { color: var(--color-white) !important; }
 
-/* ---------------------------------------------------------------------
-   8. BUTTONS — clean pill / outline
-   ------------------------------------------------------------------- */
 .btn,
 button.btn,
 a.btn {
@@ -627,7 +573,6 @@ a.btn {
 .btn-lg { padding: 14px 28px !important; font-size: 0.98rem !important; }
 .btn-full { width: 100% !important; }
 
-/* Service / "Dowiedz się więcej →" link */
 .service-link {
   font-family: 'Inter', sans-serif !important;
   font-weight: 600 !important;
@@ -642,9 +587,6 @@ a.btn {
   transform: translateX(3px);
 }
 
-/* ---------------------------------------------------------------------
-   9. CARDS — minimal
-   ------------------------------------------------------------------- */
 .usp-card, .service-card, .process-step,
 .partner-card, .testimonial-card,
 .contact-info-card, .contact-form-wrap,
@@ -666,7 +608,6 @@ a.btn {
   border-color: var(--color-line) !important;
 }
 
-/* Strip decorative card pseudo-borders / glows from styles.css */
 .usp-card::before, .usp-card::after,
 .service-card::before, .service-card::after,
 .process-step::before, .process-step::after,
@@ -687,7 +628,6 @@ a.btn {
   color: var(--color-ink-2) !important;
 }
 
-/* Card icons — minimal outline */
 .usp-icon, .service-icon, .partner-icon, .contact-icon {
   width: 56px !important;
   height: 56px !important;
@@ -712,7 +652,6 @@ a.btn {
   fill: none !important;
 }
 
-/* Process number */
 .process-number {
   font-family: 'Manrope', sans-serif !important;
   font-weight: 600 !important;
@@ -725,7 +664,6 @@ a.btn {
   margin-bottom: 0.75rem;
 }
 
-/* Grids */
 .usp-grid, .services-grid, .process-grid,
 .partners-grid, .testimonials-grid, .values-grid {
   display: grid !important;
@@ -735,9 +673,6 @@ a.btn {
 .services-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
 .testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; }
 
-/* ---------------------------------------------------------------------
-   10. ABOUT / AGENT sections
-   ------------------------------------------------------------------- */
 .about, .about-solo, .agent-section {
   background: var(--color-white) !important;
 }
@@ -751,7 +686,6 @@ a.btn {
 }
 .about-solo-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 2rem; }
 
-/* Agent visual */
 .two-col, .two-col-reverse {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
@@ -800,9 +734,6 @@ a.btn {
 }
 .agent-card-float strong { color: var(--color-ink) !important; font-weight: 700 !important; }
 
-/* Mobile: stop the floating card from sitting on top of the text column.
-   On narrow viewports the two-col grid collapses to a single column, so put
-   the card into normal flow centred under the photo. */
 @media (max-width: 880px) {
   .agent-card-float {
     position: static !important;
@@ -853,9 +784,6 @@ a.btn {
   flex-shrink: 0;
 }
 
-/* ---------------------------------------------------------------------
-   11. TESTIMONIALS — clean, no italic
-   ------------------------------------------------------------------- */
 .testimonial-card { background: var(--color-white) !important; }
 .testimonial-stars { color: var(--color-accent) !important; letter-spacing: 2px; margin-bottom: 0.75rem; }
 .testimonial-card p, .testimonial-card em {
@@ -868,9 +796,6 @@ a.btn {
 .testimonial-card footer strong { color: var(--color-ink) !important; display: block; }
 .testimonial-card footer span { color: var(--color-ink-mute) !important; font-size: 0.85rem; }
 
-/* ---------------------------------------------------------------------
-   12. CONTACT
-   ------------------------------------------------------------------- */
 .contact { background: var(--color-surface) !important; }
 .contact-layout {
   display: grid !important;
@@ -916,7 +841,6 @@ a.btn {
 
 .contact-cta-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* Form */
 .contact-form input,
 .contact-form textarea,
 .contact-form select,
@@ -962,9 +886,6 @@ input:focus, textarea:focus, select:focus {
 .form-group-check input { width: auto !important; margin-top: 4px; }
 .form-group-check label { font-weight: 400 !important; color: var(--color-ink-2) !important; font-size: 0.82rem !important; }
 
-/* ---------------------------------------------------------------------
-   13. FOOTER
-   ------------------------------------------------------------------- */
 .footer, footer.footer {
   background: var(--color-surface) !important;
   color: var(--color-ink-2) !important;
@@ -1048,9 +969,6 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--color-ink) !important;
 }
 
-/* ---------------------------------------------------------------------
-   14. STICKY BAR / COOKIE / MISC OVERLAYS
-   ------------------------------------------------------------------- */
 .sticky-bar {
   background: var(--color-white) !important;
   border: 1px solid var(--color-line) !important;
@@ -1101,9 +1019,6 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--color-ink) !important;
 }
 
-/* ---------------------------------------------------------------------
-   15. IMAGES — soft treatment
-   ------------------------------------------------------------------- */
 img, .visual, [role="img"] {
   border-radius: var(--radius);
 }
@@ -1151,9 +1066,6 @@ img, .visual, [role="img"] {
 .service-hero-bg--off-market     { background-image: url('images/lodz-architektura-5.webp') !important; }
 .service-hero-bg--wycena         { background-image: url('images/lodz-architektura-6.webp') !important; }
 
-/* ---------------------------------------------------------------------
-   16. ANIMATIONS — subtle reveals
-   ------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -1178,12 +1090,6 @@ img, .visual, [role="img"] {
   filter: none !important;
 }
 
-/* ---------------------------------------------------------------------
-   16b. HERO entrance — simple, staged fade-in for the homepage hero.
-   Plays once on load. Replaces the previously buggy parallax that
-   conflicted with .reveal !important rules and caused a visible jump
-   the moment the user started to scroll.
-   ------------------------------------------------------------------- */
 @keyframes mwwHeroFadeUp {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
@@ -1207,8 +1113,6 @@ img, .visual, [role="img"] {
   animation: mwwHeroFadeUp 700ms var(--ease) 900ms forwards;
 }
 
-/* Neutralise the generic .reveal initial state on the hero block —
-   the staged animation above owns the entrance now. */
 .hero .hero-content.reveal,
 .hero .hero-content.reveal-scale,
 .hero .hero-content.reveal-blur,
@@ -1234,9 +1138,6 @@ img, .visual, [role="img"] {
   }
 }
 
-/* ---------------------------------------------------------------------
-   17. PARTNERS — minimal mono cards
-   ------------------------------------------------------------------- */
 .partner-card {
   text-align: center;
   display: flex;
@@ -1248,9 +1149,6 @@ img, .visual, [role="img"] {
 .partner-card span { color: var(--color-ink-mute) !important; font-size: 0.85rem; }
 .partner-icon { color: var(--color-ink) !important; }
 
-/* ---------------------------------------------------------------------
-   18. OFERTY (listing) page — light treatment without structural changes
-   ------------------------------------------------------------------- */
 body.oferty,
 .oferty-page,
 .offers-list,
@@ -1304,9 +1202,6 @@ body.oferty,
   border-color: var(--color-ink) !important;
 }
 
-/* ---------------------------------------------------------------------
-   19. OFERTA detail page — colour / typography only (no structure)
-   ------------------------------------------------------------------- */
 .oferta-detail, .oferta-detail-page,
 .oferta-gallery, .oferta-info,
 .oferta-sidebar, .oferta-features {
@@ -1321,16 +1216,11 @@ body.oferty,
   border-color: var(--color-line-soft) !important;
 }
 
-/* ---------------------------------------------------------------------
-   20. UTILITY CLEANUP — remove leftover gold / dark surfaces
-   ------------------------------------------------------------------- */
 [style*="gradient"] {
-  /* harmless soft override: strip inline gradient backgrounds */
+
   background-image: none !important;
 }
 
-/* Any element that previously used the gold-on-dark scheme should
-   now read as ink-on-white. */
 .bg-dark, .bg-ink, .bg-navy {
   background: var(--color-ink) !important;
   color: var(--color-white) !important;
@@ -1340,18 +1230,12 @@ body.oferty,
 .bg-ink h1, .bg-ink h2, .bg-ink h3,
 .bg-navy h1, .bg-navy h2, .bg-navy h3 { color: var(--color-white) !important; }
 
-/* Final safety: kill leftover gold gradients on text */
 .gold, .text-gold, .accent-gold, .color-gold {
   color: var(--color-accent) !important;
   background: none !important;
   -webkit-text-fill-color: var(--color-accent) !important;
 }
 
-/* =====================================================================
-   21. POLISH — small details (no new sections, keep things calm)
-   ===================================================================== */
-
-/* Focus ring — accessible, calm */
 :focus-visible {
   outline: 2px solid var(--color-accent) !important;
   outline-offset: 3px !important;
@@ -1361,7 +1245,6 @@ body.oferty,
   outline-offset: 4px !important;
 }
 
-/* Hamburger — refined */
 .hamburger {
   width: 40px !important;
   height: 40px !important;
@@ -1379,7 +1262,6 @@ body.oferty,
   height: 1.5px !important;
 }
 
-/* USP ("Dlaczego my") — small numerals 01..04 in the corner */
 .usp-grid { counter-reset: usp; }
 .usp-card {
   counter-increment: usp;
@@ -1402,7 +1284,6 @@ body.oferty,
   pointer-events: none;
 }
 
-/* Process — thin connector line on desktop between the 4 steps */
 .process-grid { position: relative; }
 @media (min-width: 900px) {
   .process-grid::before {
@@ -1423,7 +1304,6 @@ body.oferty,
   }
 }
 
-/* Testimonials — small, calm opening quote glyph */
 .testimonial-card {
   position: relative;
   padding-top: 50px !important;
@@ -1440,7 +1320,6 @@ body.oferty,
   pointer-events: none;
 }
 
-/* Hero scroll cue — subtle pulse */
 .hero-scroll {
   position: absolute;
   bottom: 28px;
@@ -1484,9 +1363,6 @@ body.oferty,
   .hero-scroll .scroll-line::after { animation: none; }
 }
 
-/* =====================================================================
-   22. SUB-PAGE service hero — light variant (replaces dark slab)
-   ===================================================================== */
 .service-hero {
   background: var(--color-surface) !important;
   min-height: auto !important;
@@ -1532,7 +1408,6 @@ body.oferty,
   background: none !important;
 }
 
-/* Light breadcrumbs on subpages */
 .breadcrumbs-light, .breadcrumbs {
   background: transparent !important;
   border-bottom: 0 !important;
@@ -1545,9 +1420,6 @@ body.oferty,
 .breadcrumbs-light .sep, .breadcrumb-sep { color: var(--color-line) !important; }
 .breadcrumb-current { color: var(--color-ink) !important; font-weight: 500 !important; }
 
-/* =====================================================================
-   23. SERVICE CTA — single dark card pulled out of white background
-   ===================================================================== */
 .service-cta {
   background: var(--color-ink) !important;
   color: var(--color-white) !important;
@@ -1597,11 +1469,6 @@ body.oferty,
   color: var(--color-white) !important;
 }
 
-/* =====================================================================
-   24. LISTINGS PAGE — clean cards, badges, filters, page header
-   ===================================================================== */
-
-/* Page header (oferty.html top banner) */
 .page-header {
   background: var(--color-white) !important;
   padding: clamp(120px, 14vw, 180px) 0 clamp(36px, 5vw, 56px) !important;
@@ -1673,7 +1540,6 @@ body.oferty,
 }
 .page-header-note strong { color: var(--color-ink) !important; }
 
-/* Filter bar */
 .filter-bar {
   background: var(--color-white) !important;
   border: 1px solid var(--color-line-soft) !important;
@@ -1734,7 +1600,6 @@ body.oferty,
 }
 .filter-reset:hover { color: var(--color-ink) !important; }
 
-/* Listings grid wrap */
 .listings-page {
   background: var(--color-white) !important;
   max-width: 1240px;
@@ -1764,7 +1629,6 @@ body.oferty,
   font-family: 'Inter', sans-serif !important;
 }
 
-/* Listing cards */
 .listing-card {
   background: var(--color-white) !important;
   border: 1px solid var(--color-line-soft) !important;
@@ -1890,7 +1754,6 @@ body.oferty,
   font-family: 'Inter', sans-serif !important;
 }
 
-/* Listing action buttons */
 .listing-actions-bar {
   border-top: 1px solid var(--color-line-soft) !important;
   background: var(--color-white) !important;
@@ -1930,7 +1793,6 @@ body.oferty,
 }
 .btn-save.saved svg { fill: var(--color-ink) !important; }
 
-/* No results / load more */
 .no-results {
   background: var(--color-surface) !important;
   border: 1px solid var(--color-line-soft) !important;
@@ -1964,7 +1826,6 @@ body.oferty,
   color: var(--color-white) !important;
 }
 
-/* Skeleton — match light palette */
 .skeleton-photo,
 .skeleton-line {
   background: linear-gradient(90deg,
@@ -1974,9 +1835,6 @@ body.oferty,
   background-size: 200% 100% !important;
 }
 
-/* =====================================================================
-   25. OFFER DETAIL OVERLAY (oferta.html / oferty modal) — light
-   ===================================================================== */
 .detail-overlay { background: rgba(255,255,255,0.97) !important; }
 .detail-close {
   background: var(--color-white) !important;
@@ -2096,7 +1954,6 @@ body.oferty,
   color: var(--color-white) !important;
 }
 
-/* Modal */
 .modal-overlay { background: rgba(0,0,0,0.45) !important; }
 .modal {
   background: var(--color-white) !important;
@@ -2139,15 +1996,6 @@ body.oferty,
   border-color: var(--color-ink-2) !important;
 }
 
-/* ---------------------------------------------------------------------
-   18. SYMMETRIC TILE GRIDS
-   ---------------------------------------------------------------------
-   Pin service / partner grids so an even number of cards never breaks
-   into "row of 4 + leftover row of 2" on the homepage. 6 items render
-   as a clean 3+3 (and 2+2+2 on tablet, 1-per on mobile). Same idea for
-   any howto grid that may have 3 items but a 4-column rule from
-   styles.css.
-   ------------------------------------------------------------------- */
 .services-grid {
   grid-template-columns: repeat(3, 1fr) !important;
 }
@@ -2171,12 +2019,6 @@ body.oferty,
   }
 }
 
-/* ---------------------------------------------------------------------
-   19. READABILITY OF TEXT OVER PHOTOS
-   ---------------------------------------------------------------------
-   Strengthen the hero overlay so headline / lead are legible against
-   any photo, and add a subtle text-shadow on white-on-photo copy.
-   ------------------------------------------------------------------- */
 .hero-bg::after, .hero::before {
   background: linear-gradient(
     180deg,
@@ -2195,8 +2037,6 @@ body.oferty,
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
 }
 
-/* Listing card photo overlays — make the price / badge text crisp
-   against any thumbnail. */
 .listing-price,
 .listing-badges,
 .listing-badges .badge,
@@ -2204,13 +2044,6 @@ body.oferty,
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* =====================================================================
-   30. OFERTY PAGE — header backdrop image, compact non-sticky filter,
-       and mobile-friendly horizontal listing cards (olx/otomoto-style)
-   ===================================================================== */
-
-/* --- Page header on oferty.html: bring back a background image like
-       the homepage hero, with a dark overlay so text stays readable. --- */
 .page-header {
   background: var(--color-ink) !important;
   color: var(--color-white) !important;
@@ -2281,8 +2114,6 @@ body.oferty,
   border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* --- Filter bar: not sticky any more, slimmer padding so it doesn't
-       eat too much viewport when scrolling. --- */
 .filter-bar {
   position: static !important;
   top: auto !important;
@@ -2319,8 +2150,6 @@ body.oferty,
   font-size: 0.85rem !important;
 }
 
-/* --- Mobile: olx/otomoto-style horizontal listing cards. Image on the
-       left, info on the right — much easier to scan on small screens. --- */
 @media (max-width: 640px) {
   .listings-grid {
     grid-template-columns: 1fr !important;
@@ -2436,7 +2265,6 @@ body.oferty,
     font-size: 0.7rem !important;
   }
 
-  /* On the dark page header, scale the body text and padding down too. */
   .page-header { padding: 100px 0 36px !important; }
   .page-header-inner { padding: 0 18px !important; }
   .page-header h1 { font-size: 1.85rem !important; }

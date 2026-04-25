@@ -237,13 +237,11 @@ function onImgError(img) {
   img.style.background = '#f0f0f0';
 }
 
-/** Extract slug from URL - supports /oferta/slug, /oferta.html?slug=slug, and ?id=uuid */
 function getOfferSlug() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('slug')) return params.get('slug');
   if (params.get('id')) return params.get('id');
 
-  // Support /oferta/slug path pattern (requires URL rewriting on server)
   const path = window.location.pathname;
   const match = path.match(/\/oferta\/(.+?)(?:\/)?$/);
   if (match) return decodeURIComponent(match[1]);
@@ -251,7 +249,6 @@ function getOfferSlug() {
   return null;
 }
 
-/** Set all SEO meta tags dynamically */
 function setSeoMeta(offer) {
   const typeLabel = offer.type === 'sprzedaz' ? 'Sprzedaż' : 'Wynajem';
   const catLabel = CAT_LABELS[offer.category] || offer.category || '';
@@ -259,11 +256,9 @@ function setSeoMeta(offer) {
   const locationText = locationParts.length ? locationParts.join(', ') : offer.address || '';
   const priceFormatted = new Intl.NumberFormat('pl-PL').format(offer.price);
 
-  // Build SEO title
   const seoTitle = offer.metaTitle
     || (offer.title + ' - ' + typeLabel + ' | MWW Mieszkanie');
 
-  // Build SEO description
   const seoDesc = offer.metaDescription
     || (catLabel + ' na ' + typeLabel.toLowerCase() + (locationText ? ' w lokalizacji ' + locationText : '')
        + '. Cena: ' + priceFormatted + ' ' + (offer.currency || 'PLN')
@@ -273,29 +268,23 @@ function setSeoMeta(offer) {
   const pageUrl = window.location.href;
   const mainImage = resolveImg(offer.img) || '';
 
-  // Set document title
   document.title = seoTitle;
 
-  // Set meta tags
   document.getElementById('pageTitle').textContent = seoTitle;
   document.getElementById('metaDesc').setAttribute('content', seoDesc);
   document.getElementById('canonicalLink').setAttribute('href', pageUrl);
 
-  // Open Graph
   document.getElementById('ogTitle').setAttribute('content', seoTitle);
   document.getElementById('ogDesc').setAttribute('content', seoDesc);
   document.getElementById('ogImage').setAttribute('content', mainImage);
   document.getElementById('ogUrl').setAttribute('content', pageUrl);
 
-  // Twitter
   document.getElementById('twTitle').setAttribute('content', seoTitle);
   document.getElementById('twDesc').setAttribute('content', seoDesc);
   document.getElementById('twImage').setAttribute('content', mainImage);
 
-  // Breadcrumb
   document.getElementById('breadcrumbTitle').textContent = offer.title;
 
-  // JSON-LD Structured Data
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
@@ -338,14 +327,12 @@ function setSeoMeta(offer) {
     jsonLd.numberOfRooms = offer.rooms;
   }
 
-  // Add images array
   if (Array.isArray(offer.images) && offer.images.length > 0) {
     jsonLd.image = offer.images.map(function(img) {
       return resolveImg(img.webp || img.avif || img.original || '');
     }).filter(Boolean);
   }
 
-  // Breadcrumb structured data
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -359,7 +346,6 @@ function setSeoMeta(offer) {
   document.getElementById('jsonLd').textContent = JSON.stringify([jsonLd, breadcrumbLd]);
 }
 
-/** Render the full offer page */
 function renderOffer(l) {
   const article = document.getElementById('offerArticle');
 
@@ -495,11 +481,9 @@ function renderOffer(l) {
       '</a>' +
     '</div>';
 
-  // Show offer, hide loading
   document.getElementById('offerLoading').style.display = 'none';
   document.getElementById('offerContent').style.display = 'block';
 
-  // Gallery logic
   if (allImages.length > 1) {
     var currentIdx = 0;
     var mainImg = document.getElementById('galleryMainImg');
@@ -521,7 +505,6 @@ function renderOffer(l) {
     thumbs.forEach(function(t) { t.onclick = function() { goTo(parseInt(t.dataset.idx)); }; });
   }
 
-  // Ask button
   document.getElementById('offerAskBtn').addEventListener('click', function() {
     document.getElementById('modalListingTitle').textContent = 'Oferta: ' + l.title;
     document.getElementById('modalOverlay').classList.add('open');
@@ -530,7 +513,6 @@ function renderOffer(l) {
   });
 }
 
-/** Main initialization */
 document.addEventListener('DOMContentLoaded', function() {
   bindNav();
   bindModal();
@@ -556,7 +538,6 @@ async function loadOffer() {
       return;
     }
 
-    // Rewrite URL to clean path format: /oferta/slug
     if (offer.slug) {
       var cleanPath = '/oferta/' + encodeURIComponent(offer.slug);
       if (window.location.pathname + window.location.search !== cleanPath) {
@@ -576,7 +557,6 @@ function showError() {
   document.getElementById('offerError').style.display = 'flex';
 }
 
-/* ── Cookie helpers ── */
 function setCookie(name, value, days) {
   var d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -638,7 +618,6 @@ function bindModal() {
     if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
   });
 
-  // Live filtering: only digits, +, -, spaces and parentheses in the phone field.
   var mPhone = document.getElementById('mPhone');
   if (mPhone) {
     mPhone.setAttribute('inputmode', 'tel');

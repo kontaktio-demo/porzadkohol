@@ -20,8 +20,7 @@
   --c-gold-soft: #d6b378;
   --c-gold-light: #ecd29c;
   --c-gold-deep: #8d6a32;
-  /* Navy accent palette — secondary accent to reduce gold dominance.
-     Use --c-navy on light backgrounds, --c-navy-light on dark backgrounds. */
+
   --c-navy: #1a2a4a;
   --c-navy-soft: #2a3f6e;
   --c-navy-light: #8aa0cc;
@@ -39,9 +38,6 @@
   --gradient-navy-soft: linear-gradient(135deg, #3a548f 0%, #2a3f6e 60%, #1a2a4a 100%);
   --gradient-navy-line: linear-gradient(90deg, transparent 0%, var(--c-navy) 50%, transparent 100%);
 
-  /* Real-gold shimmer: multi-stop gradient with bright highlight + deep shadow stops,
-     used at large background-size with animated background-position to mimic the way
-     light travels across polished metal. */
   --gradient-gold-shimmer: linear-gradient(
     115deg,
     #8d6a32 0%,
@@ -457,8 +453,7 @@ p { font-weight: 400; }
   padding: 11px 20px;
   font-size: 0.85rem;
 }
-/* On the dark nav, primary CTA uses navy gradient (secondary accent)
-   to balance the gold wordmark and avoid an all-gold UI. */
+
 .nav .nav-cta.btn-primary {
   background: var(--gradient-navy);
   color: #fff;
@@ -640,7 +635,7 @@ p { font-weight: 400; }
 .usp-bg {
   position: absolute;
   inset: 0;
-  
+
   background:
     radial-gradient(120% 80% at 50% 0%, rgba(214, 179, 120, 0.08), transparent 60%),
     linear-gradient(180deg, #0e0e10 0%, #14141a 100%);
@@ -2363,7 +2358,6 @@ p { font-weight: 400; }
   body { font-size: 17px; }
 }
 
-
 .service-intro--reverse .container > .visual { order: -1; }
 
 .service-intro--centered .container {
@@ -2603,19 +2597,11 @@ p { font-weight: 400; }
   .perk-card { grid-template-columns: 1fr; gap: 14px; }
 }
 
-/* ---------- Subtle gold shimmer ----------
-   Reserved for a small set of premium accents (the gold wordmark accent in
-   the hero, big numbers, stars). Animation is slow and low-contrast — we
-   removed the pure-white highlight stop so it reads as warm metal, not glitter.
-   Buttons, icons and lines are intentionally NOT animated to keep the UI calm. */
-
 @keyframes goldShimmer {
   0%   { background-position: 200% 50%; }
   100% { background-position: -200% 50%; }
 }
 
-/* Subtle gradient — no pure-white peak, smaller highlight band, tighter range
-   so the moving sheen is felt rather than seen. */
 .hero-title-accent::after,
 .process-number,
 .testimonial-stars,
@@ -2639,29 +2625,23 @@ p { font-weight: 400; }
   animation: goldShimmer 14s linear infinite;
 }
 
-/* Section-header underline + service-cta accent: static gold (no shimmer). */
 .section-header-center > h2::after,
 .service-cta .container::before {
   background: var(--gradient-gold);
 }
 
-/* Service-card top accent line: static gold revealed on hover. */
 .service-card::before {
   background: var(--gradient-gold);
 }
 
-/* Agent-quote left bar: static gold. */
 .agent-quote::before {
   background: var(--gradient-gold);
 }
 
-/* Eyebrow lines: static gold. */
 .eyebrow::before,
 .section-header-center .eyebrow::after {
   background: var(--gradient-gold);
 }
-
-/* Hero scroll line keeps only the existing fade pulse (no shimmer). */
 
 @media (prefers-reduced-motion: reduce) {
   .hero-title-accent::after,

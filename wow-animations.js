@@ -119,11 +119,7 @@
     function update() {
       ticking = false;
       var scrollY = window.scrollY;
-      // Only fade the scroll cue. We deliberately do NOT touch the hero
-      // background or .hero-content here — those used to fight the
-      // .reveal { ... !important } CSS rules and caused a visible jump
-      // the moment the user started scrolling. The entrance animation
-      // is now handled in pure CSS (see redesign.css §16b).
+
       heroScroll.style.opacity = clamp(1 - scrollY / 200, 0, 1);
     }
 

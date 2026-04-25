@@ -345,7 +345,6 @@ function escHtml(str) {
 const CAT_LABELS = {mieszkanie:'Mieszkanie',dom:'Dom',dzialka:'Działka',lokal:'Lokal',biuro:'Biuro',garaz:'Garaż',magazyn:'Magazyn',inne:'Inne'};
 const DEFAULT_PHONE = '+48515488951';
 
-/* ── Saved offers (favorites) helpers ── */
 function getSavedOffers() {
   try {
     const data = localStorage.getItem('mww_saved_offers');
@@ -359,7 +358,6 @@ function isOfferSaved(id) {
   return getSavedOffers().includes(id);
 }
 
-/* ── Cookie helpers ── */
 function setCookie(name, value, days) {
   const d = new Date();
   d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -846,7 +844,7 @@ function bindFilters() {
       setSavedOffers(saved);
       return;
     }
-    // Card links now use <a> tags - no JS navigation needed
+
   });
 
   document.getElementById('detailClose').addEventListener('click', closeDetail);
@@ -854,7 +852,6 @@ function bindFilters() {
     if (e.target === document.getElementById('detailOverlay')) closeDetail();
   });
 
-  // Handle old hash-based URLs (#oferta-slug) for backward compatibility
   if (location.hash.startsWith('#oferta-')) {
     const hashSlug = decodeURIComponent(location.hash.substring(8));
     if (hashSlug) {
@@ -881,7 +878,6 @@ function bindModal() {
     }
   });
 
-  // Live filtering: only digits, +, -, spaces and parentheses in the phone field.
   const mPhone = document.getElementById('mPhone');
   if (mPhone) {
     mPhone.setAttribute('inputmode', 'tel');
