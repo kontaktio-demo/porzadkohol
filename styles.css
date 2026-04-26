@@ -2498,7 +2498,7 @@ p { font-weight: 400; }
   font-size: 0.97rem;
 }
 .checklist li::before {
-  content: '✓';
+  content: '\2713';
   color: var(--c-gold);
   font-weight: 800;
   background: var(--c-bg-alt);

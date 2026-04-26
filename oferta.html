@@ -63,9 +63,9 @@
 <nav class="breadcrumbs" aria-label="Ścieżka nawigacji">
   <div class="breadcrumbs-inner">
     <a href="/index.html">Strona główna</a>
-    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-sep">&rsaquo;</span>
     <a href="/oferty.html">Oferty</a>
-    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-sep">&rsaquo;</span>
     <span id="breadcrumbTitle" class="breadcrumb-current">Oferta</span>
   </div>
 </nav>
@@ -198,7 +198,7 @@
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>© 2026 MWW Mieszkanie - Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
+      <p>&copy; 2026 MWW Mieszkanie - Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
       <p>Stworzone przez <a href="https://kontaktio.pl" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">kontaktio.pl</a></p>
     </div>
   </div>
@@ -262,7 +262,7 @@ function setSeoMeta(offer) {
   const seoDesc = offer.metaDescription
     || (catLabel + ' na ' + typeLabel.toLowerCase() + (locationText ? ' w lokalizacji ' + locationText : '')
        + '. Cena: ' + priceFormatted + ' ' + (offer.currency || 'PLN')
-       + (offer.area ? '. Powierzchnia: ' + offer.area + ' m²' : '')
+       + (offer.area ? '. Powierzchnia: ' + offer.area + ' m\u00B2' : '')
        + '. MWW Mieszkanie - biuro nieruchomości Łódź.');
 
   const pageUrl = window.location.href;
@@ -373,7 +373,7 @@ function renderOffer(l) {
 
   var infoRows = [];
   function addRow(label, value) { if (value) infoRows.push({ label: escHtml(label), value: escHtml(String(value)) }); }
-  addRow('Powierzchnia', l.area ? l.area + ' m²' : '');
+  addRow('Powierzchnia', l.area ? l.area + ' m\u00B2' : '');
   addRow('Pokoje', l.rooms > 0 ? l.rooms : '');
   addRow('Piętro', l.floor > 0 ? l.floor + '/' + (l.totalFloors || '?') : '');
   addRow('Rok budowy', l.yearBuilt || '');
@@ -384,7 +384,7 @@ function renderOffer(l) {
   addRow('Parking', l.parking || '');
   addRow('Czynsz', l.rent > 0 ? new Intl.NumberFormat('pl-PL').format(l.rent) + ' PLN/mies.' : '');
   addRow('Kaucja', l.deposit > 0 ? new Intl.NumberFormat('pl-PL').format(l.deposit) + ' PLN' : '');
-  addRow('Powierzchnia działki', l.plotArea > 0 ? l.plotArea + ' m²' : '');
+  addRow('Powierzchnia działki', l.plotArea > 0 ? l.plotArea + ' m\u00B2' : '');
   addRow('Typ działki', l.plotType || '');
   addRow('Media', l.utilities || '');
   addRow('Dostępne od', l.availableFrom ? new Date(l.availableFrom).toLocaleDateString('pl-PL') : '');
@@ -432,7 +432,7 @@ function renderOffer(l) {
         '<div class="offer-badges">' +
           '<span class="listing-badge ' + escHtml(l.type) + '">' + typeLabel + '</span>' +
           (catLabel ? '<span class="listing-badge listing-badge-cat">' + catLabel + '</span>' : '') +
-          (l.featured ? '<span class="listing-badge listing-badge-feat">★ Wyróżniona</span>' : '') +
+          (l.featured ? '<span class="listing-badge listing-badge-feat">\u2605 Wyróżniona</span>' : '') +
         '</div>' +
         '<h1 class="offer-title" itemprop="name">' + safeTitle + '</h1>' +
         '<div class="offer-location" itemprop="address">' +
@@ -444,10 +444,10 @@ function renderOffer(l) {
             '<span itemprop="price" content="' + l.price + '">' + fmtPrice + '</span> ' +
             '<span itemprop="priceCurrency" content="' + escHtml(l.currency || 'PLN') + '">' + escHtml(l.currency || 'PLN') + '</span>' +
           '</div>' +
-          (l.pricePerM2 ? '<div class="offer-price-m2">' + new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m²</div>' : '') +
+          (l.pricePerM2 ? '<div class="offer-price-m2">' + new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m\u00B2</div>' : '') +
         '</div>' +
         '<div class="offer-quick-stats">' +
-          (l.area > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.area) + '</span><span class="qs-label">m²</span></div>' : '') +
+          (l.area > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.area) + '</span><span class="qs-label">m\u00B2</span></div>' : '') +
           (l.rooms > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.rooms) + '</span><span class="qs-label">pok.</span></div>' : '') +
           (l.floor > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.floor) + '/' + escHtml(l.totalFloors || '?') + '</span><span class="qs-label">piętro</span></div>' : '') +
           (l.yearBuilt ? '<div class="qs"><span class="qs-val">' + escHtml(l.yearBuilt) + '</span><span class="qs-label">rok bud.</span></div>' : '') +

@@ -158,7 +158,7 @@
       </div>
     </div>
     <div class="filter-group filter-group-range">
-      <label>Powierzchnia (m²)</label>
+      <label>Powierzchnia (m&sup2;)</label>
       <div class="filter-price">
         <input type="number" id="filterAreaMin" placeholder="Od" min="0" inputmode="numeric">
         <input type="number" id="filterAreaMax" placeholder="Do" min="0" inputmode="numeric">
@@ -252,7 +252,7 @@
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>© 2026 MWW Mieszkanie - Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
+      <p>&copy; 2026 MWW Mieszkanie - Magdalena Wałowska-Wojtczak &nbsp;|&nbsp; NIP: 7262546896 &nbsp;|&nbsp; REGON: 388690768</p>
       <p>Stworzone przez <a href="https://kontaktio.pl" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">kontaktio.pl</a></p>
     </div>
   </div>
@@ -551,16 +551,16 @@ function renderCard(l, idx) {
   const fmtPrice = new Intl.NumberFormat('pl-PL').format(l.price);
   const typeLabel = l.type === 'sprzedaz' ? 'Sprzedaż' : 'Wynajem';
   const imgSrc = escHtml(resolveImg(l.img) || PLACEHOLDER_SVG);
-  const pricePerM2 = l.pricePerM2 ? new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m²' : '';
+  const pricePerM2 = l.pricePerM2 ? new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m\u00B2' : '';
   const catLabel = CAT_LABELS[l.category] || escHtml(l.category) || '';
   const timeAgo = getTimeAgo(l.createdAt);
   const imgCount = Array.isArray(l.images) ? l.images.length : 0;
-  const featuredMark = l.featured ? '<span class="listing-badge-featured" title="Oferta wyróżniona">★</span>' : '';
+  const featuredMark = l.featured ? '<span class="listing-badge-featured" title="Oferta wyróżniona">\u2605</span>' : '';
   const safeTitle = escHtml(l.title);
   const safeId = escHtml(l.id);
 
   const featurePills = [];
-  if (l.area > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + escHtml(l.area) + ' m²</span>');
+  if (l.area > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + escHtml(l.area) + ' m\u00B2</span>');
   if (l.rooms > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20v-8l4-4h12l4 4v8"/><path d="M2 12h20"/><path d="M6 12v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg>' + escHtml(l.rooms) + ' pok.</span>');
   if (l.floor > 0) featurePills.push('<span class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>' + escHtml(l.floor) + '/' + escHtml(l.totalFloors || '?') + ' p.</span>');
 
@@ -658,7 +658,7 @@ function openDetail(listing) {
 
   const infoRows = [];
   function addRow(label, value) { if (value) infoRows.push({ label: escHtml(label), value: escHtml(String(value)) }); }
-  addRow('Powierzchnia', l.area ? l.area + ' m²' : '');
+  addRow('Powierzchnia', l.area ? l.area + ' m\u00B2' : '');
   addRow('Pokoje', l.rooms > 0 ? l.rooms : '');
   addRow('Piętro', l.floor > 0 ? l.floor + '/' + (l.totalFloors || '?') : '');
   addRow('Rok budowy', l.yearBuilt || '');
@@ -669,7 +669,7 @@ function openDetail(listing) {
   addRow('Parking', l.parking || '');
   addRow('Czynsz', l.rent > 0 ? new Intl.NumberFormat('pl-PL').format(l.rent) + ' PLN/mies.' : '');
   addRow('Kaucja', l.deposit > 0 ? new Intl.NumberFormat('pl-PL').format(l.deposit) + ' PLN' : '');
-  addRow('Powierzchnia działki', l.plotArea > 0 ? l.plotArea + ' m²' : '');
+  addRow('Powierzchnia działki', l.plotArea > 0 ? l.plotArea + ' m\u00B2' : '');
   addRow('Typ działki', l.plotType || '');
   addRow('Media', l.utilities || '');
   addRow('Dostępne od', l.availableFrom ? new Date(l.availableFrom).toLocaleDateString('pl-PL') : '');
@@ -717,7 +717,7 @@ function openDetail(listing) {
         <div class="detail-badges">
           <span class="listing-badge ${escHtml(l.type)}">${typeLabel}</span>
           ${catLabel ? '<span class="listing-badge listing-badge-cat">' + catLabel + '</span>' : ''}
-          ${l.featured ? '<span class="listing-badge listing-badge-feat">★ Wyróżniona</span>' : ''}
+          ${l.featured ? '<span class="listing-badge listing-badge-feat">\u2605 Wyróżniona</span>' : ''}
         </div>
         <h1 class="detail-title">${safeTitle}</h1>
         <div class="detail-location">
@@ -726,10 +726,10 @@ function openDetail(listing) {
         </div>
         <div class="detail-price-box">
           <div class="detail-price">${fmtPrice} <span>${escHtml(l.currency || 'PLN')}</span></div>
-          ${l.pricePerM2 ? '<div class="detail-price-m2">' + new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m²</div>' : ''}
+          ${l.pricePerM2 ? '<div class="detail-price-m2">' + new Intl.NumberFormat('pl-PL').format(l.pricePerM2) + ' PLN/m\u00B2</div>' : ''}
         </div>
         <div class="detail-quick-stats">
-          ${l.area > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.area) + '</span><span class="qs-label">m²</span></div>' : ''}
+          ${l.area > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.area) + '</span><span class="qs-label">m\u00B2</span></div>' : ''}
           ${l.rooms > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.rooms) + '</span><span class="qs-label">pok.</span></div>' : ''}
           ${l.floor > 0 ? '<div class="qs"><span class="qs-val">' + escHtml(l.floor) + '/' + escHtml(l.totalFloors || '?') + '</span><span class="qs-label">piętro</span></div>' : ''}
           ${l.yearBuilt ? '<div class="qs"><span class="qs-val">' + escHtml(l.yearBuilt) + '</span><span class="qs-label">rok bud.</span></div>' : ''}
