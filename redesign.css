@@ -250,11 +250,11 @@ section, .section {
 
 .bg-alt, section.bg-alt,
 .usp, .process, .partners,
-.testimonials, .services, .contact {
+.services, .contact {
   background: var(--color-white) !important;
 }
 
-.usp, .testimonials, .partners {
+.usp, .partners {
   background: var(--color-surface) !important;
 }
 
@@ -678,13 +678,12 @@ a.btn {
 }
 
 .usp-grid, .services-grid, .process-grid,
-.partners-grid, .testimonials-grid, .values-grid {
+.partners-grid, .values-grid {
   display: grid !important;
   gap: clamp(20px, 2.4vw, 32px) !important;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
 }
 .services-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
-.testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; }
 
 .about, .about-solo, .agent-section {
   background: var(--color-white) !important;

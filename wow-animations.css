@@ -422,8 +422,7 @@
 
   .dist-grid,
   .services-grid,
-  .dev-grid,
-  .testimonials-grid {
+  .dev-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
