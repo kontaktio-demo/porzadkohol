@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Porządkohol">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A1F"/>
+      <stop offset="100%" stop-color="#E0530C"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#1F2937"/>
+  <!-- box icon centered -->
+  <g transform="translate(8 8)">
+    <path d="M5 18 L24 8 L43 18 L43 38 L24 48 L5 38 Z"
+          fill="url(#g)" stroke="#FFF7ED" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M5 18 L24 28 L43 18 M24 28 L24 48"
+          fill="none" stroke="#FFF7ED" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M16 34 L24 26 L32 34 M24 26 L24 40"
+          fill="none" stroke="#1F2937" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+</svg>

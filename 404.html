@@ -2,34 +2,28 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Przekierowanie...</title>
-  <script>
-    (function() {
-      var path = window.location.pathname;
-      var match = path.match(/^\/oferta\/(.+?)(?:\/)?$/);
-      if (match) {
-        var slug = decodeURIComponent(match[1]);
-        window.location.replace('/oferta.html?slug=' + encodeURIComponent(slug));
-      } else {
-        document.title = 'Strona nie znaleziona - MWW Mieszkanie';
-        document.getElementById('content').style.display = 'block';
-      }
-    })();
-  </script>
-  <style>
-    body { font-family: 'Inter', sans-serif; text-align: center; padding: 60px 20px; background: #fafafa; color: #1a1a1a; }
-    .box { max-width: 480px; margin: 0 auto; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { color: #666; margin-bottom: 1.5rem; }
-    a { color: #2563eb; text-decoration: none; font-weight: 500; }
-    a:hover { text-decoration: underline; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1F2937">
+  <meta name="robots" content="noindex, nofollow">
+  <title>404 — Porządkohol | Tej rzeczy nie wywieźliśmy</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="apple-touch-icon" href="images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="content" class="box" style="display:none">
-    <h1>404</h1>
-    <p>Strona, której szukasz, nie istnieje.</p>
-    <a href="/">Strona główna</a> &nbsp;|&nbsp; <a href="/oferty.html">Oferty</a>
+  <div class="error-page">
+    <div>
+      <div class="error-num">404</div>
+      <h1>Tej strony chyba… już wywieźliśmy.</h1>
+      <p>Adres, którego szukasz, nie istnieje albo właśnie pojechał na PSZOK. Wróć na stronę główną i daj nam znać, czego potrzebujesz.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="/" class="btn btn-primary btn-lg">← Strona główna</a>
+        <a href="/#kontakt" class="btn btn-ghost-light btn-lg">Napisz do nas</a>
+      </div>
+    </div>
   </div>
 </body>
 </html>

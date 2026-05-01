@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Porządkohol — wywozimy gabaryty, opróżniamy mieszkania">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1F2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="orng" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A1F"/>
+      <stop offset="100%" stop-color="#E0530C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.3" r="0.6">
+      <stop offset="0%" stop-color="rgba(255,138,31,0.35)"/>
+      <stop offset="100%" stop-color="rgba(255,138,31,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Box logo big -->
+  <g transform="translate(80 170)">
+    <path d="M10 80 L130 20 L250 80 L250 220 L130 280 L10 220 Z"
+          fill="url(#orng)" stroke="#FFF7ED" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M10 80 L130 140 L250 80 M130 140 L130 280"
+          fill="none" stroke="#FFF7ED" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M80 200 L130 150 L180 200 M130 150 L130 240"
+          fill="none" stroke="#1F2937" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark + tagline -->
+  <g font-family="Unbounded, Manrope, sans-serif" fill="#FFF7ED">
+    <text x="400" y="270" font-size="84" font-weight="800" letter-spacing="-2">porządko<tspan fill="#FF8A1F">hol</tspan></text>
+    <text x="400" y="340" font-size="34" font-weight="600" fill="rgba(255,247,237,0.9)">Wywozimy gabaryty. Opróżniamy mieszkania.</text>
+    <text x="400" y="380" font-size="34" font-weight="600" fill="rgba(255,247,237,0.9)">Robimy porządek — szybko i po ludzku.</text>
+  </g>
+
+  <!-- bottom bar -->
+  <rect x="0" y="560" width="1200" height="70" fill="rgba(255,138,31,0.12)"/>
+  <g font-family="Manrope, sans-serif" fill="#FFB87A" font-size="24" font-weight="700" letter-spacing="3">
+    <text x="80" y="605">ŁÓDŹ &amp; OKOLICE  ·  ODBIÓR DZIŚ–JUTRO  ·  WYCENA GRATIS</text>
+  </g>
+</svg>

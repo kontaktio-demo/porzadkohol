@@ -1,79 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.MWWmieszkanie.pl/</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/"/>
   </url>
   <url>
-    <loc>https://www.MWWmieszkanie.pl/oferty.html</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/oferty.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/oferty.html"/>
-  </url>
-  <url>
-    <loc>https://www.MWWmieszkanie.pl/sprzedaz.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/uslugi.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/sprzedaz.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/sprzedaz.html"/>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.MWWmieszkanie.pl/wynajem.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/cennik.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/wynajem.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/wynajem.html"/>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.MWWmieszkanie.pl/skup.html</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/skup.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/skup.html"/>
-  </url>
-  <url>
-    <loc>https://www.MWWmieszkanie.pl/deweloperskie.html</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/deweloperskie.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/deweloperskie.html"/>
-  </url>
-  <url>
-    <loc>https://www.MWWmieszkanie.pl/off-market.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/realizacje.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/off-market.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/off-market.html"/>
   </url>
   <url>
-    <loc>https://www.MWWmieszkanie.pl/wycena.html</loc>
-    <lastmod>2026-04-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pl" href="https://www.MWWmieszkanie.pl/wycena.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.MWWmieszkanie.pl/wycena.html"/>
-  </url>
-  <url>
-    <loc>https://www.MWWmieszkanie.pl/polityka-prywatnosci.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/regulamin.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.MWWmieszkanie.pl/regulamin.html</loc>
-    <lastmod>2026-04-20</lastmod>
+    <loc>https://porzadkohol.pl/polityka-prywatnosci.html</loc>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
