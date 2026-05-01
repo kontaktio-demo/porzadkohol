@@ -4,9 +4,8 @@ Allow: /images/
 Allow: /*.css$
 Allow: /*.js$
 Disallow: /404.html
-Disallow: /oferta.html?
 
-# AI / LLM crawlers - allowed (public real-estate office content)
+# AI / LLM crawlers - allowed (publiczna strona usługowa)
 User-agent: GPTBot
 Allow: /
 
@@ -19,5 +18,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://www.MWWmieszkanie.pl/sitemap.xml
-Host: https://www.MWWmieszkanie.pl
+Sitemap: https://porzadkohol.pl/sitemap.xml
+Host: https://porzadkohol.pl

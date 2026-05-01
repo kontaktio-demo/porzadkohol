@@ -307,11 +307,11 @@ function initCookieConsent() {
     return v ? decodeURIComponent(v.pop()) : null;
   }
   function applyCookieConsent(prefs) {
-    setCookie('mww_cookie_consent', JSON.stringify(prefs), 365);
-    if (prefs.analytics) setCookie('mww_analytics', '1', 365); else deleteCookie('mww_analytics');
-    if (prefs.marketing) setCookie('mww_marketing', '1', 365); else deleteCookie('mww_marketing');
+    setCookie('porzadkohol_cookie_consent', JSON.stringify(prefs), 365);
+    if (prefs.analytics) setCookie('porzadkohol_analytics', '1', 365); else deleteCookie('porzadkohol_analytics');
+    if (prefs.marketing) setCookie('porzadkohol_marketing', '1', 365); else deleteCookie('porzadkohol_marketing');
   }
-  if (getCookie('mww_cookie_consent')) return;
+  if (getCookie('porzadkohol_cookie_consent')) return;
   setTimeout(() => consent.classList.add('show'), 600);
   document.getElementById('cookieAccept').addEventListener('click', () => {
     applyCookieConsent({necessary:true, analytics:true, marketing:true});
@@ -347,7 +347,7 @@ function initTelConfirm() {
     + '  <div class="tel-confirm-icon" aria-hidden="true">'
     + '    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
     + '  </div>'
-    + '  <h3 id="telConfirmTitle">Zadzwonić do MWW Mieszkanie?</h3>'
+    + '  <h3 id="telConfirmTitle">Zadzwonić do Porządkohol?</h3>'
     + '  <span class="tel-confirm-num" id="telConfirmNum"></span>'
     + '  <p>Pierwsza rozmowa jest bezpłatna i niezobowiązująca.</p>'
     + '  <div class="tel-confirm-actions">'
